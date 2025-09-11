@@ -164,9 +164,9 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
   <button class="arrow arrow-left" onclick="prevSlide()" aria-label="Sebelumnya">❮</button>
   <button class="arrow arrow-right" onclick="nextSlide()" aria-label="Berikutnya">❯</button>
 
-  <div class="slide active" style="background-image:url('https://img.huffingtonpost.com/asset/5ce9c6192100006d0c80b350.jpeg')" role="img" aria-label="Navid Snack hero image">
+  <div class="slide active" style="background-image:url('assets/hero1.jpg')" role="img" aria-label="Navid Snack hero image">
     <div class="slide-content">
-      <img src="https://picsum.photos/420/420?snack" alt="Navid Snack product"/>
+      <img src="assets/hero-prod1.jpg" alt="Navid Snack product"/>
       <div class="slide-text">
         <h1>Navid Snack — Camilan Sehat & Lezat</h1>
         <p>Snack khas Lamongan, dibuat higienis dan rasa yang konsisten. Pesan langsung via WhatsApp — cepat & mudah.</p>
@@ -175,9 +175,9 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
     </div>
   </div>
 
-  <div class="slide" style="background-image:url('https://img.huffingtonpost.com/asset/5ce9c6192100006d0c80b350.jpeg')">
+  <div class="slide" style="background-image:url('assets/hero2.jpg')">
     <div class="slide-content">
-      <img src="https://picsum.photos/420/420?snack" alt="Promo Navid Snack"/>
+      <img src="assets/hero-prod2.jpg" alt="Promo Navid Snack"/>
       <div class="slide-text">
         <h1>Promo Spesial Mingguan</h1>
         <p>Diskon paket & pengiriman cepat untuk area Deket, Lamongan.</p>
@@ -197,9 +197,9 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
   <div class="section-title"><h2 id="productsTitle">Produk Unggulan</h2></div>
   <div class="products-grid" id="productsGrid">
     <!-- Card 1 (promo: true) -->
-    <article class="card" data-name="Keripik Pisang" data-price="15000" data-oldprice="20000" data-stock="3" data-promo="true" data-desc="Keripik pisang renyah khas Navid Snack" data-img="https://picsum.photos/420/300?banana" aria-label="Keripik Pisang">
+    <article class="card" data-name="Keripik Pisang" data-price="15000" data-oldprice="20000" data-stock="3" data-promo="true" data-desc="Keripik pisang renyah khas Navid Snack" data-img="assets/keripik.jpg" aria-label="Keripik Pisang">
       <div class="img-wrapper">
-        <img src="https://picsum.photos/420/300?banana" alt="Keripik Pisang Navid Snack" onclick="openProductModal(this)">
+        <img src="assets/keripik.jpg" alt="Keripik Pisang Navid Snack" onclick="openProductModal(this)">
         <div class="promo-label">PROMO</div>
         <div class="countdown-overlay" data-cid>Promo sampai 11:00</div>
       </div>
@@ -215,48 +215,10 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
       </div>
     </article>
 
-    <!-- Card 2 (promo: true) -->
-    <article class="card" data-name="Keripik Pisang" data-price="15000" data-oldprice="20000" data-stock="3" data-promo="true" data-desc="Keripik pisang renyah khas Navid Snack" data-img="https://picsum.photos/420/300?banana" aria-label="Keripik Pisang">
+    <!-- Card 2 (promo: false) -->
+    <article class="card" data-name="Kacang Gurih" data-price="22000" data-stock="8" data-promo="false" data-desc="Kacang gurih renyah" data-img="assets/kacang.jpg" aria-label="Kacang Gurih">
       <div class="img-wrapper">
-        <img src="https://picsum.photos/420/300?banana" alt="Keripik Pisang Navid Snack" onclick="openProductModal(this)">
-        <div class="promo-label">PROMO</div>
-        <div class="countdown-overlay" data-cid>Promo sampai 11:00</div>
-      </div>
-      <h3>Keripik Pisang</h3>
-      <div class="price-row">
-        <span class="price-old">Rp 20.000</span>
-        <span class="price-new">Rp 15.000</span>
-      </div>
-      <div class="stars" aria-hidden="true">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Keripik Pisang',15000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-    <!-- Card 3 (promo: true) -->
-    <article class="card" data-name="Keripik Pisang" data-price="15000" data-oldprice="20000" data-stock="3" data-promo="true" data-desc="Keripik pisang renyah khas Navid Snack" data-img="https://picsum.photos/420/300?banana" aria-label="Keripik Pisang">
-      <div class="img-wrapper">
-        <img src="https://picsum.photos/420/300?banana" alt="Keripik Pisang Navid Snack" onclick="openProductModal(this)">
-        <div class="promo-label">PROMO</div>
-        <div class="countdown-overlay" data-cid>Promo sampai 11:00</div>
-      </div>
-      <h3>Keripik Pisang</h3>
-      <div class="price-row">
-        <span class="price-old">Rp 20.000</span>
-        <span class="price-new">Rp 15.000</span>
-      </div>
-      <div class="stars" aria-hidden="true">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Keripik Pisang',15000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-    <!-- Card 4 (promo: false) -->
-    <article class="card" data-name="Kacang Gurih" data-price="22000" data-stock="8" data-promo="false" data-desc="Kacang gurih renyah" data-img="https://picsum.photos/420/300?banana" aria-label="Kacang Gurih">
-      <div class="img-wrapper">
-        <img src="https://picsum.photos/420/300?banana" alt="Kacang Gurih Navid Snack" onclick="openProductModal(this)">
+        <img src="assets/kacang.jpg" alt="Kacang Gurih Navid Snack" onclick="openProductModal(this)">
         <!-- countdown-overlay absent when no promo -->
       </div>
       <h3>Kacang Gurih</h3>
@@ -278,9 +240,9 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <section id="gallery" class="container" aria-labelledby="galleryTitle">
   <div class="section-title"><h2 id="galleryTitle">Galeri Produk</h2></div>
   <div class="gallery-grid" id="galleryGrid">
-    <div class="gallery-card"><img src="openLightbox('https://picsum.photos/900/1200?snack1')"><img src="https://picsum.photos/420/560?snack1" alt="Galeri 1" onclick="openLightboxByIndex(0)"></div>
-    <div class="gallery-card"><img src="openLightbox('https://picsum.photos/900/1200?snack1')"><img src="https://picsum.photos/420/560?snack1" alt="Galeri 2" onclick="openLightboxByIndex(1)"></div>
-    <div class="gallery-card"><img src="openLightbox('https://picsum.photos/900/1200?snack1')"><img src="https://picsum.photos/420/560?snack1" alt="Galeri 3" onclick="openLightboxByIndex(2)"></div>
+    <div class="gallery-card"><img src="assets/g1.jpg" alt="Galeri 1" onclick="openLightboxByIndex(0)"></div>
+    <div class="gallery-card"><img src="assets/g2.jpg" alt="Galeri 2" onclick="openLightboxByIndex(1)"></div>
+    <div class="gallery-card"><img src="assets/g3.jpg" alt="Galeri 3" onclick="openLightboxByIndex(2)"></div>
   </div>
 </section>
 
@@ -591,7 +553,7 @@ const salesSamples=[['Budi','Surabaya','Keripik Pisang'],['Ani','Gresik','Kacang
 setInterval(()=>{ const s = salesSamples[Math.floor(Math.random()*salesSamples.length)]; showToast(`${s[0]} dari ${s[1]} baru saja membeli ${s[2]}`); }, 14000);
 
 /* ====== GALLERY LIGHTBOX with navigation ====== */
-const galleryImgs = ['openLightbox('https://picsum.photos/900/1200?snack1')"><img src="https://picsum.photos/420/560?snack1','openLightbox('https://picsum.photos/900/1200?snack1')"><img src="https://picsum.photos/420/560?snack1','openLightbox('https://picsum.photos/900/1200?snack1')"><img src="https://picsum.photos/420/560?snack1']; // update with your hosted images
+const galleryImgs = ['assets/g1.jpg','assets/g2.jpg','assets/g3.jpg']; // update with your hosted images
 let gIndex = 0;
 function openLightboxByIndex(i){
   gIndex = i % galleryImgs.length;
