@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Navid Snack — Camilan Sehat & Lezat Lamongan</title>
+<meta name="description" content="Navid Snack - Camilan sehat & lezat dari Lamongan. Pesan cepat via WhatsApp. Halal, higienis, bergizi."/>
+<meta name="keywords" content="navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat"/>
+<link rel="icon" href="https://img.icons8.com/emoji/48/popcorn.png" type="image/png"/>
+<style>
+:root{
+  --bg:#fff;--surface:#fbfaf8;--muted:#7b7b7b;--text:#17202a;
+  --brand:#0f1724;--accent:#ffb703;--accent-2:#fb8500;--soft:#f4f1ea;
+  --success:#2d6a4f;--danger:#d00000;--glass:rgba(255,255,255,0.7);
+  --radius:12px;--shadow:0 8px 24px rgba(17,24,39,0.08);
+  font-sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;font-family:var(--font-sans,system-ui),sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1.45}
+header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:14px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.2)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.logo img{width:36px;height:36px;border-radius:8px;background:var(--soft);padding:4px}
+nav{margin-left:auto;display:flex;align-items:center;gap:16px}
+nav ul{display:flex;gap:16px;margin:0;padding:0;list-style:none}
+nav a{color:var(--accent);text-decoration:none;font-weight:600}
+.menu-toggle{display:none;background:none;border:1px solid rgba(255,183,3,0.12);color:var(--accent);padding:8px;border-radius:8px;cursor:pointer}
+.btn-toggle{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--accent);padding:8px 10px;border-radius:10px;cursor:pointer}
+
+/* HERO */
+#hero{position:relative;height:70vh;min-height:400px;display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid rgba(15,23,36,0.06)}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s}
+.slide.active{opacity:1}
+.slide::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.35),rgba(2,6,23,0.15))}
+.slide-content{position:relative;z-index:2;max-width:1100px;color:var(--accent);display:flex;gap:28px;align-items:center;padding:32px}
+.slide-content img{width:220px;height:220px;object-fit:cover;border-radius:18px;background:var(--soft);padding:8px}
+.slide-text h1{margin:0;font-size:36px;letter-spacing:.2px;color:#fff}
+.slide-text p{margin:8px 0 16px;color:rgba(255,255,255,0.9)}
+.hero-cta{display:inline-flex;gap:10px;align-items:center}
+.btn{background:var(--accent);color:var(--brand);border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(251,133,0,0.12)}
+.dots{position:absolute;bottom:18px;width:100%;text-align:center;z-index:3}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.6);margin:0 6px;cursor:pointer;opacity:.7}
+.dot.active{background:var(--accent-2);opacity:1}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:20px}
+.arrow-left{left:18px}.arrow-right{right:18px}
+
+/* LAYOUT */
+.container{max-width:1200px;margin:0 auto;padding:28px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-title h2{margin:0;font-size:20px;color:var(--brand)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:var(--surface);padding:16px;border-radius:14px;box-shadow:var(--shadow);position:relative;overflow:visible;border:1px solid rgba(2,6,23,0.04)}
+.card img{width:100%;height:180px;object-fit:cover;border-radius:10px;margin-bottom:12px}
+.promo-label{position:absolute;top:12px;left:12px;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;padding:6px 8px;border-radius:8px;font-weight:800;font-size:12px}
+.price-row{display:flex;gap:8px;align-items:center;justify-content:center;margin:8px 0}
+.price-old{text-decoration:line-through;color:var(--muted);font-size:13px}
+.price-new{color:var(--danger);font-weight:800}
+.stars{color:#f6c453;margin-bottom:8px}
+.countdown-overlay{position:absolute;bottom:12px;left:12px;background:rgba(255,183,3,0.95);color:#071123;padding:6px 8px;border-radius:8px;font-weight:700;font-size:13px}
+
+/* gallery */
+.gallery-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.gallery-card{width:180px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;background:#fff}
+.gallery-card img{width:100%;height:240px;object-fit:cover;display:block;transition:transform .25s}
+.gallery-card:hover img{transform:scale(1.05)}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,7,18,0.75);z-index:1400}
+.lightbox img{max-width:92%;max-height:86%;border-radius:12px;box-shadow:0 20px 50px rgba(2,6,23,0.6)}
+.lightbox .close-light{position:absolute;top:24px;right:30px;color:#fff;font-size:28px;cursor:pointer}
+
+/* testimonial */
+.testimonial-wrap{position:relative;padding:14px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;box-shadow:var(--shadow)}
+.testimonial-slider{display:flex;transition:transform .45s ease}
+.testimonial-card{min-width:300px;padding:16px;text-align:center}
+.testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
+.testimonial-nav{display:flex;gap:8px;justify-content:center;margin-top:12px}
+
+/* cart & floats */
+.whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
+.whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
+.floating-cart{position:fixed;bottom:86px;right:26px;z-index:1301;background:var(--accent);width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--brand);cursor:pointer;box-shadow:0 10px 30px rgba(15,23,36,0.12)}
+.cart-badge{position:absolute;top:-8px;right:-8px;background:var(--danger);color:#fff;padding:4px 7px;border-radius:999px;font-size:12px}
+.cart-panel{position:fixed;top:0;right:-420px;width:380px;height:100%;background:var(--bg);box-shadow:-20px 0 40px rgba(2,6,23,0.12);transition:right .35s;padding:20px;z-index:1350;overflow:auto}
+.cart-panel.active{right:0}
+.close-cart{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer}
+
+/* quick order */
+.quick-order{display:flex;flex-direction:column;gap:10px;padding:14px;background:var(--surface);border-radius:12px;box-shadow:var(--shadow)}
+.quick-order input,.quick-order textarea,.quick-order select{padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.06);font-size:14px}
+.quick-order button{align-self:flex-start}
+
+/* footer */
+footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
+.footer-grid{display:flex;gap:20px;flex-wrap:wrap;max-width:1200px;margin:0 auto}
+.footer-info{flex:1 1 320px}
+.footer-map{flex:1 1 320px}
+
+/* misc */
+.promo-marquee{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#071123;padding:8px;text-align:center;font-weight:800}
+.toast{position:fixed;left:18px;bottom:26px;background:rgba(3,7,18,0.95);color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:1450;display:flex;gap:10px;align-items:center}
+.scroll-top{position:fixed;right:18px;bottom:160px;background:transparent;border:1px solid rgba(2,6,23,0.06);padding:8px;border-radius:10px;cursor:pointer;display:none;z-index:1302}
+@media(max-width:900px){.slide-content{flex-direction:column;text-align:center}.slide-content img{width:160px;height:160px}.menu-toggle{display:inline-block}nav ul{display:none}}
+</style>
+</head>
+<body>
+<!-- promo -->
+<div class="promo-marquee" id="promoBar"><marquee behavior="scroll" direction="left">🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥</marquee></div>
+
+<!-- header -->
+<header>
+  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Buka menu">☰</button>
+  <div class="logo"><img src="https://img.icons8.com/emoji/48/popcorn.png" alt="Navid Snack logo"/><span>Navid Snack</span></div>
+  <nav>
+    <ul>
+      <li><a href="#hero">Beranda</a></li>
+      <li><a href="#products">Produk</a></li>
+      <li><a href="#gallery">Galeri</a></li>
+      <li><a href="#testimonials">Testimoni</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </nav>
+  <button class="btn-toggle" onclick="toggleDarkMode()" aria-pressed="false" title="Toggle dark mode">🌙</button>
+</header>
+
+<!-- side menu -->
+<div id="sideMenu" class="side-menu" style="left:-100%;">
+  <button class="close-btn" onclick="toggleMenu()" aria-label="Tutup">×</button>
+  <ul>
+    <li><a href="#hero" onclick="toggleMenu()">Beranda</a></li>
+    <li><a href="#products" onclick="toggleMenu()">Produk</a></li>
+    <li><a href="#gallery" onclick="toggleMenu()">Galeri</a></li>
+    <li><a href="#testimonials" onclick="toggleMenu()">Testimoni</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Kontak</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <button class="arrow arrow-left" onclick="prevSlide()" aria-label="Sebelumnya">❮</button>
+  <button class="arrow arrow-right" onclick="nextSlide()" aria-label="Berikutnya">❯</button>
+
+  <div class="slide active" style="background-image:url('https://picsum.photos/1400/700?food,1')" role="img" aria-label="Navid Snack hero image">
+    <div class="slide-content container">
+      <img src="https://picsum.photos/420/420?snack" alt="Navid Snack product"/>
+      <div class="slide-text">
+        <h1>Navid Snack — Camilan Sehat & Lezat</h1>
+        <p>Snack khas Lamongan, dibuat higienis dan rasa yang konsisten. Pesan langsung via WhatsApp — cepat & mudah.</p>
+        <div class="hero-cta"><a href="https://wa.me/6281234567890" class="btn" aria-label="Hubungi via WhatsApp">Hubungi Sekarang</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slide" style="background-image:url('https://picsum.photos/1400/700?food,2')">
+    <div class="slide-content container">
+      <img src="https://picsum.photos/420/420?snack,2" alt="Promo Navid Snack"/>
+      <div class="slide-text">
+        <h1>Promo Spesial Mingguan</h1>
+        <p>Diskon paket & pengiriman cepat untuk area Deket, Lamongan.</p>
+        <a href="#products" class="btn">Lihat Produk</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="dots">
+    <span class="dot active" onclick="showSlide(0)"></span>
+    <span class="dot" onclick="showSlide(1)"></span>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="container" aria-labelledby="productsTitle">
+  <div class="section-title"><h2 id="productsTitle">Produk Unggulan</h2></div>
+  <div class="products-grid" id="productsGrid">
+    <!-- Card 1 -->
+    <article class="card promo" data-name="Keripik Pisang" data-price="15000" data-stock="3" data-start="08:00" data-end="11:00" aria-label="Keripik Pisang">
+      <div class="promo-label">PROMO</div>
+      <img src="https://picsum.photos/420/300?banana" alt="Keripik Pisang Navid Snack"/>
+      <h3>Keripik Pisang</h3>
+      <div class="price-row"><span class="price-old">Rp 20.000</span><span class="price-new">Rp 15.000</span></div>
+      <div class="stars" aria-hidden="true">★★★★★</div>
+      <div class="countdown-overlay" id="cd-0">Promo sampai 11:00</div>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
+        <button class="btn" onclick="addToCartCard(this)">Tambah ke Keranjang</button>
+        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Keripik Pisang',15000)">Pesan Cepat</button>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card" data-name="Kacang Gurih" data-price="22000" data-stock="8" aria-label="Kacang Gurih">
+      <img src="https://picsum.photos/420/300?peanuts" alt="Kacang Gurih Navid Snack"/>
+      <h3>Kacang Gurih</h3>
+      <div class="price-row"><span class="price-old">Rp 25.000</span><span class="price-new">Rp 22.000</span></div>
+      <div class="stars">★★★★★</div>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
+        <button class="btn" onclick="addToCartCard(this)">Tambah ke Keranjang</button>
+        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Kacang Gurih',22000)">Pesan Cepat</button>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="container" aria-labelledby="galleryTitle">
+  <div class="section-title"><h2 id="galleryTitle">Galeri Produk</h2></div>
+  <div class="gallery-grid" id="galleryGrid">
+    <div class="gallery-card" onclick="openLightbox('https://picsum.photos/900/1200?snack1')"><img src="https://picsum.photos/420/560?snack1" alt="Foto produk 1"/></div>
+    <div class="gallery-card" onclick="openLightbox('https://picsum.photos/900/1200?snack2')"><img src="https://picsum.photos/420/560?snack2" alt="Foto produk 2"/></div>
+    <div class="gallery-card" onclick="openLightbox('https://picsum.photos/900/1200?snack3')"><img src="https://picsum.photos/420/560?snack3" alt="Foto produk 3"/></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)"><span class="close-light" onclick="closeLightbox(event)">×</span><img id="lightboxImg" alt="Preview"/></div>
+
+<!-- TESTIMONIAL -->
+<section id="testimonials" class="container" aria-labelledby="testiTitle">
+  <div class="section-title"><h2 id="testiTitle">Testimoni Pelanggan</h2></div>
+  <div class="testimonial-wrap">
+    <div style="overflow:hidden">
+      <div id="testiSlider" class="testimonial-slider">
+        <div class="testimonial-card">
+          <img src="https://i.pravatar.cc/100?u=a" alt="Foto pelanggan A"/><p><strong>Ani, Surabaya</strong></p><p>"Rasanya enak, pengirimannya cepat. Recomended!"</p>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://i.pravatar.cc/100?u=b" alt="Foto pelanggan B"/><p><strong>Budi, Gresik</strong></p><p>"Camilan keluarga favorit, gurih dan renyah."</p>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://i.pravatar.cc/100?u=c" alt="Foto pelanggan C"/><p><strong>Siti, Lamongan</strong></p><p>"Pesan online mudah, respon WA cepat."</p>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-nav">
+      <button class="btn" onclick="tPrev()">❮</button>
+      <button class="btn" onclick="tNext()">❯</button>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK ORDER FORM -->
+<section class="container" aria-labelledby="quickOrderTitle" style="margin-top:18px">
+  <div class="section-title"><h2 id="quickOrderTitle">Form Pemesanan Cepat</h2></div>
+  <form id="quickOrderForm" class="quick-order" onsubmit="submitQuickOrder(event)">
+    <input id="qName" type="text" placeholder="Nama lengkap" required aria-label="Nama"/>
+    <input id="qWA" type="tel" placeholder="Nomor WhatsApp (contoh: 0812...)" required aria-label="Nomor WA"/>
+    <input id="qAddr" type="text" placeholder="Alamat (kelurahan/kota)" required aria-label="Alamat"/>
+    <select id="qProduct" required aria-label="Pilih produk">
+      <option value="">Pilih produk...</option>
+      <option value="Keripik Pisang|15000">Keripik Pisang - Rp15.000</option>
+      <option value="Kacang Gurih|22000">Kacang Gurih - Rp22.000</option>
+    </select>
+    <input id="qQty" type="number" min="1" value="1" required aria-label="Jumlah"/>
+    <textarea id="qNote" rows="2" placeholder="Catatan / request (opsional)"></textarea>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn" type="submit">Kirim ke WhatsApp Admin</button>
+      <small style="color:var(--muted)">Subtotal akan disertakan sebelum ongkir</small>
+    </div>
+  </form>
+</section>
+
+<!-- floating elements -->
+<button class="floating-cart" onclick="toggleCart()" aria-label="Buka keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+<div class="whatsapp-float" title="Chat via WhatsApp"><a id="waLink" href="https://wa.me/6281234567890" target="_blank" rel="noreferrer"><img src="https://img.icons8.com/color/96/whatsapp.png" alt="WhatsApp Navid Snack"/></a></div>
+<button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Kembali ke atas">↑</button>
+
+<!-- cart panel -->
+<aside id="cartPanel" class="cart-panel" aria-label="Keranjang belanja">
+  <button class="close-cart" onclick="toggleCart()">×</button>
+  <h3>Keranjang</h3>
+  <div id="cartItems" style="margin-top:14px"></div>
+  <p style="margin-top:12px"><strong>Subtotal:</strong> Rp <span id="cartTotal">0</span></p>
+  <p style="font-size:13px;color:var(--muted)">Belum termasuk ongkir dari Deket, Lamongan</p>
+  <div style="display:flex;gap:8px;margin-top:12px">
+    <button class="btn" onclick="checkout()">Checkout via WhatsApp</button>
+    <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06)" onclick="clearCart()">Bersihkan</button>
+  </div>
+</aside>
+
+<!-- footer -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-info">
+      <h3>Navid Snack</h3>
+      <p>Alamat: Deket, Lamongan, Jawa Timur</p>
+      <p>Telp: +62 812-3456-7890</p>
+      <p style="margin-top:8px"><strong>Certificate:</strong></p>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
+        <img src="https://via.placeholder.com/80x40?text=Halal" alt="Sertifikat Halal" style="height:40px;border-radius:6px"/>
+        <img src="https://via.placeholder.com/80x40?text=BPOM" alt="Sertifikat BPOM" style="height:40px;border-radius:6px"/>
+      </div>
+    </div>
+    <div class="footer-map">
+      <h4>Lokasi</h4>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." style="width:100%;height:220px;border:0;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Navid Snack"></iframe>
+    </div>
+  </div>
+</footer>
+
+<!-- popup / toast placeholder -->
+<div id="toastPlace"></div>
+
+<!-- scripts (minified-ish) -->
+<script>
+/* ====== state ====== */
+let slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.dot'),cur=0;
+function showSlide(n){slides.forEach((s,i)=>s.classList.toggle('active',i===n));dots.forEach((d,i)=>d.classList.toggle('active',i===n));cur=n}
+function prevSlide(){showSlide((cur-1+slides.length)%slides.length)}function nextSlide(){showSlide((cur+1)%slides.length)}
+let slideInterval=setInterval(nextSlide,6000);
+
+/* ====== menu & darkmode ====== */
+function toggleMenu(){let m=document.getElementById('sideMenu');m.style.left=(m.style.left==='0px'?'-100%':'0px')}
+function toggleDarkMode(){document.body.classList.toggle('dark-mode');document.querySelector('.btn-toggle').innerText=document.body.classList.contains('dark-mode')?'☀️':'🌙'}
+
+/* ====== LIGHTBOX ====== */
+function openLightbox(src){document.getElementById('lightboxImg').src=src;document.getElementById('lightbox').style.display='flex'}
+function closeLightbox(e){if(e.target&&e.target.id!=='lightboxImg'){document.getElementById('lightbox').style.display='none'}}
+
+/* ====== CART ====== */
+let cart=[];function addToCartCard(el){
+  let card=el.closest('.card');let name=card.dataset.name;let price=Number(card.dataset.price);let stock=Number(card.dataset.stock||99);
+  let found=cart.find(x=>x.name===name);if(found){if(found.qty+1>stock){showToast('Stok tidak cukup untuk '+name);return}found.qty++}else{cart.push({name,price,qty:1,stock})}
+  renderCart();showToast(name+' ditambahkan ke keranjang')}
+function renderCart(){let out='';let total=0;cart.forEach((it,i)=>{total+=it.price*it.qty;out+=`<div style="padding:8px 0;border-bottom:1px dashed #e6e6e6"><strong>${it.name}</strong><div style="margin-top:6px">Rp ${it.price} x <input type="number" value="${it.qty}" min="1" style="width:64px" onchange="updateQty(${i},this.value)"/> &nbsp; <button style="background:transparent;border:none;color:var(--danger);cursor:pointer" onclick="removeItem(${i})">Hapus</button></div></div>`});document.getElementById('cartItems').innerHTML=out||'<em>Keranjang kosong</em>';document.getElementById('cartTotal').innerText=total;document.getElementById('cartBadge').innerText=cart.reduce((s,i)=>s+i.qty,0)}
+function updateQty(i,q){q=Number(q);if(q<1)q=1;let it=cart[i];if(q>it.stock){showToast('Melebihi stok tersedia');return}it.qty=q;renderCart()}
+function removeItem(i){cart.splice(i,1);renderCart()}
+function clearCart(){cart=[];renderCart();toggleCart();showToast('Keranjang dibersihkan')}
+function toggleCart(){document.getElementById('cartPanel').classList.toggle('active')}
+
+/* ====== checkout via WA ====== */
+function checkout(){
+  if(cart.length===0){showToast('Keranjang masih kosong');return}
+  let msg='Halo%2C%20saya%20ingin%20pesan%20%3A%0A';let total=0;
+  cart.forEach(it=>{msg+=encodeURIComponent(`${it.name} x ${it.qty} = Rp ${it.price*it.qty}`)+'%0A';total+=it.price*it.qty});
+  msg+=encodeURIComponent(`%0ASubtotal: Rp ${total} (belum termasuk ongkir dari Deket, Lamongan)`);window.open('https://wa.me/6281234567890?text='+msg)
+}
+
+/* ====== quick order form ====== */
+function quickOrderPref(name,price){
+  document.getElementById('qProduct').value = `${name}|${price}`;
+  document.getElementById('qQty').value = 1;
+  document.getElementById('qName').focus();window.scrollTo({top:document.getElementById('quickOrderForm').offsetTop-80,behavior:'smooth'})
+}
+function submitQuickOrder(e){e.preventDefault();
+  let name=document.getElementById('qName').value, wa=document.getElementById('qWA').value, addr=document.getElementById('qAddr').value;
+  let prod=document.getElementById('qProduct').value, qty=Number(document.getElementById('qQty').value), note=document.getElementById('qNote').value;
+  if(!prod){showToast('Pilih produk');return}
+  let [pname,pprice]=prod.split('|');let subtotal = Number(pprice)*qty;
+  let text=`Halo, saya *${name}* ingin memesan:%0A- ${pname} x ${qty} = Rp ${subtotal}%0AAlamat: ${addr}%0ANo WA: ${wa}%0ANote: ${note || '-'}%0A(Subtotal belum termasuk ongkir dari Deket, Lamongan)`;
+  window.open('https://wa.me/6281234567890?text='+encodeURIComponent(text));
+}
+
+/* ====== toast (popup pembelian & notifikasi) ====== */
+function showToast(text,delay=4000){
+  let t=document.createElement('div');t.className='toast';t.innerHTML=`<svg width="20" height="20" viewBox="0 0 24 24" style="opacity:.9;margin-right:6px"><circle cx="12" cy="12" r="10" fill="#ffcf6b"/></svg><div>${text}</div>`;
+  document.getElementById('toastPlace').appendChild(t);setTimeout(()=>{t.style.opacity=0;t.addEventListener('transitionend',()=>t.remove());},delay);
+}
+/* simulate live purchases */
+let salesSamples=[['Budi','Surabaya','Keripik Pisang'],['Ani','Gresik','Kacang Gurih'],['Rina','Sidoarjo','Keripik Pisang']];
+setInterval(()=>{let s=salesSamples[Math.floor(Math.random()*salesSamples.length)];showToast(`${s[0]} dari ${s[1]} baru saja membeli ${s[2]}`);},14000);
+
+/* ====== gallery lightbox handled above ====== */
+
+/* ====== testimonial slider simple ====== */
+let tIdx=0;const tSlider=document.getElementById('testiSlider');
+function tNext(){tIdx=Math.min(tIdx+1, tSlider.children.length-1);tSlider.style.transform=`translateX(-${tIdx*310}px)`}
+function tPrev(){tIdx=Math.max(tIdx-1,0);tSlider.style.transform=`translateX(-${tIdx*310}px)`}
+
+/* ====== small helpers ====== */
+function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
+window.addEventListener('scroll',()=>{document.getElementById('scrollTopBtn').style.display=(window.scrollY>200)?'inline-block':'none'})
+
+/* ====== init render ====== */
+renderCart();
+
+/* ====== accessibility / keyboard ====== */
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.getElementById('lightbox').style.display='none';document.getElementById('sideMenu').style.left='-100%'}});
+</script>
+</body>
+</html>
