@@ -1,16 +1,26 @@
 // =======================
 // KONTAK & KONFIGURASI
 // =======================
+// =======================
+// INFO WEBSITE & SEO
+// =======================
 window.SITE = {
   img: "assets/logo.png",
   brand: "Navid Snack",
   wa: "6281234567890",
   alamat: "Deket, Lamongan, Jawa Timur",
+  keywords: "navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat, snack lamongan, oleh-oleh lamongan",
+  description: "Navid Snack — Camilan sehat & lezat khas Lamongan, higienis dan bergizi. Pesan cepat via WhatsApp.",
+  url: "https://navidsnack.vercel.app", // domain kamu nanti
   sertifikat: [
     { src: "assets/halal.png", alt: "Sertifikat Halal" },
     { src: "assets/bpom.png", alt: "Sertifikat BPOM" }
-  ],
+  ]
 };
+
+// teks promo
+window.PROMO_TEXT = "🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥";
+
 
 // =======================
 // SLIDER HERO
