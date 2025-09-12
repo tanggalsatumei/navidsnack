@@ -185,6 +185,7 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <body>
 <!-- promo -->
 <div class="promo-marquee" id="promoBar"><marquee behavior="scroll" direction="left"></marquee></div>
+<img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openProductModal(this)">
 
 <!-- header -->
 <header>
@@ -397,7 +398,7 @@ function renderHero(){
 
 function renderProducts(){
   // contoh di renderProducts()
-  <img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openProductModal(this)">
+  
 
   const grid = $('#productsGrid');
   grid.innerHTML = '';
