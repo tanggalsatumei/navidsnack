@@ -6,6 +6,12 @@
 <title>Navid Snack — Camilan Sehat & Lezat Lamongan</title>
 <meta name="description" content="Navid Snack - Camilan sehat & lezat dari Lamongan. Pesan cepat via WhatsApp. Halal, higienis, bergizi."/>
 <meta name="keywords" content="navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat"/>
+<!-- Tambahan OG SEO -->
+<meta property="og:title" content="Navid Snack">
+<meta property="og:description" content="Navid Snack — Camilan sehat & lezat khas Lamongan, higienis dan bergizi. Pesan cepat via WhatsApp.">
+<meta property="og:image" content="assets/logo.png">
+<meta property="og:url" content="https://www.navidsnack.com">
+
 <link rel="icon" href="assets/logo.png" type="image/png"/>
 <style>
 :root{
@@ -372,14 +378,17 @@ document.addEventListener('DOMContentLoaded', ()=>{
 const $ = s=>document.querySelector(s);
 const $$ = s=>Array.from(document.querySelectorAll(s));
 
-/* =======================
-   RENDER DINAMIS
-======================= */
-document.addEventListener('DOMContentLoaded', ()=>{
-  const promo = $('#promoBar marquee');
-  if (promo) promo.textContent = window.PROMO_TEXT;
-});
+document.addEventListener('DOMContentLoaded',()=>{
 
+  // ✅ Contoh render awal
+  const promo = $('#promoBar marquee');
+  if(window.PROMO_TEXT && promo) promo.textContent = window.PROMO_TEXT;
+
+  if(!window.SLIDES || !window.PRODUCTS){
+    console.error("⚠️ data.js belum dimuat atau kosong");
+    return;
+  }
+});
 
 function renderHero(){
   const hero = $('#hero');
