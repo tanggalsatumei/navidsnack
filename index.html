@@ -35,25 +35,6 @@ body.dark-mode{
 body.dark-mode .btn{color:#071021;background:var(--accent)}
 body.dark-mode .price-new{color:var(--accent)}
 body.dark-mode .slide-text h1{color:#fff}
-/* Dark mode fix semua teks */
-body.dark-mode {
-  background:#0b1220; 
-  color:#e6e6e6;
-}
-body.dark-mode h1,
-body.dark-mode h2,
-body.dark-mode h3,
-body.dark-mode p,
-body.dark-mode .card,
-body.dark-mode .price-new,
-body.dark-mode .price-old,
-body.dark-mode .slide-text h1 {
-  color:#e6e6e6 !important;
-}
-body.dark-mode .btn {
-  background: var(--accent);
-  color: #071021;
-}
 
 
 /* Header */
@@ -120,28 +101,17 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .stars{color:#f6c453;margin-bottom:8px}
 
 /* gallery */
-#galleryGrid {
+.gallery-grid{
   display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
   gap:14px;
-  overflow:hidden;
-  scroll-behavior:smooth;
+  padding-bottom:10px;
 }
-.gallery-card {
-  flex: 0 0 calc(20% - 12px); /* 5 per tampilan */
-}
-.gallery-controls {
-  text-align:center;
-  margin-top:10px;
-}
-.gallery-controls button {
-  border:none;
-  background:var(--accent);
-  color:#071021;
-  border-radius:8px;
-  margin:0 5px;
-  padding:4px 10px;
-  cursor:pointer;
-}
+.gallery-card{flex:0 0 180px;scroll-snap-align:start;}
+.gallery-card img{width:100%;height:240px;object-fit:cover;display:block;transition:transform .25s}
+.gallery-card:hover img{transform:scale(1.05)}
+
 /* lightbox */
 .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,7,18,0.85);z-index:1400}
 .lightbox img{max-width:92%;max-height:86%;border-radius:12px;box-shadow:0 20px 50px rgba(2,6,23,0.6)}
@@ -150,28 +120,11 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .lightbox .prev{left:12px}.lightbox .next{right:12px}
 
 /* testimonial */
-#testiSlider {
-  display:flex;
-  gap:20px;
-  overflow:hidden;
-  transition:transform .5s ease;
-}
-.testimonial-card {
-  flex: 0 0 260px;
-}
-.testimonial-controls {
-  text-align:center;
-  margin-top:10px;
-}
-.testimonial-controls button {
-  border:none;
-  background:var(--accent);
-  color:#071021;
-  border-radius:8px;
-  margin:0 5px;
-  padding:4px 10px;
-  cursor:pointer;
-}
+.testimonial-wrap{overflow:hidden;position:relative}
+.testimonial-slider{display:flex;transition:transform .5s ease;gap:20px}
+.testimonial-card{min-width:260px}
+.testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
+
 /* cart & floats */
 .whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
 .whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
@@ -281,10 +234,6 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <section id="gallery" class="container" aria-labelledby="galleryTitle">
   <div class="section-title"><h2 id="galleryTitle">Galeri Produk</h2></div>
   <div class="gallery-grid" id="galleryGrid"></div>
-  <div class="gallery-controls">
-  <button onclick="galleryPrev()">Prev</button>
-  <button onclick="galleryNext()">Next</button>
-</div>
 </section>
 
 <!-- LIGHTBOX -->
@@ -398,21 +347,28 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <script>
 const $ = s=>document.querySelector(s);
 const $$ = s=>Array.from(document.querySelectorAll(s));
-let cart = JSON.parse(localStorage.getItem('cart')||'[]');
-let galleryIndex=0, testiIndex=0;
   
-document.addEventListener('DOMContentLoaded',()=>{
-  document.title = window.SITE.brand+" — "+window.SITE.description;
-  document.querySelector('meta[name="description"]')?.setAttribute('content', window.SITE.description);
-  document.querySelector('meta[name="keywords"]')?.setAttribute('content', window.SITE.keywords);
-  [['og:title',window.SITE.brand],['og:description',window.SITE.description],
-   ['og:image',window.SITE.img],['og:url',window.SITE.url]]
-  .forEach(([p,c])=>{
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.title = window.SITE.brand + " — " + window.SITE.description;
+
+  document.querySelector('meta[name="description"]')
+    ?.setAttribute('content', window.SITE.description);
+  document.querySelector('meta[name="keywords"]')
+    ?.setAttribute('content', window.SITE.keywords);
+
+  // OG TAGS (SEO Sosmed)
+  const head=document.head;
+  const ogs = [
+    ['og:title', window.SITE.brand],
+    ['og:description', window.SITE.description],
+    ['og:image', window.SITE.img],
+    ['og:url', window.SITE.url]
+  ];
+  ogs.forEach(([p,c])=>{
     const m=document.createElement('meta');
-    m.setAttribute('property',p);m.setAttribute('content',c);
-    document.head.appendChild(m);
+    m.setAttribute('property',p); m.setAttribute('content',c);
+    head.appendChild(m);
   });
-});
 
   // Teks promo
   const promo = $('#promoBar marquee');
@@ -441,63 +397,43 @@ function renderHero(){
 }
 
 function renderProducts(){
+  // contoh di renderProducts()
+  
+
   const grid = $('#productsGrid');
-  grid.innerHTML='';
+  grid.innerHTML = '';
+  const qSelect = $('#qProduct');
+  qSelect.innerHTML = '<option value="">Pilih produk...</option>';
   window.PRODUCTS.forEach(p=>{
-    grid.innerHTML+=`
-      <article class="card"
-        data-name="${p.name}" data-price="${p.price}" data-oldprice="${p.oldPrice||''}" 
-        data-stock="${p.stock}" data-promo="${p.promo}" data-desc="${p.desc}" data-img="${p.img}"
-        data-tglpromostart="${p.tglPromoStart}" data-tglpromoend="${p.tglPromoEnd}"
-        data-jampromostart="${p.jamPromoStart}" data-jampromoend="${p.jamPromoEnd}">
+    grid.innerHTML += `
+      <article class="card" data-name="${p.name}" data-price="${p.price}" data-oldprice="${p.oldPrice||''}"
+        data-stock="${p.stock}" data-promo="${p.promo}" data-desc="${p.desc}" data-img="${p.img}">
         <div class="img-wrapper">
-          <img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openProductModal(this)">
-          ${p.promo?`<div class="promo-label">PROMO</div><div class="countdown-overlay" data-cid>...</div>`:''}
+          <img src="${p.img}" alt="${p.name}" onclick="openProductModal(this)">
+          ${p.promo ? `<div class="promo-label">PROMO</div><div class="countdown-overlay" data-cid>Promo terbatas</div>` : ''}
         </div>
         <h3>${p.name}</h3>
         <div class="price-row">
-          <span class="price-old">${p.oldPrice?'Rp '+p.oldPrice.toLocaleString('id-ID'):''}</span>
+          <span class="price-old">${p.oldPrice ? 'Rp '+p.oldPrice.toLocaleString('id-ID') : ''}</span>
           <span class="price-new">Rp ${p.price.toLocaleString('id-ID')}</span>
         </div>
-        <div style="display:flex;gap:8px;justify-content:center;margin-top:10px">
+        <div class="stars">${'★'.repeat(p.rating||5)}</div>
+        <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
           <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
+          <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('${p.name}',${p.price})">Pesan Cepat</button>
         </div>
       </article>`;
-  });
-}
-  function initCountdown(){
-  $$('.card').forEach(card=>{
-    if(card.dataset.promo==='true'){
-      const cEl = card.querySelector('[data-cid]');
-      const end = card.dataset.tglpromoend?new Date(card.dataset.tglpromoend+'T'+(card.dataset.jampromoend||'23:59')):null;
-      if(end){
-        const tick=()=>{
-          const now=new Date(), diff=end-now;
-          if(diff<=0){cEl.textContent='Promo berakhir';return;}
-          const h=Math.floor(diff/1000/60/60),
-                m=Math.floor(diff/1000/60)%60,
-                s=Math.floor(diff/1000)%60;
-          cEl.textContent=`Sisa ${h}j ${m}m ${s}d`;
-        };
-        setInterval(tick,1000);tick();
-      }else cEl.textContent='Promo terbatas';
-    }
+    qSelect.innerHTML += `<option value="${p.name}|${p.price}">${p.name} - Rp${p.price.toLocaleString('id-ID')}</option>`;
   });
 }
 
 function renderGallery(){
-  const grid=$('#galleryGrid');
-  grid.innerHTML=window.GALLERY.map(g=>`
-    <div class="gallery-card"><img src="${g.src}" alt="${g.alt}" loading="lazy"></div>
-  `).join('');
-}
-function galleryNext(){
-  galleryIndex=(galleryIndex+1)%window.GALLERY.length;
-  $('#galleryGrid').style.transform=`translateX(-${galleryIndex*20}%)`;
-}
-function galleryPrev(){
-  galleryIndex=(galleryIndex-1+window.GALLERY.length)%window.GALLERY.length;
-  $('#galleryGrid').style.transform=`translateX(-${galleryIndex*20}%)`;
+  const grid = $('#galleryGrid');
+  grid.innerHTML='';
+  window.GALLERY.forEach((g,i)=>{
+    grid.innerHTML+=`<div class="gallery-card"><img src="${g.src}" alt="${g.alt}" onclick="openLightboxByIndex(${i})"></div>`;
+  });
+  window.galleryImgs = window.GALLERY.map(g=>g.src);
 }
 
 function renderTestimonials(){
@@ -506,14 +442,6 @@ function renderTestimonials(){
   window.TESTIMONIALS.forEach(t=>{
     slider.innerHTML += `<div class="testimonial-card"><img src="${t.img}" alt="${t.name}"><p><strong>${t.name}, ${t.kota}</strong></p><p>"${t.text}"</p></div>`;
   });
-}
-  function testiNext(){
-  testiIndex=(testiIndex+1)%window.TESTIMONIALS.length;
-  $('#testiSlider').style.transform=`translateX(-${testiIndex*(260+20)}px)`;
-}
-function testiPrev(){
-  testiIndex=(testiIndex-1+window.TESTIMONIALS.length)%window.TESTIMONIALS.length;
-  $('#testiSlider').style.transform=`translateX(-${testiIndex*(260+20)}px)`;
 }
 
 function renderCertificates(){
@@ -528,6 +456,28 @@ function initNotif(){
     const s = window.NOTIFIKASI[Math.floor(Math.random()*window.NOTIFIKASI.length)];
     showToast(`${s.nama} dari ${s.kota} baru saja membeli ${s.produk}`);
   },14000);
+}
+
+function initCountdown(){
+  const now = new Date();
+  $$('.card').forEach(card=>{
+    if(card.dataset.promo==='true'){
+      const start = card.dataset.tglpromostart && new Date(card.dataset.tglpromostart+'T'+(card.dataset.jampromostart||'00:00'));
+      const end   = card.dataset.tglpromoend && new Date(card.dataset.tglpromoend+'T'+(card.dataset.jampromoend||'23:59'));
+      const cEl = card.querySelector('[data-cid]');
+      if(start && end && now>=start && now<=end){
+        const tick=()=>{
+          const now=new Date(), diff=end-now;
+          if(diff<=0){cEl.textContent='Promo berakhir'; return;}
+          const h=Math.floor(diff/1000/60/60), m=Math.floor(diff/1000/60)%60, s=Math.floor(diff/1000)%60;
+          cEl.textContent=`Sisa ${h}j ${m}m ${s}d`;
+        };
+        setInterval(tick,1000); tick();
+      }else{
+        cEl.textContent='Promo terbatas';
+      }
+    }
+  });
 }
 
 
@@ -588,32 +538,24 @@ function addToCartFromModal(){
   if(f) f.qty++; else cart.push({name,price,qty:1,stock:99});
   renderCart(); showToast(name+' ditambahkan ke keranjang'); floatingCartBtn.style.display='flex'; closeProductModal();
 }
-const cartBadge=$('#cartBadge'),cartItemsWrap=$('#cartItems'),cartTotalEl=$('#cartTotal');
 function renderCart(){
   localStorage.setItem('cart', JSON.stringify(cart));
-  cartItemsWrap.innerHTML='';
-  let total=0;
-  cart.forEach((it,i)=>{
-    total+=it.price*it.qty;
+  cartItemsWrap.innerHTML=''; let total=0;
+  cart.forEach((it,i)=>{ total+=it.price*it.qty;
     cartItemsWrap.innerHTML+=`
-      <div class="cart-item">
-        <strong>${it.name}</strong>
-        <div style="margin-top:6px">Rp ${it.price.toLocaleString('id-ID')} 
+      <div class="cart-item" style="padding:10px 0">
+        <strong>${it.name}</strong><div style="margin-top:6px">Rp ${it.price.toLocaleString('id-ID')} 
         <button onclick="decQty(${i})">-</button>
         <input type="number" value="${it.qty}" min="1" style="width:56px" onchange="setQty(${i}, this.value)">
-        <button onclick="incQty(${i})">+</button> 
-        = <strong>Rp ${(it.price*it.qty).toLocaleString('id-ID')}</strong>
+        <button onclick="incQty(${i})">+</button> = <strong>Rp ${(it.price*it.qty).toLocaleString('id-ID')}</strong>
         <button style="float:right;background:transparent;border:none;color:var(--danger)" onclick="removeItem(${i})">Hapus</button>
         </div></div>`;
   });
+  document.addEventListener('DOMContentLoaded',()=>{
+  cart = JSON.parse(localStorage.getItem('cart')||'[]');
   cartTotalEl.textContent=total.toLocaleString('id-ID');
   cartBadge.textContent=cart.reduce((s,i)=>s+i.qty,0);
-}
-function addToCart(btn){
-  const c = btn.closest('.card');
-  let f=cart.find(x=>x.name===c.dataset.name);
-  if(f) f.qty++; else cart.push({name:c.dataset.name,price:Number(c.dataset.price),qty:1,stock:c.dataset.stock});
-  renderCart();
+  });
 }
 function incQty(i){ if(cart[i].qty<cart[i].stock) cart[i].qty++; renderCart(); }
 function decQty(i){ if(cart[i].qty>1) cart[i].qty--; renderCart(); }
