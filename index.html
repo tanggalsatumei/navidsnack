@@ -26,6 +26,10 @@ body.dark-mode{
   --bg:#071021;--surface:#0f1724;--muted:#9aa6b2;--text:#e6eef4;
   --brand:#071127;--accent:#ffb703;--accent-2:#ff9f1c;--soft:#081226;
 }
+body.dark-mode .btn{color:#071021;background:var(--accent)}
+body.dark-mode .price-new{color:var(--accent)}
+body.dark-mode .slide-text h1{color:#fff}
+
 
 /* Header */
 header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
@@ -34,7 +38,20 @@ header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(
 nav{margin-left:auto;display:flex;align-items:center;gap:16px}
 nav ul{display:flex;gap:16px;margin:0;padding:0;list-style:none}
 nav a{color:var(--accent);text-decoration:none;font-weight:600}
-.menu-toggle{display:none;background:none;border:1px solid rgba(255,183,3,0.12);color:var(--accent);padding:8px;border-radius:8px;cursor:pointer}
+.menu-toggle{
+  display:none;
+  background:none;
+  border:1px solid rgba(255,183,3,0.12);
+  color:var(--accent);
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:22px; /* Tambahan */
+}
+@media(max-width:900px){
+  .menu-toggle{display:inline-block}
+}
+
 .btn-toggle{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--accent);padding:8px 10px;border-radius:10px;cursor:pointer}
 
 /* Side menu (mobile) */
@@ -51,6 +68,11 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .slide::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.35),rgba(2,6,23,0.12))}
 .slide-content{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:28px;color:var(--accent);display:flex;gap:24px;align-items:center;justify-content:center}
 .slide-text h1{margin:0;font-size:34px;color:#fff}
+@media(max-width:600px){
+  .slide-text h1{font-size:22px}
+  .slide-text p{font-size:14px}
+}
+
 .btn{background:var(--accent);color:var(--brand);border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(251,133,0,0.12)}
 .dots{position:absolute;bottom:18px;width:100%;text-align:center;z-index:3}
 .dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.6);margin:0 6px;cursor:pointer;opacity:.7}
@@ -73,8 +95,14 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .stars{color:#f6c453;margin-bottom:8px}
 
 /* gallery */
-.gallery-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.gallery-card{width:180px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;background:#fff}
+.gallery-grid{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  gap:14px;
+  padding-bottom:10px;
+}
+.gallery-card{flex:0 0 180px;scroll-snap-align:start;}
 .gallery-card img{width:100%;height:240px;object-fit:cover;display:block;transition:transform .25s}
 .gallery-card:hover img{transform:scale(1.05)}
 
@@ -86,9 +114,9 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .lightbox .prev{left:12px}.lightbox .next{right:12px}
 
 /* testimonial */
-.testimonial-wrap{position:relative;padding:14px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
-.testimonial-slider{display:flex;transition:transform .45s ease}
-.testimonial-card{min-width:300px;padding:16px;text-align:center}
+.testimonial-wrap{overflow:hidden;position:relative}
+.testimonial-slider{display:flex;transition:transform .5s ease;gap:20px}
+.testimonial-card{min-width:260px}
 .testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
 
 /* cart & floats */
@@ -310,6 +338,34 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <script async defer src="//www.instagram.com/embed.js"></script>
 <script src="js/data.js"></script>
 <script>
+document.addEventListener('DOMContentLoaded', ()=>{
+  document.title = window.SITE.brand + " — " + window.SITE.description;
+
+  document.querySelector('meta[name="description"]')
+    ?.setAttribute('content', window.SITE.description);
+  document.querySelector('meta[name="keywords"]')
+    ?.setAttribute('content', window.SITE.keywords);
+
+  // OG TAGS (SEO Sosmed)
+  const head=document.head;
+  const ogs = [
+    ['og:title', window.SITE.brand],
+    ['og:description', window.SITE.description],
+    ['og:image', window.SITE.img],
+    ['og:url', window.SITE.url]
+  ];
+  ogs.forEach(([p,c])=>{
+    const m=document.createElement('meta');
+    m.setAttribute('property',p); m.setAttribute('content',c);
+    head.appendChild(m);
+  });
+
+  // Teks promo
+  const promo = $('#promoBar marquee');
+  if (promo) promo.textContent = window.PROMO_TEXT;
+});
+</script>
+<script>
 /* =======================
    UTILITAS & SELECTOR
 ======================= */
@@ -319,6 +375,8 @@ const $$ = s=>Array.from(document.querySelectorAll(s));
 /* =======================
    RENDER DINAMIS
 ======================= */
+$('#promoBar marquee').textContent = window.PROMO_TEXT;
+
 function renderHero(){
   const hero = $('#hero');
   window.SLIDES.forEach((s,i)=>{
@@ -341,6 +399,9 @@ function renderHero(){
 }
 
 function renderProducts(){
+  // contoh di renderProducts()
+  <img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openProductModal(this)">
+
   const grid = $('#productsGrid');
   grid.innerHTML = '';
   const qSelect = $('#qProduct');
@@ -399,6 +460,29 @@ function initNotif(){
   },14000);
 }
 
+function initCountdown(){
+  const now = new Date();
+  $$('.card').forEach(card=>{
+    if(card.dataset.promo==='true'){
+      const start = card.dataset.tglpromostart && new Date(card.dataset.tglpromostart+'T'+(card.dataset.jampromostart||'00:00'));
+      const end   = card.dataset.tglpromoend && new Date(card.dataset.tglpromoend+'T'+(card.dataset.jampromoend||'23:59'));
+      const cEl = card.querySelector('[data-cid]');
+      if(start && end && now>=start && now<=end){
+        const tick=()=>{
+          const now=new Date(), diff=end-now;
+          if(diff<=0){cEl.textContent='Promo berakhir'; return;}
+          const h=Math.floor(diff/1000/60/60), m=Math.floor(diff/1000/60)%60, s=Math.floor(diff/1000)%60;
+          cEl.textContent=`Sisa ${h}j ${m}m ${s}d`;
+        };
+        setInterval(tick,1000); tick();
+      }else{
+        cEl.textContent='Promo terbatas';
+      }
+    }
+  });
+}
+
+
 /* =======================
    SLIDER CONTROL
 ======================= */
@@ -417,7 +501,16 @@ function prevSlide(){showSlide(slideCur-1)}
 ======================= */
 function toggleMenu(){ const m=$('#sideMenu'); const a=m.classList.toggle('active'); m.setAttribute('aria-hidden',!a); }
 document.addEventListener('click',e=>{ const side=$('#sideMenu'); if(!e.target.closest('.menu-toggle') && side.classList.contains('active') && !e.target.closest('.side-menu')){ side.classList.remove('active'); side.setAttribute('aria-hidden','true'); }});
-function toggleDarkMode(){ document.body.classList.toggle('dark-mode'); const t=document.body.classList.contains('dark-mode')?'☀️':'🌙'; $$('.btn-toggle').forEach(b=>b.textContent=t); }
+function toggleDarkMode(){
+  const dark = document.body.classList.toggle('dark-mode');
+  localStorage.setItem('dark', dark ? '1' : '0');
+  const t=dark?'☀️':'🌙';
+  $$('.btn-toggle').forEach(b=>b.textContent=t);
+}
+// saat load
+if(localStorage.getItem('dark')==='1'){
+  document.body.classList.add('dark-mode');
+}
 
 function initProductCards(){
   $$('.card').forEach(card=>{
@@ -448,6 +541,7 @@ function addToCartFromModal(){
   renderCart(); showToast(name+' ditambahkan ke keranjang'); floatingCartBtn.style.display='flex'; closeProductModal();
 }
 function renderCart(){
+  localStorage.setItem('cart', JSON.stringify(cart));
   cartItemsWrap.innerHTML=''; let total=0;
   cart.forEach((it,i)=>{ total+=it.price*it.qty;
     cartItemsWrap.innerHTML+=`
@@ -459,8 +553,11 @@ function renderCart(){
         <button style="float:right;background:transparent;border:none;color:var(--danger)" onclick="removeItem(${i})">Hapus</button>
         </div></div>`;
   });
+  document.addEventListener('DOMContentLoaded',()=>{
+  cart = JSON.parse(localStorage.getItem('cart')||'[]');
   cartTotalEl.textContent=total.toLocaleString('id-ID');
   cartBadge.textContent=cart.reduce((s,i)=>s+i.qty,0);
+  });
 }
 function incQty(i){ if(cart[i].qty<cart[i].stock) cart[i].qty++; renderCart(); }
 function decQty(i){ if(cart[i].qty>1) cart[i].qty--; renderCart(); }
@@ -513,12 +610,25 @@ function closeProductModal(){ $('#productModal').style.display='none'; }
 
 /* TESTIMONI SLIDER */
 let tIdx=0; const tSlider=()=>$('#testiSlider');
-function testiNext(){ tIdx=(tIdx+1)%tSlider().children.length; tSlider().style.transform=`translateX(-${tIdx*300}px)`;}
-function testiPrev(){ tIdx=(tIdx-1+tSlider().children.length)%tSlider().children.length; tSlider().style.transform=`translateX(-${tIdx*300}px)`; }
+function testiNext(){ tIdx=(tIdx+1)%tSlider().children.length; tSlider().style.transform=`translateX(-${tIdx*260}px)`;}
+function testiPrev(){ tIdx=(tIdx-1+tSlider().children.length)%tSlider().children.length; tSlider().style.transform=`translateX(-${tIdx*260}px)`;}
 
 /* SCROLL TOP */
 function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
 window.addEventListener('scroll',()=>$('#scrollTopBtn').style.display=(window.scrollY>200)?'inline-block':'none');
+function enableSwipe(container, callback){
+  let startX=0;
+  container.addEventListener('touchstart',e=>{startX=e.touches[0].clientX});
+  container.addEventListener('touchend',e=>{
+    const dx=e.changedTouches[0].clientX-startX;
+    if(Math.abs(dx)>50) callback(dx<0?'next':'prev');
+  });
+}
+enableSwipe($('#testiSlider'), dir=> dir==='next'?testiNext():testiPrev());
+enableSwipe($('#galleryGrid'), dir=>{
+  $('#galleryGrid').scrollBy({left: dir==='next'?250:-250, behavior:'smooth'});
+});
+
 
 /* =======================
    INIT
