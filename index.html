@@ -184,7 +184,7 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 </head>
 <body>
 <!-- promo -->
-<div class="promo-marquee" id="promoBar"><marquee behavior="scroll" direction="left">🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥</marquee></div>
+<div class="promo-marquee" id="promoBar"><marquee behavior="scroll" direction="left"></marquee></div>
 
 <!-- header -->
 <header>
@@ -344,6 +344,9 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <script async defer src="//www.instagram.com/embed.js"></script>
 <script src="js/data.js"></script>
 <script>
+const $ = s=>document.querySelector(s);
+const $$ = s=>Array.from(document.querySelectorAll(s));
+  
 document.addEventListener('DOMContentLoaded', ()=>{
   document.title = window.SITE.brand + " — " + window.SITE.description;
 
@@ -375,20 +378,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 /* =======================
    UTILITAS & SELECTOR
 ======================= */
-const $ = s=>document.querySelector(s);
-const $$ = s=>Array.from(document.querySelectorAll(s));
 
-document.addEventListener('DOMContentLoaded',()=>{
-
-  // ✅ Contoh render awal
-  const promo = $('#promoBar marquee');
-  if(window.PROMO_TEXT && promo) promo.textContent = window.PROMO_TEXT;
-
-  if(!window.SLIDES || !window.PRODUCTS){
-    console.error("⚠️ data.js belum dimuat atau kosong");
-    return;
-  }
-});
 
 function renderHero(){
   const hero = $('#hero');
