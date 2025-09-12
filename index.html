@@ -186,129 +186,19 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <section id="hero">
   <button class="arrow arrow-left" onclick="prevSlide()" aria-label="Sebelumnya">❮</button>
   <button class="arrow arrow-right" onclick="nextSlide()" aria-label="Berikutnya">❯</button>
-
-  <div class="slide active" style="background-image:url('assets/bg.jpg')" role="img" aria-label="Navid Snack hero image">
-    <div class="slide-content">
-      <img src="assets/logo.png" alt="Navid Snack product"/>
-      <div class="slide-text">
-        <h1>Navid Snack — Camilan Sehat & Lezat</h1>
-        <p>Snack khas Lamongan, dibuat higienis dan rasa yang konsisten. Pesan langsung via WhatsApp — cepat & mudah.</p>
-        <div class="hero-cta"><a href="https://wa.me/6281234567890" class="btn" aria-label="Hubungi via WhatsApp">Hubungi Sekarang</a></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="slide" style="background-image:url('assets/bg.jpg')">
-    <div class="slide-content">
-      <img src="assets/logo.png" alt="Promo Navid Snack"/>
-      <div class="slide-text">
-        <h1>Promo Spesial Mingguan</h1>
-        <p>Diskon paket & pengiriman cepat untuk area Deket, Lamongan.</p>
-        <a href="#products" class="btn">Lihat Produk</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="dots">
-    <span class="dot active" onclick="showSlide(0)"></span>
-    <span class="dot" onclick="showSlide(1)"></span>
-  </div>
+  <!-- Slides akan diinject dari data.js -->
 </section>
 
 <!-- PRODUCTS -->
 <section id="products" class="container" aria-labelledby="productsTitle">
   <div class="section-title"><h2 id="productsTitle">Produk Unggulan</h2></div>
-  <div class="products-grid" id="productsGrid">
-    <!-- Card 1 (promo: true) -->
-    <article class="card" data-name="Keripik Pisang" data-price="15000" data-oldprice="20000" data-stock="3" data-promo="true" data-desc="Keripik pisang renyah khas Navid Snack" data-img="assets/bg.jpg" aria-label="Keripik Pisang">
-      <div class="img-wrapper">
-        <img src="assets/bg.jpg" alt="Keripik Pisang Navid Snack" onclick="openProductModal(this)">
-        <div class="promo-label">PROMO</div>
-        <div class="countdown-overlay" data-cid>Promo sampai 11:00</div>
-      </div>
-      <h3>Keripik Pisang</h3>
-      <div class="price-row">
-        <span class="price-old">Rp 20.000</span>
-        <span class="price-new">Rp 15.000</span>
-      </div>
-      <div class="stars" aria-hidden="true">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Keripik Pisang',15000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-    <!-- Card 2 (promo: false) -->
-    <article class="card" data-name="Kacang Gurih" data-price="22000" data-stock="8" data-promo="false" data-desc="Kacang gurih renyah" data-img="assets/bg.jpg" aria-label="Kacang Gurih">
-      <div class="img-wrapper">
-        <img src="assets/bg.jpg" alt="Kacang Gurih Navid Snack" onclick="openProductModal(this)">
-        <!-- countdown-overlay absent when no promo -->
-      </div>
-      <h3>Kacang Gurih</h3>
-      <div class="price-row">
-        <!-- price-old will be hidden by JS if not promo -->
-        <span class="price-old">Rp 25.000</span>
-        <span class="price-new">Rp 22.000</span>
-      </div>
-      <div class="stars">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Kacang Gurih',22000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-    <!-- Card 3 (promo: false) -->
-    <article class="card" data-name="Corn Milk Drink" data-price="22000" data-stock="8" data-promo="false" data-desc="Corn Milk Drink" data-img="assets/bg.jpg" aria-label="Corn Milk Drink">
-      <div class="img-wrapper">
-        <img src="assets/bg.jpg" alt="Corn Milk Drink Navid Snack" onclick="openProductModal(this)">
-        <!-- countdown-overlay absent when no promo -->
-      </div>
-      <h3>Corn Milk Drink</h3>
-      <div class="price-row">
-        <!-- price-old will be hidden by JS if not promo -->
-        <span class="price-old">Rp 25.000</span>
-        <span class="price-new">Rp 22.000</span>
-      </div>
-      <div class="stars">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Corn Milk Drink',22000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-    <!-- Card 4 (promo: false) -->
-    <article class="card" data-name="Minuman Kemangi" data-price="22000" data-stock="8" data-promo="false" data-desc="Minuman Kemangi" data-img="assets/bg.jpg" aria-label="Minuman Kemangi">
-      <div class="img-wrapper">
-        <img src="assets/bg.jpg" alt="Minuman Kemangi Navid Snack" onclick="openProductModal(this)">
-        <!-- countdown-overlay absent when no promo -->
-      </div>
-      <h3>Minuman Kemangi</h3>
-      <div class="price-row">
-        <!-- price-old will be hidden by JS if not promo -->
-        <span class="price-old">Rp 25.000</span>
-        <span class="price-new">Rp 22.000</span>
-      </div>
-      <div class="stars">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Minuman Kemangi',22000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-  </div>
+  <div class="products-grid" id="productsGrid"></div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery" class="container" aria-labelledby="galleryTitle">
   <div class="section-title"><h2 id="galleryTitle">Galeri Produk</h2></div>
-  <div class="gallery-grid" id="galleryGrid">
-    <div class="gallery-card"><img src="assets/bg.jpg" alt="Galeri 1" onclick="openLightboxByIndex(0)"></div>
-    <div class="gallery-card"><img src="assets/logo.jpg" alt="Galeri 2" onclick="openLightboxByIndex(1)"></div>
-    <div class="gallery-card"><img src="assets/bg.jpg" alt="Galeri 3" onclick="openLightboxByIndex(2)"></div>
-    <div class="gallery-card"><img src="assets/logo.jpg" alt="Galeri 4" onclick="openLightboxByIndex(3)"></div>
-    <div class="gallery-card"><img src="assets/bg.jpg" alt="Galeri 5" onclick="openLightboxByIndex(4)"></div>
-    <div class="gallery-card"><img src="assets/logo.jpg" alt="Galeri 6" onclick="openLightboxByIndex(5)"></div>
-  </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
 </section>
 
 <!-- LIGHTBOX -->
@@ -324,11 +214,7 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
   <div class="section-title"><h2 id="testiTitle">Testimoni Pelanggan</h2></div>
   <div class="testimonial-wrap">
     <div style="overflow:hidden">
-      <div id="testiSlider" class="testimonial-slider">
-        <div class="testimonial-card"><img src="https://i.pravatar.cc/100?u=a" alt="Foto pelanggan A"/><p><strong>Ani, Surabaya</strong></p><p>"Rasanya enak, pengirimannya cepat. Recomended!"</p></div>
-        <div class="testimonial-card"><img src="https://i.pravatar.cc/100?u=b" alt="Foto pelanggan B"/><p><strong>Budi, Gresik</strong></p><p>"Camilan keluarga favorit, gurih dan renyah."</p></div>
-        <div class="testimonial-card"><img src="https://i.pravatar.cc/100?u=c" alt="Foto pelanggan C"/><p><strong>Siti, Lamongan</strong></p><p>"Pesan online mudah, respon WA cepat."</p></div>
-      </div>
+      <div id="testiSlider" class="testimonial-slider"></div>
     </div>
     <div class="testimonial-nav" style="margin-top:12px">
       <button class="btn" onclick="testiPrev()">❮</button>
@@ -346,8 +232,6 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
     <input id="qAddr" type="text" placeholder="Alamat (kelurahan/kota)" required aria-label="Alamat"/>
     <select id="qProduct" required aria-label="Pilih produk">
       <option value="">Pilih produk...</option>
-      <option value="Keripik Pisang|15000">Keripik Pisang - Rp15.000</option>
-      <option value="Kacang Gurih|22000">Kacang Gurih - Rp22.000</option>
     </select>
     <input id="qQty" type="number" min="1" value="1" required aria-label="Jumlah"/>
     <textarea id="qNote" rows="2" placeholder="Catatan / request (opsional)"></textarea>
@@ -391,34 +275,19 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
   </div>
 </div>
 
-<!-- feed (instagram + youtube) -->
+<!-- feed -->
 <section id="feed" class="container" aria-labelledby="feedTitle">
   <div class="section-title"><h2 id="feedTitle">Media Sosial</h2></div>
-
   <div class="feed-grid">
-    <!-- Instagram embed -->
-    <div class="feed-ig">
-      <h3 style="margin-bottom:10px;color:var(--brand)">Instagram</h3>
-      <div id="igEmbedContainer"></div>
-    </div>
-
-    <!-- YouTube embed -->
+    <div class="feed-ig"><h3>Instagram</h3><div id="igEmbedContainer"></div></div>
     <div class="feed-yt">
-      <h3 style="margin-bottom:10px;color:var(--brand)">YouTube</h3>
+      <h3>YouTube</h3>
       <div class="yt-wrapper">
-        <!-- Ganti VIDEO_ID di bawah dengan ID video/playlist channel kamu -->
-        <iframe 
-          src="https://www.youtube.com/embed/GIGHFb40bps?list=RDGIGHFb40bps" 
-          title="Navid Snack YouTube"
-          frameborder="0"
-          allowfullscreen
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        ></iframe>
+        <iframe src="https://www.youtube.com/embed/GIGHFb40bps?list=RDGIGHFb40bps" title="Navid Snack YouTube" frameborder="0" allowfullscreen></iframe>
       </div>
     </div>
   </div>
 </section>
-
 
 <!-- footer -->
 <footer id="contact">
@@ -428,293 +297,239 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
       <p>Alamat: Deket, Lamongan, Jawa Timur</p>
       <p>Telp: +62 812-3456-7890</p>
       <p style="margin-top:8px"><strong>Certificate:</strong></p>
-      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-        <img src="https://via.placeholder.com/80x40?text=Halal" alt="Sertifikat Halal" style="height:40px;border-radius:6px"/>
-        <img src="https://via.placeholder.com/80x40?text=BPOM" alt="Sertifikat BPOM" style="height:40px;border-radius:6px"/>
-      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:8px" id="certWrap"></div>
     </div>
     <div class="footer-map">
       <h4>Lokasi</h4>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." style="width:100%;height:220px;border:0;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Navid Snack"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." style="width:100%;height:220px;border:0;border-radius:10px" loading="lazy"></iframe>
     </div>
   </div>
 </footer>
 
-<!-- toast placeholder -->
 <div id="toastPlace"></div>
-
-<!-- Instagram embed script (official) -->
 <script async defer src="//www.instagram.com/embed.js"></script>
-
+<script src="data.js"></script>
 <script>
-/* -------------------------
-   Simple helper functions
-   -------------------------*/
+/* =======================
+   UTILITAS & SELECTOR
+======================= */
 const $ = s=>document.querySelector(s);
 const $$ = s=>Array.from(document.querySelectorAll(s));
 
-/* ====== HERO SLIDER ====== */
-let slides = $$('.slide'), dots = $$('.dot'), slideCur = 0;
-function showSlide(n){
-  slideCur = (n+slides.length)%slides.length;
-  slides.forEach((s,i)=>s.classList.toggle('active', i===slideCur));
-  dots.forEach((d,i)=>d.classList.toggle('active', i===slideCur));
-}
-function nextSlide(){ showSlide(slideCur+1) }
-function prevSlide(){ showSlide(slideCur-1) }
-let slideTimer = setInterval(nextSlide, 6000);
-
-/* ====== SIDE MENU (HAMBURGER) ====== */
-function toggleMenu(){
-  const menu = $('#sideMenu');
-  const isActive = menu.classList.toggle('active');
-  menu.setAttribute('aria-hidden', !isActive);
-}
-/* hide side menu when clicking outside (optional) */
-document.addEventListener('click', (e)=>{
-  const side = $('#sideMenu');
-  const btn = e.target.closest('.menu-toggle')!==null;
-  if(!btn && side.classList.contains('active') && !e.target.closest('.side-menu')) {
-    side.classList.remove('active');
-    side.setAttribute('aria-hidden','true');
-  }
-});
-
-/* ====== DARK MODE ====== */
-function toggleDarkMode(){
-  document.body.classList.toggle('dark-mode');
-  const t = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-  $$('.btn-toggle').forEach(b=>b.textContent = t);
+/* =======================
+   RENDER DINAMIS
+======================= */
+function renderHero(){
+  const hero = $('#hero');
+  window.SLIDES.forEach((s,i)=>{
+    hero.insertAdjacentHTML('beforeend',`
+      <div class="slide ${i===0?'active':''}" style="background-image:url('${s.bg}')">
+        <div class="slide-content">
+          <img src="${s.img}" alt="${s.title}">
+          <div class="slide-text">
+            <h1>${s.title}</h1>
+            <p>${s.text}</p>
+            <a href="${s.cta.link}" class="btn">${s.cta.text}</a>
+          </div>
+        </div>
+      </div>
+    `);
+  });
+  const dots = document.createElement('div'); dots.className='dots';
+  window.SLIDES.forEach((_,i)=>dots.innerHTML+=`<span class="dot ${i===0?'active':''}" onclick="showSlide(${i})"></span>`);
+  hero.appendChild(dots);
 }
 
-/* ====== PRODUCTS: handle promo/price & countdown position ====== */
-function initProductCards(){
-  $$('.card').forEach((card, idx) => {
-    // ensure countdown inside image wrapper; we already placed it in HTML
-    // Hide price-old if not promo
-    const isPromo = card.dataset.promo === 'true' || card.classList.contains('promo');
-    const oldEl = card.querySelector('.price-old');
-    if(!isPromo && oldEl) {
-      oldEl.style.display = 'none';
-    }
-    // If no promo and only price-new should show original price, ensure price-new shows data-price
-    if(!isPromo){
-      const priceNew = card.querySelector('.price-new');
-      if(priceNew) priceNew.textContent = formatRupiah(card.dataset.price);
-    } else {
-      // If promo true but data-oldprice exists, format values
-      if(card.dataset.oldprice){
-        const old = card.querySelector('.price-old');
-        const nw = card.querySelector('.price-new');
-        if(old) old.textContent = formatRupiah(card.dataset.oldprice);
-        if(nw) nw.textContent = formatRupiah(card.dataset.price);
-      }
-    }
-    // If countdown present, you may implement live countdown based on data-start/data-end.
-    const cd = card.querySelector('[data-cid]');
-    if(cd && card.dataset.end){
-      // simple static text or compute based on server time; here we keep the text as in HTML.
-    }
+function renderProducts(){
+  const grid = $('#productsGrid');
+  grid.innerHTML = '';
+  const qSelect = $('#qProduct');
+  qSelect.innerHTML = '<option value="">Pilih produk...</option>';
+  window.PRODUCTS.forEach(p=>{
+    grid.innerHTML += `
+      <article class="card" data-name="${p.name}" data-price="${p.price}" data-oldprice="${p.oldPrice||''}"
+        data-stock="${p.stock}" data-promo="${p.promo}" data-desc="${p.desc}" data-img="${p.img}">
+        <div class="img-wrapper">
+          <img src="${p.img}" alt="${p.name}" onclick="openProductModal(this)">
+          ${p.promo ? `<div class="promo-label">PROMO</div><div class="countdown-overlay" data-cid>Promo terbatas</div>` : ''}
+        </div>
+        <h3>${p.name}</h3>
+        <div class="price-row">
+          <span class="price-old">${p.oldPrice ? 'Rp '+p.oldPrice.toLocaleString('id-ID') : ''}</span>
+          <span class="price-new">Rp ${p.price.toLocaleString('id-ID')}</span>
+        </div>
+        <div class="stars">${'★'.repeat(p.rating||5)}</div>
+        <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
+          <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
+          <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('${p.name}',${p.price})">Pesan Cepat</button>
+        </div>
+      </article>`;
+    qSelect.innerHTML += `<option value="${p.name}|${p.price}">${p.name} - Rp${p.price.toLocaleString('id-ID')}</option>`;
   });
 }
-function formatRupiah(v){ if(!v) return ''; return 'Rp ' + Number(v).toLocaleString('id-ID'); }
 
-/* ====== CART ====== */
-let cart = []; // {name, price, qty, stock}
-const floatingCartBtn = $('#floatingCart');
-const cartBadge = $('#cartBadge');
-const cartItemsWrap = $('#cartItems');
-const cartTotalEl = $('#cartTotal');
-
-function addToCart(btn){
-  const card = btn.closest('.card');
-  addProductToCartFromCard(card);
+function renderGallery(){
+  const grid = $('#galleryGrid');
+  grid.innerHTML='';
+  window.GALLERY.forEach((g,i)=>{
+    grid.innerHTML+=`<div class="gallery-card"><img src="${g.src}" alt="${g.alt}" onclick="openLightboxByIndex(${i})"></div>`;
+  });
+  window.galleryImgs = window.GALLERY.map(g=>g.src);
 }
+
+function renderTestimonials(){
+  const slider = $('#testiSlider');
+  slider.innerHTML='';
+  window.TESTIMONIALS.forEach(t=>{
+    slider.innerHTML += `<div class="testimonial-card"><img src="${t.img}" alt="${t.name}"><p><strong>${t.name}, ${t.kota}</strong></p><p>"${t.text}"</p></div>`;
+  });
+}
+
+function renderCertificates(){
+  const wrap = $('#certWrap');
+  window.SITE.sertifikat.forEach(s=>{
+    wrap.innerHTML+=`<img src="${s.src}" alt="${s.alt}" style="height:40px;border-radius:6px">`;
+  });
+}
+
+function initNotif(){
+  setInterval(()=>{
+    const s = window.NOTIFIKASI[Math.floor(Math.random()*window.NOTIFIKASI.length)];
+    showToast(`${s.nama} dari ${s.kota} baru saja membeli ${s.produk}`);
+  },14000);
+}
+
+/* =======================
+   SLIDER CONTROL
+======================= */
+let slideCur=0;
+function showSlide(n){
+  const slides=$$('.slide'), dots=$$('.dot');
+  slideCur=(n+slides.length)%slides.length;
+  slides.forEach((s,i)=>s.classList.toggle('active',i===slideCur));
+  dots.forEach((d,i)=>d.classList.toggle('active',i===slideCur));
+}
+function nextSlide(){showSlide(slideCur+1)}
+function prevSlide(){showSlide(slideCur-1)}
+
+/* =======================
+   FUNGSI LAMA
+======================= */
+function toggleMenu(){ const m=$('#sideMenu'); const a=m.classList.toggle('active'); m.setAttribute('aria-hidden',!a); }
+document.addEventListener('click',e=>{ const side=$('#sideMenu'); if(!e.target.closest('.menu-toggle') && side.classList.contains('active') && !e.target.closest('.side-menu')){ side.classList.remove('active'); side.setAttribute('aria-hidden','true'); }});
+function toggleDarkMode(){ document.body.classList.toggle('dark-mode'); const t=document.body.classList.contains('dark-mode')?'☀️':'🌙'; $$('.btn-toggle').forEach(b=>b.textContent=t); }
+
+function initProductCards(){
+  $$('.card').forEach(card=>{
+    const promo = card.dataset.promo==='true';
+    const oldEl = card.querySelector('.price-old');
+    if(!promo && oldEl) oldEl.style.display='none';
+  });
+}
+
+function formatRupiah(v){ return 'Rp ' + Number(v).toLocaleString('id-ID'); }
+
+/* CART */
+let cart=[];
+const floatingCartBtn=$('#floatingCart'),cartBadge=$('#cartBadge'),cartItemsWrap=$('#cartItems'),cartTotalEl=$('#cartTotal');
+function addToCart(btn){ addProductToCartFromCard(btn.closest('.card')); }
 function addProductToCartFromCard(card){
-  const name = card.dataset.name;
-  const price = Number(card.dataset.price || 0);
-  const stock = Number(card.dataset.stock || 999);
-  let found = cart.find(x=>x.name===name);
-  if(found){
-    if(found.qty+1 > stock){ showToast('Stok tidak cukup untuk ' + name); return; }
-    found.qty++;
-  } else {
-    cart.push({name, price, qty:1, stock});
-  }
-  renderCart();
-  showToast(name + ' ditambahkan ke keranjang');
-  // show floating cart when first item added
-  floatingCartBtn.style.display = 'flex';
+  const name=card.dataset.name, price=Number(card.dataset.price), stock=Number(card.dataset.stock||999);
+  let f=cart.find(x=>x.name===name);
+  if(f){ if(f.qty+1>stock){ showToast('Stok tidak cukup untuk '+name); return; } f.qty++; }
+  else cart.push({name,price,qty:1,stock});
+  renderCart(); showToast(name+' ditambahkan ke keranjang'); floatingCartBtn.style.display='flex';
 }
 function addToCartFromModal(){
-  const name = $('#modalName').textContent;
-  const priceText = $('#modalPrice').getAttribute('data-price') || $('#modalPrice').textContent.replace(/[^0-9]/g,'') || 0;
-  const price = Number(priceText);
-  let found = cart.find(x=>x.name===name);
-  if(found) found.qty++;
-  else cart.push({name, price, qty:1, stock:99});
-  renderCart();
-  showToast(name + ' ditambahkan ke keranjang');
-  floatingCartBtn.style.display = 'flex';
-  closeProductModal();
+  const name=$('#modalName').textContent;
+  const price=Number($('#modalPrice').getAttribute('data-price')||0);
+  let f=cart.find(x=>x.name===name);
+  if(f) f.qty++; else cart.push({name,price,qty:1,stock:99});
+  renderCart(); showToast(name+' ditambahkan ke keranjang'); floatingCartBtn.style.display='flex'; closeProductModal();
 }
-
 function renderCart(){
-  if(!cartItemsWrap) return;
-  cartItemsWrap.innerHTML = '';
-  let total = 0;
-  cart.forEach((it, i) => {
-    total += it.price * it.qty;
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.style.padding = '10px 0';
-    div.innerHTML = `
-      <strong>${it.name}</strong><div style="margin-top:6px">Rp ${it.price.toLocaleString('id-ID')} &nbsp;
-      <button onclick="decQty(${i})">-</button>
-      <input type="number" value="${it.qty}" min="1" style="width:56px" onchange="setQty(${i}, this.value)">
-      <button onclick="incQty(${i})">+</button>
-      &nbsp; = <strong>Rp ${(it.price*it.qty).toLocaleString('id-ID')}</strong>
-      <button style="float:right;background:transparent;border:none;color:var(--danger);cursor:pointer" onclick="removeItem(${i})">Hapus</button>
-      </div>
-    `;
-    cartItemsWrap.appendChild(div);
+  cartItemsWrap.innerHTML=''; let total=0;
+  cart.forEach((it,i)=>{ total+=it.price*it.qty;
+    cartItemsWrap.innerHTML+=`
+      <div class="cart-item" style="padding:10px 0">
+        <strong>${it.name}</strong><div style="margin-top:6px">Rp ${it.price.toLocaleString('id-ID')} 
+        <button onclick="decQty(${i})">-</button>
+        <input type="number" value="${it.qty}" min="1" style="width:56px" onchange="setQty(${i}, this.value)">
+        <button onclick="incQty(${i})">+</button> = <strong>Rp ${(it.price*it.qty).toLocaleString('id-ID')}</strong>
+        <button style="float:right;background:transparent;border:none;color:var(--danger)" onclick="removeItem(${i})">Hapus</button>
+        </div></div>`;
   });
-  cartTotalEl.textContent = total.toLocaleString('id-ID');
-  cartBadge.textContent = cart.reduce((s,i)=>s+i.qty,0);
+  cartTotalEl.textContent=total.toLocaleString('id-ID');
+  cartBadge.textContent=cart.reduce((s,i)=>s+i.qty,0);
 }
-
-function incQty(i){ if(cart[i].qty < cart[i].stock) cart[i].qty++; renderCart(); }
-function decQty(i){ if(cart[i].qty > 1) cart[i].qty--; renderCart(); }
-function setQty(i, val){ let q = Number(val); if(isNaN(q) || q<1) q=1; if(q>cart[i].stock){ showToast('Melebihi stok tersedia'); q = cart[i].stock; } cart[i].qty = q; renderCart(); }
-function removeItem(i){ cart.splice(i,1); renderCart(); if(cart.length===0){ floatingCartBtn.style.display='none'; } }
+function incQty(i){ if(cart[i].qty<cart[i].stock) cart[i].qty++; renderCart(); }
+function decQty(i){ if(cart[i].qty>1) cart[i].qty--; renderCart(); }
+function setQty(i,v){ let q=Number(v); if(isNaN(q)||q<1) q=1; if(q>cart[i].stock){ showToast('Melebihi stok tersedia'); q=cart[i].stock; } cart[i].qty=q; renderCart(); }
+function removeItem(i){ cart.splice(i,1); renderCart(); if(!cart.length) floatingCartBtn.style.display='none'; }
 function clearCart(){ cart=[]; renderCart(); toggleCart(); showToast('Keranjang dibersihkan'); floatingCartBtn.style.display='none'; }
-
 function toggleCart(){ $('#cartPanel').classList.toggle('active'); }
 
-/* ====== CHECKOUT via WA ====== */
+/* CHECKOUT WA */
 function checkout(){
-  if(cart.length===0){ showToast('Keranjang masih kosong'); return; }
-  let msg = 'Halo, saya ingin pesan:%0A';
-  let subtotal = 0;
-  cart.forEach(it=>{
-    msg += `${it.name} x ${it.qty} = Rp ${ (it.price*it.qty).toLocaleString('id-ID') }%0A`;
-    subtotal += it.price * it.qty;
-  });
-  msg += `%0ASubtotal: Rp ${subtotal.toLocaleString('id-ID')} (belum termasuk ongkir dari Deket, Lamongan)`;
-  window.open('https://wa.me/6281234567890?text=' + encodeURIComponent(msg));
+  if(!cart.length){ showToast('Keranjang kosong'); return; }
+  let msg='Halo, saya ingin pesan:%0A'; let sub=0;
+  cart.forEach(it=>{ msg+=`${it.name} x ${it.qty} = Rp ${(it.price*it.qty).toLocaleString('id-ID')}%0A`; sub+=it.price*it.qty; });
+  msg+=`%0ASubtotal: Rp ${sub.toLocaleString('id-ID')} (belum termasuk ongkir dari Deket, Lamongan)`;
+  window.open('https://wa.me/'+window.SITE.wa+'?text='+encodeURIComponent(msg));
 }
 
-/* ====== QUICK ORDER FORM ====== */
-function quickOrderPref(name, price){
-  $('#qProduct').value = `${name}|${price}`;
-  $('#qQty').value = 1;
-  $('#qName').focus();
-  window.scrollTo({top:document.getElementById('quickOrderForm').offsetTop-80,behavior:'smooth'});
-}
+/* QUICK ORDER */
+function quickOrderPref(n,p){ $('#qProduct').value=`${n}|${p}`; $('#qQty').value=1; $('#qName').focus(); window.scrollTo({top:$('#quickOrderForm').offsetTop-80,behavior:'smooth'});}
 function submitQuickOrder(e){
   e.preventDefault();
-  const name = $('#qName').value.trim(), wa = $('#qWA').value.trim(), addr = $('#qAddr').value.trim();
-  const prod = $('#qProduct').value, qty = Number($('#qQty').value), note = $('#qNote').value;
-  if(!prod){ showToast('Pilih produk'); return; }
-  const [pname,pprice] = prod.split('|'); const subtotal = Number(pprice)*qty;
-  let text = `Halo, saya *${name}* ingin memesan:%0A- ${pname} x ${qty} = Rp ${subtotal}%0AAlamat: ${addr}%0ANo WA: ${wa}%0ANote: ${note||'-'}%0A(Subtotal belum termasuk ongkir dari Deket, Lamongan)`;
-  window.open('https://wa.me/6281234567890?text=' + encodeURIComponent(text));
+  const n=$('#qName').value.trim(),wa=$('#qWA').value.trim(),addr=$('#qAddr').value.trim();
+  const prod=$('#qProduct').value,qty=Number($('#qQty').value),note=$('#qNote').value;
+  if(!prod){showToast('Pilih produk');return;}
+  const [pn,pp]=prod.split('|'); const sub=Number(pp)*qty;
+  const txt=`Halo, saya *${n}* ingin memesan:%0A- ${pn} x ${qty} = Rp ${sub}%0AAlamat: ${addr}%0ANo WA: ${wa}%0ANote: ${note||'-'}%0A(Subtotal belum termasuk ongkir dari Deket, Lamongan)`;
+  window.open('https://wa.me/'+window.SITE.wa+'?text='+encodeURIComponent(txt));
 }
 
-/* ====== TOAST notification (e.g. simulated recent purchase) ====== */
-function showToast(text, delay = 4000){
-  const t = document.createElement('div'); t.className='toast';
-  t.style.opacity = '1';
-  t.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" style="opacity:.9;margin-right:8px"><circle cx="12" cy="12" r="10" fill="#ffcf6b"/></svg><div>${text}</div>`;
+/* TOAST */
+function showToast(text,delay=4000){
+  const t=document.createElement('div'); t.className='toast'; t.innerHTML=`<div>${text}</div>`;
   $('#toastPlace').appendChild(t);
-  setTimeout(()=>{ t.style.transition='opacity .5s'; t.style.opacity=0; t.addEventListener('transitionend', ()=>t.remove()); }, delay);
+  setTimeout(()=>{t.style.transition='opacity .5s';t.style.opacity=0;t.addEventListener('transitionend',()=>t.remove());},delay);
 }
-/* simulate sale notices */
-const salesSamples=[['Budi','Surabaya','Keripik Pisang'],['Ani','Gresik','Kacang Gurih'],['Rina','Sidoarjo','Keripik Pisang']];
-setInterval(()=>{ const s = salesSamples[Math.floor(Math.random()*salesSamples.length)]; showToast(`${s[0]} dari ${s[1]} baru saja membeli ${s[2]}`); }, 14000);
 
-/* ====== GALLERY LIGHTBOX with navigation ====== */
-const galleryImgs = ['assets/bg.jpg','assets/bg.jpg','assets/bg.jpg']; // update with your hosted images
-let gIndex = 0;
-function openLightboxByIndex(i){
-  gIndex = i % galleryImgs.length;
-  $('#lightboxImg').src = galleryImgs[gIndex];
-  $('#lightbox').style.display = 'flex';
-  $('#lightbox').setAttribute('aria-hidden','false');
+/* LIGHTBOX & MODAL */
+function openLightboxByIndex(i){ window.gIndex=i; $('#lightboxImg').src=window.galleryImgs[i]; $('#lightbox').style.display='flex'; $('#lightbox').setAttribute('aria-hidden','false'); }
+function closeLightbox(){ $('#lightbox').style.display='none'; $('#lightbox').setAttribute('aria-hidden','true'); }
+function nextGallery(){ window.gIndex=(window.gIndex+1)%window.galleryImgs.length; $('#lightboxImg').src=window.galleryImgs[window.gIndex]; }
+function prevGallery(){ window.gIndex=(window.gIndex-1+window.galleryImgs.length)%window.galleryImgs.length; $('#lightboxImg').src=window.galleryImgs[window.gIndex]; }
+
+function openProductModal(img){
+  const c=img.closest('.card'); $('#modalImg').src=c.dataset.img;
+  $('#modalName').textContent=c.dataset.name; $('#modalDesc').textContent=c.dataset.desc;
+  $('#modalPrice').textContent=formatRupiah(c.dataset.price); $('#modalPrice').setAttribute('data-price',c.dataset.price);
+  $('#productModal').style.display='flex';
 }
-function closeLightbox(){ $('#lightbox').style.display = 'none'; $('#lightbox').setAttribute('aria-hidden','true'); }
-function nextGallery(){ gIndex = (gIndex+1) % galleryImgs.length; $('#lightboxImg').src = galleryImgs[gIndex]; }
-function prevGallery(){ gIndex = (gIndex-1 + galleryImgs.length) % galleryImgs.length; $('#lightboxImg').src = galleryImgs[gIndex]; }
+function closeProductModal(){ $('#productModal').style.display='none'; }
 
-/* ====== TESTIMONIAL slider (looping) ====== */
-let tIdx = 0; const tSlider = $('#testiSlider');
-function testiNext(){ tIdx = (tIdx + 1) % tSlider.children.length; tSlider.style.transform = `translateX(-${tIdx * 300}px)`; }
-function testiPrev(){ tIdx = (tIdx - 1 + tSlider.children.length) % tSlider.children.length; tSlider.style.transform = `translateX(-${tIdx * 300}px)`; }
+/* TESTIMONI SLIDER */
+let tIdx=0; const tSlider=()=>$('#testiSlider');
+function testiNext(){ tIdx=(tIdx+1)%tSlider().children.length; tSlider().style.transform=`translateX(-${tIdx*300}px)`;}
+function testiPrev(){ tIdx=(tIdx-1+tSlider().children.length)%tSlider().children.length; tSlider().style.transform=`translateX(-${tIdx*300}px)`; }
 
-/* ====== PRODUCT MODAL (detail from dataset) ====== */
-function openProductModal(imgEl){
-  const card = imgEl.closest('.card');
-  $('#modalImg').src = card.dataset.img || imgEl.src;
-  $('#modalName').textContent = card.dataset.name || '';
-  $('#modalDesc').textContent = card.dataset.desc || '';
-  const price = card.dataset.price || '';
-  $('#modalPrice').textContent = price ? formatRupiah(price) : '';
-  $('#modalPrice').setAttribute('data-price', price || '');
-  $('#productModal').style.display = 'flex';
-}
-function closeProductModal(){ $('#productModal').style.display = 'none'; }
-
-/* ====== INSTAGRAM embed (1 random post) ====== */
-/* NOTE: Replace the sample entries with **actual embed URLs** from your account:
-   Example: "https://www.instagram.com/p/POST_ID/embed"
-   You can obtain embed code from Instagram >> three-dot >> Embed (copy).
-*/
-const igUrls = [
-  // Put real embed URLs here for navid_snack posts:
-  "https://www.instagram.com/p/CxsfPbPyvW0/?hl=en&img_index=2",
-  "https://www.instagram.com/p/Cim8OTdp49J/?hl=en&img_index=2",
-  "https://www.instagram.com/p/CGxXMP_lDIh/?hl=en"
-];
-// If there are real embed URLs, inject a blockquote so instagram's embed.js renders it.
-(function renderRandomIG(){
-  const container = $('#igEmbedContainer');
-  if(!container) return;
-  // choose random
-  const url = igUrls[Math.floor(Math.random()*igUrls.length)];
-  // if url is placeholder, show small note
-  if(!url.includes('/p/')){
-    container.innerHTML = `<div style="padding:20px;background:var(--surface);border-radius:8px">Silakan ganti array <code>igUrls</code> di script dengan URL embed post dari akun https://www.instagram.com/navid_snack/</div>`;
-    return;
-  }
-  // create blockquote as Instagram expects
-  const block = document.createElement('blockquote'); block.className = 'instagram-media'; block.setAttribute('data-instgrm-permalink', url.replace('/embed','')); block.style = "width:100%;max-width:540px";
-  block.innerHTML = `<a href="${url.replace('/embed','')}" target="_blank" rel="noopener noreferrer">Lihat di Instagram</a>`;
-  container.appendChild(block);
-  if(window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === 'function'){
-    try{ window.instgrm.Embeds.process(); }catch(e){ /* ignore */ }
-  }
-})();
-
-/* ====== helpers & init ====== */
+/* SCROLL TOP */
 function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
-window.addEventListener('scroll', ()=>{ $('#scrollTopBtn').style.display = (window.scrollY>200)?'inline-block':'none'; });
+window.addEventListener('scroll',()=>$('#scrollTopBtn').style.display=(window.scrollY>200)?'inline-block':'none');
 
-/* Hide price-old for non-promo cards and initialize countdown placement */
-document.addEventListener('DOMContentLoaded', ()=>{
-  initProductCards();
-  renderCart();
-  // ensure floating cart hidden if empty
-  if(cart.length===0) floatingCartBtn.style.display = 'none';
-});
-
-/* Accessibility: ESC to close modals/side menu */
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape'){
-    closeLightbox();
-    closeProductModal();
-    $('#sideMenu').classList.remove('active');
-  }
+/* =======================
+   INIT
+======================= */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderHero();renderProducts();renderGallery();renderTestimonials();renderCertificates();
+  initProductCards();renderCart();initNotif();
+  if(!cart.length) $('#floatingCart').style.display='none';
+  setInterval(nextSlide,6000);
 });
 </script>
+
 </body>
 </html>
