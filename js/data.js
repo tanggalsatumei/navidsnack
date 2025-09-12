@@ -8,6 +8,7 @@ window.SITE = {
   img: "assets/logo.png",
   brand: "Navid Snack",
   wa: "6281234567890",
+  promotext: "🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥",
   alamat: "Deket, Lamongan, Jawa Timur",
   keywords: "navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat, snack lamongan, oleh-oleh lamongan",
   description: "Navid Snack — Camilan sehat & lezat khas Lamongan, higienis dan bergizi. Pesan cepat via WhatsApp.",
@@ -17,10 +18,6 @@ window.SITE = {
     { src: "assets/bpom.png", alt: "Sertifikat BPOM" }
   ]
 };
-
-// teks promo
-window.PROMO_TEXT = "🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥";
-
 
 // =======================
 // SLIDER HERO
