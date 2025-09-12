@@ -1,34 +1,131 @@
-// js/data.js
-window.NavidData = {
-  products: [
-    {
-      id: "p1",
-      name: "Keripik Pisang",
-      desc: "Keripik pisang renyah khas Navid Snack",
-      price: 15000,
-      oldPrice: 20000,
-      promo: true,
-      stock: 3,
-      endTime: "2025-09-15T11:00:00",
-      img: "assets/logo.jpg"
-    },
-    {
-      id: "p2",
-      name: "Kacang Gurih",
-      desc: "Kacang gurih renyah",
-      price: 22000,
-      promo: false,
-      stock: 8,
-      img: "assets/img/kacang.jpg"
-    }
+// =======================
+// KONTAK & KONFIGURASI
+// =======================
+window.SITE = {
+  img: "assets/logo.png",
+  brand: "Navid Snack",
+  wa: "6281234567890",
+  alamat: "Deket, Lamongan, Jawa Timur",
+  sertifikat: [
+    { src: "assets/halal.png", alt: "Sertifikat Halal" },
+    { src: "assets/bpom.png", alt: "Sertifikat BPOM" }
   ],
-  gallery: [
-    "assets/img/g1.jpg",
-    "assets/img/g2.jpg",
-    "assets/img/g3.jpg"
-  ],
-  testimonials: [
-    { name: "Ani", city: "Surabaya", text: "Rasanya enak, pengiriman cepat!", avatar: "https://i.pravatar.cc/100?u=a" },
-    { name: "Budi", city: "Gresik", text: "Camilan favorit keluarga!", avatar: "https://i.pravatar.cc/100?u=b" }
-  ]
 };
+
+// =======================
+// SLIDER HERO
+// =======================
+window.SLIDES = [
+  {
+    bg:"assets/bg.jpg",
+    img: "assets/logo.png",
+    title: "Navid Snack — Camilan Sehat & Lezat",
+    text: "Snack khas Lamongan, dibuat higienis dan rasa yang konsisten.",
+    cta: { text: "Hubungi Sekarang", link: "https://wa.me/6281234567890" }
+  },
+  {
+    bg:"assets/bg.jpg",
+    img: "assets/logo.png",
+    title: "Promo Spesial Mingguan",
+    text: "Diskon paket & pengiriman cepat untuk area Deket, Lamongan.",
+    cta: { text: "Lihat Produk", link: "#products" }
+  }
+];
+
+// =======================
+// PRODUK
+// tglPromoStart & tglPromoEnd format: YYYY-MM-DD
+// jamPromoStart & jamPromoEnd format: HH:mm (24 jam)
+window.PRODUCTS = [
+  {
+    id: "p01",
+    name: "Keripik Pisang",
+    desc: "Keripik pisang renyah khas Navid Snack",
+    img: "assets/bg.jpg",
+    price: 15000,
+    oldPrice: 20000,
+    promo: true,
+    tglPromoStart: "2025-09-11",
+    tglPromoEnd: "2025-09-11",
+    jamPromoStart: "09:00",
+    jamPromoEnd: "11:00",
+    stock: 5,
+    rating: 5
+  },
+  {
+    id: "p02",
+    name: "Keripik Telur Asin",
+    desc: "Keripik telur asin khas Navid Snack",
+    img: "assets/logo.jpg",
+    price: 15000,
+    oldPrice: 20000,
+    promo: true,
+    tglPromoStart: "",
+    tglPromoEnd: "",
+    jamPromoStart: "",
+    jamPromoEnd: "",
+    stock: 5,
+    rating: 5
+  },
+  {
+    id: "p03",
+    name: "Corn Milk Drink",
+    desc: "Minuman susu jagung khas Navid Snack",
+    img: "assets/bg.jpg",
+    price: 15000,
+    oldPrice: 20000,
+    promo: true,
+    tglPromoStart: "",
+    tglPromoEnd: "",
+    jamPromoStart: "",
+    jamPromoEnd: "",
+    stock: 5,
+    rating: 5
+  },
+  {
+    id: "p04",
+    name: "Sari Kemangi",
+    desc: "Minuman sari kemangi khas Navid Snack",
+    img: "assets/logo.jpg",
+    price: 15000,
+    oldPrice: 20000,
+    promo: true,
+    tglPromoStart: "",
+    tglPromoEnd: "",
+    jamPromoStart: "",
+    jamPromoEnd: "",
+    stock: 5,
+    rating: 5
+  }
+];
+
+// =======================
+// GALERI (Lightbox)
+window.GALLERY = [
+  { src: "assets/logo.jpg", alt: "Galeri 1" },
+  { src: "assets/bg.jpg", alt: "Galeri 2" },
+  { src: "assets/logo.jpg", alt: "Galeri 3" },
+  { src: "assets/bg.jpg", alt: "Galeri 4" },
+  { src: "assets/logo.jpg", alt: "Galeri 5" },
+  { src: "assets/bg.jpg", alt: "Galeri 6" },
+  { src: "assets/logo.jpg", alt: "Galeri 7" }
+];
+
+// =======================
+// TESTIMONI
+window.TESTIMONIALS = [
+  { name: "Ani", kota: "Surabaya", text: "Rasanya enak, pengirimannya cepat!", img: "https://i.pravatar.cc/100?u=ani" },
+  { name: "Budi", kota: "Gresik", text: "Camilan keluarga favorit, gurih dan renyah.", img: "https://i.pravatar.cc/100?u=budi" },
+  { name: "Siti", kota: "Lamongan", text: "Pesan online mudah, respon WA cepat.", img: "https://i.pravatar.cc/100?u=siti" },
+  { name: "Bambang", kota: "Sidorajo", text: "Rasanya enak, pengirimannya cepat!", img: "https://i.pravatar.cc/100?u=ani" },
+  { name: "Arif", kota: "Malang", text: "Camilan keluarga favorit, gurih dan renyah.", img: "https://i.pravatar.cc/100?u=budi" },
+  { name: "Muin", kota: "Bojonegoro", text: "Pesan online mudah, respon WA cepat.", img: "https://i.pravatar.cc/100?u=siti" }
+];
+
+// =======================
+// NOTIFIKASI PEMBELIAN
+window.NOTIFIKASI = [
+  { nama: "Budi", kota: "Surabaya", produk: "Keripik Pisang" },
+  { nama: "Ani", kota: "Gresik", produk: "Kacang Gurih" },
+  { nama: "Rina", kota: "Sidoarjo", produk: "Corn Milk Drink" }
+];
