@@ -375,7 +375,11 @@ const $$ = s=>Array.from(document.querySelectorAll(s));
 /* =======================
    RENDER DINAMIS
 ======================= */
-$('#promoBar marquee').textContent = window.PROMO_TEXT;
+document.addEventListener('DOMContentLoaded', ()=>{
+  const promo = $('#promoBar marquee');
+  if (promo) promo.textContent = window.PROMO_TEXT;
+});
+
 
 function renderHero(){
   const hero = $('#hero');
