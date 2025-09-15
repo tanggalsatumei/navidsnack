@@ -1,34 +1,24 @@
-window.DATA_ALL = {
-  settings: {
+const DB = {
+  Pengaturan: {
     site_title: "Navid Snack",
     logo: "/assets/logo.png",
-    icon: "/assets/favicon.png",
-
-    /* 🎨 Tema warna elegan */
-    warna: "#c59d5f",         // warna utama (aksen emas elegan)
-    warna_primer: "#1e1e1e",  // warna dasar background/header
-    warna_teks: "#f5f5f5",    // warna teks utama
-    warna_kartu: "#2a2a2a",   // warna kartu produk/galeri
-
-    /* 📈 SEO */
-    meta_desc: "Navid Snack - Produsen Keripik Pisang, Corn Milk Drink, Sari Kemangi, dan Kerupuk Telur Asin khas Lamongan.",
-    meta_keywords: [
-      "keripik pisang", "corn milk drink", "sari kemangi", "kerupuk telur asin",
-      "camilan khas lamongan", "snack lokal lamongan", "makanan ringan lamongan"
-    ],
-
-    /* 📍 Info bisnis */
-    textpromo: "✨ Promo Spesial Hari Ini ✨",
+    icon: "/assets/logo.png",
+    warna: "#c59b58",              // warna tema utama, bisa diganti
+    textpromo: "🔥 Promo Spesial Setiap Hari! 🔥",
     wa: "6281234567890",
-    wa_message: "Halo Navid Snack, saya mau pesan produk Anda.",
-    alamat: "Jl. Mawar No.10, Lamongan",
+    wa_message: "Halo Navid Snack, saya mau pesan...",
+    alamat: "Jl. Raya Utama No.1, Lamongan",
     "jam buka": "08.00 - 17.00",
-    deskripsi: "UMKM lokal yang memproduksi camilan khas Lamongan.",
+    deskripsi: "Produsen snack lokal berkualitas dari Lamongan",
     maps: "https://maps.google.com/...",
-    video_embed: "https://www.youtube.com/embed/xxxxxx"
+    video_embed: "https://www.youtube.com/embed/xxxx",
+    keywords: [
+      "snack", "keripik pisang", "corn milk drink",
+      "sari kemangi", "kerupuk telur asin", "navid snack"
+    ]
   },
 
-  slides: [
+  Slider: [
     {
       bg: "/assets/bg.jpg",
       img: "/assets/logo.png",
@@ -49,7 +39,7 @@ window.DATA_ALL = {
     }
   ],
 
-  products: [
+  Produk: [
     {
       id: "P1",
       nama: "Keripik Pisang",
@@ -98,7 +88,7 @@ window.DATA_ALL = {
     }
   ],
 
-  gallery: [
+  Galeri: [
     { url: "/assets/bg.jpg", alt: "Proses produksi" },
     { url: "/assets/logo.jpg", alt: "Produk jadi" },
     { url: "/assets/bg.jpg", alt: "Kemasan produk" },
@@ -108,7 +98,7 @@ window.DATA_ALL = {
     { url: "/assets/bg.jpg", alt: "Kemasan produk" }
   ],
 
-  testimonials: [
+  Testimoni: [
     { nama: "Budi", jabatan: "Pelanggan", gambar: "/assets/bg.jpg", alt: "Budi puas" },
     { nama: "Sari", jabatan: "Pelanggan", gambar: "/assets/logo.jpg", alt: "Sari senang" },
     { nama: "Wawan", jabatan: "Pelanggan", gambar: "/assets/bg.jpg", alt: "Budi puas" },
@@ -117,7 +107,7 @@ window.DATA_ALL = {
     { nama: "Sardi", jabatan: "Pelanggan", gambar: "/assets/logo.jpg", alt: "Sari senang" }
   ],
 
-  purchases: [
+  NotifikasiPembelian: [
     { nama: "Andi", produk: "Keripik Pisang" },
     { nama: "Dewi", produk: "Corn Milk Drink" },
     { nama: "Rudi", produk: "Kerupuk Telur Asin" },
