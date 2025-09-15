@@ -32,8 +32,11 @@ body{
 /* Dark mode overrides (toggle class on body) */
 body.dark-mode{
   --bg:#071021;--surface:#0f1724;--muted:#9aa6b2;--text:#e6eef4;
-  --brand:#071127;--accent:#ffb703;--accent-2:#ff9f1c;--soft:#081226;
+  --brand:#0a1629;--accent:#ffcf6b;--accent-2:#ff9f1c;--soft:#081226;
 }
+
+.promo-marquee{background:linear-gradient(90deg,#ff0000,#ff7b00);color:#fff;font-weight:800;text-align:center;padding:10px;letter-spacing:0.5px}
+.promo-marquee marquee{font-size:15px}
 
 /* Header */
 header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
@@ -57,14 +60,16 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s}
 .slide.active{opacity:1}
 .slide::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.35),rgba(2,6,23,0.12))}
-.slide-content{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:28px;color:var(--accent);display:flex;gap:24px;align-items:center;justify-content:center}
-.slide-text h1{margin:0;font-size:34px;color:#fff}
-.btn{background:var(--accent);color:var(--brand);border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(251,133,0,0.12)}
-.dots{position:absolute;bottom:18px;width:100%;text-align:center;z-index:3}
-.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.6);margin:0 6px;cursor:pointer;opacity:.7}
-.dot.active{background:var(--accent-2);opacity:1}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:20px}
-.arrow-left{left:18px}.arrow-right{right:18px}
+.slide-content{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:28px;color:#fff;display:flex;gap:24px;align-items:center;justify-content:center;text-align:center}
+.slide-content img{width:200px;height:200px;border-radius:16px;object-fit:cover}
+.slide-text h1{margin:0;font-size:32px;color:#fff}
+@media(max-width:600px){
+  .slide-content{flex-direction:column}
+  .slide-content img{width:140px;height:140px}
+  .arrow{top:70%!important}
+}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);border:none;color:#fff;padding:10px;border-radius:50%;cursor:pointer;font-size:20px;z-index:10}
+.arrow-left{left:12px}.arrow-right{right:12px}
 
 /* layout & cards */
 .container{max-width:var(--maxw);margin:0 auto;padding:28px}
@@ -99,6 +104,19 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .testimonial-card{min-width:300px;padding:16px;text-align:center;flex-shrink:0}
 .testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
 
+.quick-order{background:var(--surface);padding:20px;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,0.06);display:grid;gap:14px;grid-template-columns:1fr 1fr}
+.quick-order input,.quick-order textarea,.quick-order select{
+  padding:12px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.1);background:var(--bg);color:var(--text);font-size:15px
+}
+.quick-order textarea{grid-column:1/-1}
+.quick-order button{grid-column:1/-1;background:var(--accent);color:#000;font-weight:700;padding:12px;border:none;border-radius:12px;cursor:pointer;box-shadow:0 4px 12px rgba(251,133,0,0.3)}
+body.dark-mode .quick-order input,body.dark-mode .quick-order textarea,body.dark-mode .quick-order select{
+  background:#081226;border-color:#1c2836;color:#e6eef4
+}
+
+.feed-grid{display:grid;grid-template-columns:30% 70%;gap:20px}
+@media(max-width:800px){.feed-grid{grid-template-columns:1fr}}
+  
 /* cart & floats */
 .whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
 .whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
@@ -200,20 +218,16 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
   </div>
 </section>
 
-<!-- QUICK ORDER FORM -->
-<section class="container" aria-labelledby="quickOrderTitle" style="margin-top:18px">
-  <div class="section-title"><h2 id="quickOrderTitle">Form Pemesanan Cepat</h2></div>
-  <form id="quickOrderForm" class="quick-order" onsubmit="submitQuickOrder(event)">
-    <input id="qName" type="text" placeholder="Nama lengkap" required aria-label="Nama"/>
-    <input id="qWA" type="tel" placeholder="Nomor WhatsApp (contoh: 0812...)" required aria-label="Nomor WA"/>
-    <input id="qAddr" type="text" placeholder="Alamat (kelurahan/kota)" required aria-label="Alamat"/>
-    <select id="qProduct" required aria-label="Pilih produk"></select>
-    <input id="qQty" type="number" min="1" value="1" required aria-label="Jumlah"/>
-    <textarea id="qNote" rows="2" placeholder="Catatan / request (opsional)"></textarea>
-    <div style="display:flex;gap:10px;align-items:center">
-      <button class="btn" type="submit">Kirim ke WhatsApp Admin</button>
-      <small style="color:var(--muted)">Subtotal akan disertakan sebelum ongkir</small>
-    </div>
+<section class="container" style="padding:30px;max-width:1100px;margin:auto">
+  <h2 style="text-align:center;margin-bottom:20px">Form Pemesanan Cepat</h2>
+  <form class="quick-order">
+    <input type="text" placeholder="Nama Lengkap" required/>
+    <input type="tel" placeholder="Nomor WhatsApp" required/>
+    <input type="text" placeholder="Alamat (kelurahan/kota)" required/>
+    <select required><option>Pilih Produk...</option></select>
+    <input type="number" min="1" value="1"/>
+    <textarea rows="2" placeholder="Catatan (opsional)"></textarea>
+    <button>Kirim ke WhatsApp</button>
   </form>
 </section>
 
@@ -250,19 +264,16 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
   </div>
 </div>
 
-<!-- feed (instagram + youtube) -->
-<section id="feed" class="container" aria-labelledby="feedTitle">
-  <div class="section-title"><h2 id="feedTitle">Media Sosial</h2></div>
-  <div class="feed-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-    <div class="feed-ig" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
-      <h3 style="margin-bottom:10px;color:var(--brand)">Instagram</h3>
-      <div id="igEmbedContainer"></div>
+<section class="container" style="padding:30px;max-width:1100px;margin:auto">
+  <h2 style="text-align:center;margin-bottom:20px">Media Sosial</h2>
+  <div class="feed-grid">
+    <div style="background:var(--surface);padding:16px;border-radius:12px">
+      <h3>Instagram</h3>
+      <div style="background:#ccc;height:300px;border-radius:10px"></div>
     </div>
-    <div class="feed-yt" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
-      <h3 style="margin-bottom:10px;color:var(--brand)">YouTube</h3>
-      <div class="yt-wrapper">
-        <iframe id="ytFrame" src="" title="Navid Snack YouTube" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%;height:315px;border-radius:12px"></iframe>
-      </div>
+    <div style="background:var(--surface);padding:16px;border-radius:12px">
+      <h3>YouTube</h3>
+      <iframe src="https://www.youtube.com/embed/" style="width:100%;height:320px;border-radius:12px" frameborder="0" allowfullscreen></iframe>
     </div>
   </div>
 </section>
