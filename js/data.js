@@ -2,17 +2,30 @@ window.DATA_ALL = {
   settings: {
     site_title: "Navid Snack",
     logo: "/assets/logo.png",
-    icon: "/assets/logo.png",
-    warna: "#FFD700",
-    textpromo: "🔥 Promo Spesial Hari Ini 🔥",
+    icon: "/assets/favicon.png",
+
+    /* 🎨 Tema warna elegan */
+    warna: "#c59d5f",         // warna utama (aksen emas elegan)
+    warna_primer: "#1e1e1e",  // warna dasar background/header
+    warna_teks: "#f5f5f5",    // warna teks utama
+    warna_kartu: "#2a2a2a",   // warna kartu produk/galeri
+
+    /* 📈 SEO */
+    meta_desc: "Navid Snack - Produsen Keripik Pisang, Corn Milk Drink, Sari Kemangi, dan Kerupuk Telur Asin khas Lamongan.",
+    meta_keywords: [
+      "keripik pisang", "corn milk drink", "sari kemangi", "kerupuk telur asin",
+      "camilan khas lamongan", "snack lokal lamongan", "makanan ringan lamongan"
+    ],
+
+    /* 📍 Info bisnis */
+    textpromo: "✨ Promo Spesial Hari Ini ✨",
     wa: "6281234567890",
     wa_message: "Halo Navid Snack, saya mau pesan produk Anda.",
     alamat: "Jl. Mawar No.10, Lamongan",
     "jam buka": "08.00 - 17.00",
-    deskripsi: "UMKM lokal yang memproduksi camilan khas: Keripik Pisang, Corn Milk Drink, Sari Kemangi, dan Kerupuk Telur Asin.",
+    deskripsi: "UMKM lokal yang memproduksi camilan khas Lamongan.",
     maps: "https://maps.google.com/...",
-    video_embed: "https://www.youtube.com/embed/xxxxxx",
-    keywords: "keripik pisang, corn milk drink, sari kemangi, kerupuk telur asin, camilan khas lamongan, navid snack, snack rumahan, minuman herbal, minuman jagung, makanan ringan"
+    video_embed: "https://www.youtube.com/embed/xxxxxx"
   },
 
   slides: [
@@ -104,8 +117,10 @@ window.DATA_ALL = {
     { nama: "Sardi", jabatan: "Pelanggan", gambar: "/assets/logo.jpg", alt: "Sari senang" }
   ],
 
-  articles: [
-    { judul: "Tips Menyimpan Keripik Pisang", slug: "tips-keripik", deskripsi: "Agar keripik tetap renyah dan awet.", gambar: "/assets/artikel1.jpg" },
-    { judul: "Manfaat Minuman Jagung", slug: "manfaat-cornmilk", deskripsi: "Corn Milk Drink kaya serat dan vitamin.", gambar: "/assets/artikel2.jpg" }
+  purchases: [
+    { nama: "Andi", produk: "Keripik Pisang" },
+    { nama: "Dewi", produk: "Corn Milk Drink" },
+    { nama: "Rudi", produk: "Kerupuk Telur Asin" },
+    { nama: "Tina", produk: "Sari Kemangi" }
   ]
 };
