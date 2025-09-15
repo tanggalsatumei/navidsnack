@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title id="pageTitle">Navid Snack</title>
-<meta name="description" id="metaDescription" content="Camilan sehat & lezat dari Lamongan. Pesan cepat via WhatsApp."/>
+<title id="pageTitle">Navid Snack — Camilan Sehat & Lezat Lamongan</title>
+<meta name="description" id="metaDescription" content="Navid Snack - Camilan sehat & lezat dari Lamongan. Pesan cepat via WhatsApp. Halal, higienis, bergizi."/>
 <meta name="keywords" id="metaKeywords" content="navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat"/>
 
-<meta property="og:title" id="ogTitle" content="Navid Snack"/>
-<meta property="og:description" id="ogDesc" content="Camilan sehat & lezat dari Lamongan. Pesan cepat via WhatsApp."/>
-<meta property="og:image" id="ogImage" content="assets/logo.png"/>
+<!-- Open Graph (akan diupdate ke nilai dari data.js setelah data.js dimuat) -->
+<meta property="og:title" content="" id="ogTitle"/>
+<meta property="og:description" content="" id="ogDesc"/>
+<meta property="og:image" content="" id="ogImage"/>
 <meta property="og:type" content="website"/>
 
 <link rel="icon" id="favicon" href="assets/logo.png" type="image/png"/>
@@ -21,585 +22,729 @@
   --success:#2d6a4f;--danger:#d00000;--glass:rgba(255,255,255,0.7);
   --radius:12px;--shadow:0 8px 24px rgba(17,24,39,0.08);--maxw:1200px;
 }
-/* DARK MODE variables override everything */
-body.dark-mode{
-  --bg:#071127;--surface:#0f1724;--muted:#95a3b3;--text:#e6eef4;
-  --brand:#081224;--accent:#ffb703;--accent-2:#ff9f1c;--soft:#071226;
-  --shadow:0 8px 30px rgba(0,0,0,0.6);
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+  background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;
 }
 
-html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
-a{color:inherit}
-
-/* PROMO MARQUEE - ngejreng */
-.promo-marquee{
-  background: linear-gradient(90deg,#ff2d2d,#ff7a00);
-  color:#fff;font-weight:800;padding:8px 0;font-size:15px;text-align:center;
-  text-shadow:0 2px 6px rgba(0,0,0,0.25);
-  position:sticky;top:0;z-index:1400;
+/* Dark mode overrides (toggle class on body) */
+body.dark-mode{
+  --bg:#071021;--surface:#0f1724;--muted:#9aa6b2;--text:#e6eef4;
+  --brand:#071127;--accent:#ffb703;--accent-2:#ff9f1c;--soft:#081226;
 }
 
 /* Header */
-header{position:sticky;top:40px;z-index:1200;display:flex;align-items:center;gap:16px;padding:12px 20px;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);box-shadow:0 2px 10px rgba(0,0,0,0.12)}
-.logo{display:flex;align-items:center;gap:10px}
-.logo img{width:40px;height:40px;border-radius:8px;background:var(--soft);padding:4px}
-nav{margin-left:auto}
-nav ul{display:flex;gap:18px;list-style:none;margin:0;padding:0}
+header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
+.logo img{width:36px;height:36px;border-radius:8px;background:var(--soft);padding:4px}
+nav{margin-left:auto;display:flex;align-items:center;gap:16px}
+nav ul{display:flex;gap:16px;margin:0;padding:0;list-style:none}
 nav a{color:var(--accent);text-decoration:none;font-weight:600}
-.menu-toggle{display:none;background:none;border:1px solid rgba(255,255,255,0.08);color:var(--accent);padding:8px;border-radius:8px;cursor:pointer}
+.menu-toggle{display:none;background:none;border:1px solid rgba(255,183,3,0.12);color:var(--accent);padding:8px;border-radius:8px;cursor:pointer}
 .btn-toggle{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--accent);padding:8px 10px;border-radius:10px;cursor:pointer}
 
-/* HERO slider */
-#hero{position:relative;height:65vh;min-height:320px;overflow:hidden;border-bottom:1px solid rgba(0,0,0,0.05)}
-.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .5s ease}
+/* Side menu (mobile) */
+.side-menu{position:fixed;top:0;left:-100%;width:78%;height:100%;background:var(--brand);color:var(--accent);padding:22px;transition:left .28s;z-index:1300;overflow:auto}
+.side-menu.active{left:0}
+.side-menu .close-btn{background:none;border:none;color:var(--accent);font-size:28px;position:absolute;top:12px;right:18px;cursor:pointer}
+.side-menu ul{list-style:none;padding:40px 0 0 0;margin:0}
+.side-menu li{margin:14px 0}
+
+/* hero */
+#hero{position:relative;height:70vh;min-height:360px;overflow:hidden;border-bottom:1px solid rgba(15,23,36,0.06)}
+.slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s}
 .slide.active{opacity:1}
-.slide::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.44),rgba(0,0,0,0.08))}
-.slide-content{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:28px;color:#fff;display:flex;gap:20px;align-items:center;justify-content:center;text-align:center;flex-direction:column}
-.hero-title{font-size:28px;margin:0;padding:0}
-.arrow{position:absolute;background:rgba(0,0,0,0.45);border:none;color:#fff;padding:10px 14px;border-radius:10px;cursor:pointer}
-.arrow-left{left:18px;top:50%;transform:translateY(-50%)}
-.arrow-right{right:18px;top:50%;transform:translateY(-50%)}
-.dots{position:absolute;bottom:14px;width:100%;text-align:center}
-.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.6);margin:0 6px;cursor:pointer}
-.dot.active{background:var(--accent)}
+.slide::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.35),rgba(2,6,23,0.12))}
+.slide-content{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:28px;color:var(--accent);display:flex;gap:24px;align-items:center;justify-content:center}
+.slide-text h1{margin:0;font-size:34px;color:#fff}
+.btn{background:var(--accent);color:var(--brand);border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(251,133,0,0.12)}
+.dots{position:absolute;bottom:18px;width:100%;text-align:center;z-index:3}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.6);margin:0 6px;cursor:pointer;opacity:.7}
+.dot.active{background:var(--accent-2);opacity:1}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:20px}
+.arrow-left{left:18px}.arrow-right{right:18px}
 
-/* Layout main container */
+/* layout & cards */
 .container{max-width:var(--maxw);margin:0 auto;padding:28px}
-
-/* Products */
-.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
-.card{background:var(--surface);padding:14px;border-radius:12px;box-shadow:var(--shadow);position:relative}
-.card img{width:100%;height:220px;object-fit:cover;border-radius:10px;display:block}
-.card h3{margin:8px 0 6px 0}
-.card p{color:var(--muted);margin:0 0 8px 0}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.card{background:var(--surface);padding:14px;border-radius:12px;box-shadow:var(--shadow);position:relative;overflow:visible;border:1px solid rgba(2,6,23,0.04)}
+.img-wrapper{position:relative;border-radius:10px;overflow:hidden}
+.card img{display:block;width:100%;height:220px;object-fit:cover;cursor:pointer}
+.promo-label{position:absolute;top:12px;left:12px;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;padding:6px 8px;border-radius:8px;font-weight:800;font-size:12px;z-index:5}
+.countdown-overlay{position:absolute;left:0;right:0;bottom:0;background:rgba(255,183,3,0.95);color:#071123;padding:6px 8px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;font-weight:700;font-size:13px;text-align:center;z-index:6}
 .price-row{display:flex;gap:8px;align-items:center;justify-content:center;margin:8px 0}
 .price-old{text-decoration:line-through;color:var(--muted);font-size:13px}
 .price-new{color:var(--danger);font-weight:800}
-.promo-label{position:absolute;top:12px;left:12px;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;padding:6px 8px;border-radius:8px;font-weight:800;font-size:12px}
-.countdown-overlay{margin-top:6px;color:var(--success);font-weight:700;text-align:center}
+.stars{color:#f6c453;margin-bottom:8px}
 
-/* Gallery & Testimonial slider */
-.gallery-slider,.testimonial-wrap{position:relative;overflow:hidden;margin-top:12px}
-.gallery-track,.testimonial-track{display:flex;transition:transform .45s ease;will-change:transform}
-.gallery-slide,.testimonial-card{min-width:260px;margin:8px;background:var(--surface);border-radius:12px;box-shadow:var(--shadow);flex-shrink:0;padding:8px;text-align:center}
-.gallery-slide img,.testimonial-card img{width:100%;height:200px;object-fit:cover;border-radius:10px}
-.slider-arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.45);color:#fff;border:none;padding:10px;border-radius:10px;cursor:pointer;z-index:20}
-.slider-left{left:8px}.slider-right{right:8px}
+/* gallery -> slider */
+.gallery-slider{position:relative;overflow:hidden}
+.gallery-track{display:flex;transition:transform .45s ease}
+.gallery-slide{min-width:260px;margin:8px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);flex-shrink:0}
+.gallery-slide img{width:100%;height:220px;object-fit:cover;display:block}
 
-/* Lightbox */
-.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.86);z-index:1600}
-.lightbox img{max-width:92%;max-height:86%;border-radius:12px;box-shadow:0 20px 50px rgba(0,0,0,0.6)}
-.lightbox .btn{position:absolute;background:none;border:none;color:#fff;font-size:32px;cursor:pointer}
-.lightbox .prev{left:18px}.lightbox .next{right:18px}.lightbox .close{top:18px;right:26px;font-size:40px}
+/* lightbox */
+.lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,7,18,0.85);z-index:1400}
+.lightbox img{max-width:92%;max-height:86%;border-radius:12px;box-shadow:0 20px 50px rgba(2,6,23,0.6)}
+.lightbox .close-light{position:absolute;top:18px;right:28px;color:#fff;font-size:28px;cursor:pointer}
+.lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:40px;padding:8px;cursor:pointer}
+.lightbox .prev{left:12px}.lightbox .next{right:12px}
 
-/* Quick order form */
-.quick-order{background:var(--surface);padding:20px;border-radius:12px;box-shadow:var(--shadow);color:var(--text)}
-.quick-order-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px}
-.quick-order input, .quick-order select, .quick-order textarea{width:100%;padding:10px;border:1px solid rgba(15,23,36,0.06);border-radius:8px;font-size:15px;background:transparent;color:var(--text)}
-.quick-order button{background:var(--accent);border:none;color:var(--brand);padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer}
-.quick-order small{color:var(--muted)}
+/* testimonial slider */
+.testimonial-wrap{position:relative;padding:14px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
+.testimonial-track{display:flex;transition:transform .45s ease}
+.testimonial-card{min-width:300px;padding:16px;text-align:center;flex-shrink:0}
+.testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
 
-/* Feed grid IG 30% YT 70% */
-.feed-grid{display:grid;grid-template-columns:30% 70%;gap:20px}
+/* cart & floats */
+.whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
+.whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
+.floating-cart{position:fixed;bottom:86px;right:26px;z-index:1301;background:var(--accent);width:56px;height:56px;border-radius:14px;display:none;align-items:center;justify-content:center;font-weight:800;color:var(--brand);cursor:pointer;box-shadow:0 10px 30px rgba(15,23,36,0.12)}
+.cart-badge{position:absolute;top:-8px;right:-8px;background:var(--danger);color:#fff;padding:4px 7px;border-radius:999px;font-size:12px}
+.cart-panel{position:fixed;top:0;right:-420px;width:380px;height:100%;background:var(--bg);box-shadow:-20px 0 40px rgba(2,6,23,0.12);transition:right .35s;padding:20px;z-index:1350;overflow:auto}
+.cart-panel.active{right:0}
+.close-cart{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer}
 
-/* Footer */
-footer{background:#08101a;color:#fff;padding:28px;margin-top:18px;border-top:4px solid rgba(255,183,3,0.06)}
-
-/* Responsive */
+/* responsive */
 @media(max-width:900px){
-  .slide-content{padding:18px}
-  .card img{height:180px}
-  .gallery-slide,.testimonial-card{min-width:220px}
-}
-@media(max-width:700px){
-  nav ul{display:none}
+  .slide-content{flex-direction:column;text-align:center}
+  .slide-content img{width:160px;height:160px}
   .menu-toggle{display:inline-block}
-  #hero{height:48vh;min-height:250px}
-  .arrow-left,.arrow-right{top:auto;bottom:8px;transform:none;padding:8px;opacity:0.95}
-  .arrow-left{left:8px}.arrow-right{right:8px}
-  .feed-grid{grid-template-columns:1fr}
-  .quick-order-row{grid-template-columns:1fr}
-  .promo-marquee{font-size:14px}
+  nav ul{display:none}
+  .gallery-slide{min-width:220px}
+  .testimonial-card{min-width:260px}
 }
 </style>
 </head>
 <body>
+<!-- promo -->
+<div class="promo-marquee" id="promoBar"><marquee id="promoText" behavior="scroll" direction="left">🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥</marquee></div>
 
-<!-- Marquee -->
-<div class="promo-marquee"><marquee behavior="scroll" direction="left" id="promoText">🔥 PROMO SPESIAL — Diskon hingga 50% Hari Ini 🔥</marquee></div>
-
-<!-- Header -->
+<!-- header -->
 <header>
-  <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-  <div class="logo"><img id="siteLogo" src="assets/logo.png" alt="logo"><div id="siteBrand" style="color:var(--accent);font-weight:800">Navid Snack</div></div>
-  <nav><ul><li><a href="#products">Produk</a></li><li><a href="#gallery">Galeri</a></li><li><a href="#testi">Testimoni</a></li><li><a href="#feed">Feed</a></li></ul></nav>
-  <button class="btn-toggle" onclick="toggleDarkMode()" id="darkBtn">🌙</button>
+  <button class="menu-toggle" onclick="toggleMenu()" aria-label="Buka menu">☰</button>
+  <div class="logo"><img id="siteLogo" src="assets/logo.png" alt="Navid Snack logo"/><span id="siteBrand">Navid Snack</span></div>
+  <nav>
+    <ul>
+      <li><a href="#hero">Beranda</a></li>
+      <li><a href="#products">Produk</a></li>
+      <li><a href="#gallery">Galeri</a></li>
+      <li><a href="#testimonials">Testimoni</a></li>
+      <li><a href="#feed">Feed</a></li>
+      <li><a href="#contact">Kontak</a></li>
+    </ul>
+  </nav>
+  <button class="btn-toggle" onclick="toggleDarkMode()" aria-pressed="false" title="Toggle dark mode">🌙</button>
 </header>
+
+<!-- side menu -->
+<div id="sideMenu" class="side-menu" aria-hidden="true">
+  <button class="close-btn" onclick="toggleMenu()" aria-label="Tutup">×</button>
+  <ul>
+    <li><a href="#hero" onclick="toggleMenu()">Beranda</a></li>
+    <li><a href="#products" onclick="toggleMenu()">Produk</a></li>
+    <li><a href="#gallery" onclick="toggleMenu()">Galeri</a></li>
+    <li><a href="#testimonials" onclick="toggleMenu()">Testimoni</a></li>
+    <li><a href="#feed" onclick="toggleMenu()">Feed</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Kontak</a></li>
+  </ul>
+</div>
 
 <!-- HERO -->
 <section id="hero">
-  <button class="arrow arrow-left" onclick="prevSlide()" aria-label="Prev">❮</button>
-  <button class="arrow arrow-right" onclick="nextSlide()" aria-label="Next">❯</button>
+  <button class="arrow arrow-left" onclick="prevSlide()" aria-label="Sebelumnya">❮</button>
+  <button class="arrow arrow-right" onclick="nextSlide()" aria-label="Berikutnya">❯</button>
+
+  <!-- slides will be rendered here -->
   <div id="slidesContainer"></div>
+
   <div class="dots" id="heroDots"></div>
 </section>
 
 <!-- PRODUCTS -->
-<section id="products" class="container">
-  <h2>Produk Unggulan</h2>
-  <div id="productsGrid" class="products-grid"></div>
+<section id="products" class="container" aria-labelledby="productsTitle">
+  <div class="section-title"><h2 id="productsTitle">Produk Unggulan</h2></div>
+  <div class="products-grid" id="productsGrid"></div>
 </section>
 
 <!-- GALLERY -->
-<section id="gallery" class="container">
-  <h2>Galeri</h2>
-  <div class="gallery-slider">
-    <button class="slider-arrow slider-left" onclick="galleryPrev()">❮</button>
-    <div class="gallery-track" id="galleryTrack" tabindex="0"></div>
-    <button class="slider-arrow slider-right" onclick="galleryNext()">❯</button>
+<section id="gallery" class="container" aria-labelledby="galleryTitle">
+  <div class="section-title"><h2 id="galleryTitle">Galeri Produk</h2></div>
+  <div class="gallery-slider" id="gallerySlider">
+    <div class="gallery-track" id="galleryTrack"></div>
   </div>
 </section>
 
 <!-- LIGHTBOX -->
-<div id="lightbox" class="lightbox" aria-hidden="true">
-  <button class="btn prev" onclick="lightboxPrev()" aria-label="Prev">❮</button>
-  <img id="lightboxImg" alt="Preview">
-  <button class="btn next" onclick="lightboxNext()" aria-label="Next">❯</button>
-  <button class="btn close" onclick="closeLightbox()" aria-label="Close">×</button>
+<div id="lightbox" class="lightbox" role="dialog" aria-hidden="true">
+  <button class="nav-btn prev" onclick="prevGallery()" aria-label="Sebelumnya">❮</button>
+  <img id="lightboxImg" alt="Preview"/>
+  <button class="nav-btn next" onclick="nextGallery()" aria-label="Berikutnya">❯</button>
+  <button class="close-light" onclick="closeLightbox()" aria-label="Tutup">×</button>
 </div>
 
 <!-- TESTIMONIAL -->
-<section id="testi" class="container">
-  <h2>Testimoni</h2>
+<section id="testimonials" class="container" aria-labelledby="testiTitle">
+  <div class="section-title"><h2 id="testiTitle">Testimoni Pelanggan</h2></div>
   <div class="testimonial-wrap">
-    <button class="slider-arrow slider-left" onclick="testiPrev()">❮</button>
-    <div class="testimonial-track" id="testiTrack"></div>
-    <button class="slider-arrow slider-right" onclick="testiNext()">❯</button>
+    <div style="overflow:hidden">
+      <div id="testiTrack" class="testimonial-track"></div>
+    </div>
+    <div class="testimonial-nav" style="margin-top:12px">
+      <button class="btn" onclick="testiPrev()">❮</button>
+      <button class="btn" onclick="testiNext()">❯</button>
+    </div>
   </div>
 </section>
 
-<!-- QUICK ORDER -->
-<section class="container">
-  <h2>Form Pemesanan Cepat</h2>
+<!-- QUICK ORDER FORM -->
+<section class="container" aria-labelledby="quickOrderTitle" style="margin-top:18px">
+  <div class="section-title"><h2 id="quickOrderTitle">Form Pemesanan Cepat</h2></div>
   <form id="quickOrderForm" class="quick-order" onsubmit="submitQuickOrder(event)">
-    <div class="quick-order-row">
-      <input id="qName" placeholder="Nama lengkap" required>
-      <input id="qWA" placeholder="Nomor WhatsApp (0812...)" required>
+    <input id="qName" type="text" placeholder="Nama lengkap" required aria-label="Nama"/>
+    <input id="qWA" type="tel" placeholder="Nomor WhatsApp (contoh: 0812...)" required aria-label="Nomor WA"/>
+    <input id="qAddr" type="text" placeholder="Alamat (kelurahan/kota)" required aria-label="Alamat"/>
+    <select id="qProduct" required aria-label="Pilih produk"></select>
+    <input id="qQty" type="number" min="1" value="1" required aria-label="Jumlah"/>
+    <textarea id="qNote" rows="2" placeholder="Catatan / request (opsional)"></textarea>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn" type="submit">Kirim ke WhatsApp Admin</button>
+      <small style="color:var(--muted)">Subtotal akan disertakan sebelum ongkir</small>
     </div>
-    <input id="qAddr" placeholder="Alamat lengkap (kel/kec/kota)" required>
-    <select id="qProduct" required></select>
-    <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
-      <input id="qQty" type="number" min="1" value="1" required style="width:110px">
-      <button type="submit">Pesan via WhatsApp</button>
-      <small style="margin-left:auto;color:var(--muted)">Subtotal akan dihitung saat checkout</small>
-    </div>
-    <textarea id="qNote" placeholder="Catatan / permintaan (opsional)" style="margin-top:10px"></textarea>
   </form>
 </section>
 
-<!-- FEED -->
-<section id="feed" class="container">
-  <h2>Media Sosial</h2>
-  <div class="feed-grid">
-    <div class="feed-ig">
-      <h3>Instagram</h3>
+<!-- floating elements -->
+<button class="floating-cart" id="floatingCart" onclick="toggleCart()" aria-label="Buka keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></button>
+<div class="whatsapp-float" title="Chat via WhatsApp"><a id="waLink" href="#" target="_blank" rel="noreferrer"><img src="https://img.icons8.com/color/96/whatsapp.png" alt="WhatsApp Navid Snack"/></a></div>
+<button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Kembali ke atas">↑</button>
+
+<!-- cart panel -->
+<aside id="cartPanel" class="cart-panel" aria-label="Keranjang belanja">
+  <button class="close-cart" onclick="toggleCart()">×</button>
+  <h3>Keranjang</h3>
+  <div id="cartItems" style="margin-top:14px"></div>
+  <p style="margin-top:12px"><strong>Subtotal:</strong> Rp <span id="cartTotal">0</span></p>
+  <p style="font-size:13px;color:var(--muted)">Belum termasuk ongkir</p>
+  <div style="display:flex;gap:8px;margin-top:12px">
+    <button class="btn" onclick="checkout()">Checkout via WhatsApp</button>
+    <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06)" onclick="clearCart()">Bersihkan</button>
+  </div>
+</aside>
+
+<!-- product modal -->
+<div id="productModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:1500">
+  <div style="background:var(--bg);padding:18px;border-radius:10px;max-width:520px;width:calc(100% - 40px);position:relative">
+    <button onclick="closeProductModal()" style="position:absolute;top:10px;right:12px;background:none;border:none;font-size:22px;cursor:pointer">×</button>
+    <img id="modalImg" src="" alt="Detail produk" style="width:100%;height:300px;object-fit:cover;border-radius:8px;margin-bottom:10px">
+    <h3 id="modalName"></h3>
+    <p id="modalDesc" style="color:var(--muted)"></p>
+    <p id="modalPrice" style="font-weight:800;color:var(--danger)"></p>
+    <div style="display:flex;gap:8px;margin-top:10px">
+      <button class="btn" onclick="addToCartFromModal()">Tambah ke Keranjang</button>
+      <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06)" onclick="closeProductModal()">Tutup</button>
+    </div>
+  </div>
+</div>
+
+<!-- feed (instagram + youtube) -->
+<section id="feed" class="container" aria-labelledby="feedTitle">
+  <div class="section-title"><h2 id="feedTitle">Media Sosial</h2></div>
+  <div class="feed-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="feed-ig" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
+      <h3 style="margin-bottom:10px;color:var(--brand)">Instagram</h3>
       <div id="igEmbedContainer"></div>
     </div>
-    <div class="feed-yt">
-      <h3>YouTube</h3>
-      <iframe id="ytFrame" src="" title="YouTube" style="width:100%;height:320px;border-radius:12px;border:0;"></iframe>
+    <div class="feed-yt" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
+      <h3 style="margin-bottom:10px;color:var(--brand)">YouTube</h3>
+      <div class="yt-wrapper">
+        <iframe id="ytFrame" src="" title="Navid Snack YouTube" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%;height:315px;border-radius:12px"></iframe>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div style="max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:20px">
-    <div>
-      <h3 id="footerBrand" style="margin:0">Navid Snack</h3>
-      <p id="footerAddr" style="margin:6px 0 0 0;color:var(--muted)">Deket, Lamongan, Jawa Timur</p>
+<!-- footer -->
+<footer id="contact">
+  <div class="footer-grid" style="display:flex;gap:20px;flex-wrap:wrap;max-width:var(--maxw);margin:0 auto;padding:28px;background:#08101a;color:#fff">
+    <div class="footer-info" style="flex:1 1 320px">
+      <h3 id="footerBrand">Navid Snack</h3>
+      <p id="footerAddr">Alamat: Deket, Lamongan, Jawa Timur</p>
+      <p id="footerPhone">Telp: +62 812-3456-7890</p>
+      <p style="margin-top:8px"><strong>Certificate:</strong></p>
+      <div id="certRow" style="display:flex;gap:8px;align-items:center;margin-top:8px"></div>
     </div>
-    <div>&copy; <span id="yr"></span> Navid Snack</div>
+    <div class="footer-map" style="flex:1 1 320px">
+      <h4>Lokasi</h4>
+      <iframe id="mapFrame" src="https://www.google.com/maps/embed?pb=!1m18!..." style="width:100%;height:220px;border:0;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Navid Snack"></iframe>
+    </div>
   </div>
 </footer>
 
-<!-- load data.js (you must provide this) -->
-<script src="js/data.js"></script>
+<!-- toast placeholder -->
+<div id="toastPlace"></div>
+
+<!-- Instagram embed script (official) -->
+<script async defer src="//www.instagram.com/embed.js"></script>
+
+<!-- load data.js first (you uploaded it as data.js) -->
+<script src="data.js"></script>
 
 <script>
-/* ----------------------
-   Utilities & initial
-   ---------------------- */
+/* =============
+   MAIN SCRIPT
+   - uses window.SITE, window.SLIDES, window.PRODUCTS, window.GALLERY, window.TESTIMONIALS, window.NOTIFIKASI
+   ============= */
+
+/* -------------------------
+   Helper selectors (unchanged)
+   -------------------------*/
 const $ = s=>document.querySelector(s);
 const $$ = s=>Array.from(document.querySelectorAll(s));
-document.getElementById('yr').textContent = new Date().getFullYear();
 
-/* Apply SITE meta if available */
+/* -------------------------
+   Update head/meta from SITE
+   -------------------------*/
 function applySiteMeta(){
   if(!window.SITE) return;
-  const s = window.SITE;
-  $('#pageTitle').textContent = s.brand || $('#pageTitle').textContent;
-  $('#metaDescription').setAttribute('content', s.description || '');
-  $('#metaKeywords').setAttribute('content', s.keywords || '');
-  $('#siteLogo').src = s.img || $('#siteLogo').src;
-  $('#favicon').href = s.img || $('#favicon').href;
-  $('#ogImage').setAttribute('content', s.img || $('#ogImage').getAttribute('content'));
-  $('#ogTitle').setAttribute('content', s.brand || $('#ogTitle').getAttribute('content'));
-  $('#ogDesc').setAttribute('content', s.description || $('#ogDesc').getAttribute('content'));
-  if(s.wa) {
-    // optional: set WA links used by checkout
-    window._SITE_WA = s.wa;
-  }
+  const site = window.SITE;
+  const brand = site.brand || document.title;
+  $('#pageTitle').textContent = brand + (brand.includes('Navid')? '' : ' — Navid Snack');
+  $('#metaDescription').setAttribute('content', (site.description || $('#metaDescription').getAttribute('content')));
+  $('#metaKeywords').setAttribute('content', (site.keywords || $('#metaKeywords').getAttribute('content')));
+  $('#siteBrand').textContent = site.brand || 'Navid Snack';
+  $('#footerBrand').textContent = site.brand || 'Navid Snack';
+  $('#siteLogo').src = site.img || $('#siteLogo').src;
+  $('#favicon').href = site.img || $('#favicon').href;
+  $('#waLink').href = site.wa ? `https://wa.me/${site.wa}` : $('#waLink').href;
+  $('#footerAddr').textContent = 'Alamat: ' + (site.alamat || '');
+  // certificates
+  const certRow = $('#certRow');
+  certRow.innerHTML = '';
+  (site.sertifikat || []).forEach(c=>{
+    const img = document.createElement('img');
+    img.src = c.src; img.alt = c.alt; img.style.height='40px'; img.style.borderRadius='6px';
+    img.loading = 'lazy';
+    certRow.appendChild(img);
+  });
+
+  // OG meta
+  $('#ogTitle').setAttribute('content', site.brand || document.title);
+  $('#ogDesc').setAttribute('content', site.description || $('#metaDescription').getAttribute('content'));
+  $('#ogImage').setAttribute('content', site.img || $('#ogImage').getAttribute('content'));
 }
 
-/* ----------------------
-   DARK MODE (persist)
-   ---------------------- */
+/* ======================
+   HERO SLIDER (dynamic)
+   ====================== */
+let slides = [], dots = [], slideCur = 0, slideTimer = null;
+function renderHero(){
+  const container = $('#slidesContainer');
+  const dotsWrap = $('#heroDots');
+  container.innerHTML = '';
+  dotsWrap.innerHTML = '';
+  const data = window.SLIDES || [];
+  data.forEach((s,i)=>{
+    const slide = document.createElement('div');
+    slide.className = 'slide' + (i===0?' active':'');
+    slide.style.backgroundImage = `url('${s.bg}')`;
+    slide.setAttribute('role','img');
+    slide.setAttribute('aria-label', s.title||('Slide '+(i+1)));
+    slide.innerHTML = `
+      <div class="slide-content">
+        <img src="${s.img}" alt="${s.title}" loading="lazy"/>
+        <div class="slide-text">
+          <h1>${s.title}</h1>
+          <p>${s.text || ''}</p>
+          ${ s.cta ? `<div class="hero-cta"><a href="${s.cta.link}" class="btn" aria-label="${s.cta.text}">${s.cta.text}</a></div>` : '' }
+        </div>
+      </div>
+    `;
+    container.appendChild(slide);
+
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (i===0?' active':'');
+    dot.addEventListener('click', ()=> showSlide(i));
+    dotsWrap.appendChild(dot);
+  });
+  slides = $$('.slide');
+  dots = $$('.dot');
+  slideCur = 0;
+  if(slideTimer) clearInterval(slideTimer);
+  slideTimer = setInterval(nextSlide, 6000);
+}
+function showSlide(n){
+  slideCur = (n+slides.length)%slides.length;
+  slides.forEach((s,i)=>s.classList.toggle('active', i===slideCur));
+  dots.forEach((d,i)=>d.classList.toggle('active', i===slideCur));
+}
+function nextSlide(){ showSlide(slideCur+1) }
+function prevSlide(){ showSlide(slideCur-1) }
+
+/* ====== SIDE MENU (HAMBURGER) - unchanged name ====== */
+function toggleMenu(){
+  const menu = $('#sideMenu');
+  const isActive = menu.classList.toggle('active');
+  menu.setAttribute('aria-hidden', !isActive);
+}
+document.addEventListener('click', (e)=>{
+  const side = $('#sideMenu');
+  const btn = e.target.closest('.menu-toggle')!==null;
+  if(!btn && side.classList.contains('active') && !e.target.closest('.side-menu')) {
+    side.classList.remove('active');
+    side.setAttribute('aria-hidden','true');
+  }
+});
+
+/* ====== DARK MODE (with localStorage) ====== */
+function applyDarkModeFromStorage(){
+  const val = localStorage.getItem('navid_darkmode');
+  if(val === '1') document.body.classList.add('dark-mode');
+  else document.body.classList.remove('dark-mode');
+  const t = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  $$('.btn-toggle').forEach(b=>b.textContent = t);
+}
 function toggleDarkMode(){
   document.body.classList.toggle('dark-mode');
-  localStorage.setItem('navid_darkmode', document.body.classList.contains('dark-mode')? '1':'0');
-  $('#darkBtn').textContent = document.body.classList.contains('dark-mode')? '☀️':'🌙';
-}
-if(localStorage.getItem('navid_darkmode')==='1'){ document.body.classList.add('dark-mode'); $('#darkBtn').textContent='☀️'; }
-
-/* ----------------------
-   HERO SLIDER
-   ---------------------- */
-let slideIndex = 0, slideTimer = null;
-function renderHero(){
-  const slides = window.SLIDES || [];
-  const container = $('#slidesContainer'); const dots = $('#heroDots');
-  container.innerHTML = ''; dots.innerHTML = '';
-  if(!slides.length) return;
-  slides.forEach((s,i)=>{
-    const el = document.createElement('div');
-    el.className = 'slide' + (i===0 ? ' active' : '');
-    el.style.backgroundImage = `url('${s.bg}')`;
-    el.innerHTML = `<div class="slide-content"><h2 class="hero-title">${s.title||''}</h2><p>${s.text||''}</p>${s.cta?`<div style="margin-top:10px"><a href="${s.cta.link}" class="btn" style="background:var(--accent);color:#071123;padding:8px 12px;border-radius:8px;text-decoration:none;font-weight:800">${s.cta.text}</a></div>`:''}</div>`;
-    container.appendChild(el);
-    const dot = document.createElement('span'); dot.className = 'dot' + (i===0?' active':''); dot.onclick = ()=> showSlide(i);
-    dots.appendChild(dot);
-  });
-  slideIndex = 0;
-  if(slideTimer) clearInterval(slideTimer);
-  slideTimer = setInterval(()=> showSlide(slideIndex+1), 6000);
-}
-function showSlide(i){
-  const slides = $$('.slide'); const dots = $$('.dot');
-  if(!slides.length) return;
-  slideIndex = (i + slides.length) % slides.length;
-  slides.forEach((sl,idx)=> sl.classList.toggle('active', idx===slideIndex));
-  dots.forEach((d,idx)=> d.classList.toggle('active', idx===slideIndex));
-}
-function nextSlide(){ showSlide(slideIndex+1) }
-function prevSlide(){ showSlide(slideIndex-1) }
-
-/* ----------------------
-   PROMO LOGIC & COUNTDOWN
-   Specification:
-   - fields: tglPromoStart, tglPromoEnd, jamPromoStart, jamPromoEnd
-   - If only tglPromoStart present, treat as single-day full-day promo (00:00-23:59)
-   - If only jamPromoStart/jamPromoEnd present, treat as daily recurring promo at those hours
-   - If jamPromoStart > jamPromoEnd => spans midnight
-   ---------------------- */
-
-/* normalize helper: returns minutes since midnight */
-function minutesOf(hm){
-  if(!hm) return null;
-  const [h,m] = hm.split(':').map(x=>Number(x||0));
-  return (h*60 + m);
-}
-function parseDateOnly(d){
-  if(!d) return null;
-  // expect YYYY-MM-DD
-  const parts = d.split('-').map(Number);
-  if(parts.length<3) return null;
-  return new Date(parts[0], parts[1]-1, parts[2], 0, 0, 0, 0);
+  const active = document.body.classList.contains('dark-mode');
+  localStorage.setItem('navid_darkmode', active ? '1' : '0');
+  const t = active ? '☀️' : '🌙';
+  $$('.btn-toggle').forEach(b=>b.textContent = t);
 }
 
-/* determine if product is currently in promo */
-function isInPromo(p){
-  try{
-    // If promo flag false => no
-    if(!p.promo) return false;
-    const now = new Date();
-    const nowMinutes = now.getHours()*60 + now.getMinutes();
+/* ============================
+   PRODUCTS (render from PRODUCTS)
+   ============================ */
+function formatRupiah(v){ if(!v) return ''; return 'Rp ' + Number(v).toLocaleString('id-ID'); }
 
-    // 1) Date window check
-    if(p.tglPromoStart){
-      const startDate = parseDateOnly(p.tglPromoStart);
-      const endDate = parseDateOnly(p.tglPromoEnd || p.tglPromoStart);
-      // set end to end of day
-      endDate.setHours(23,59,59,999);
-      if(now < startDate || now > endDate) return false;
-    }
-
-    // 2) Time-of-day check
-    if(p.jamPromoStart || p.jamPromoEnd){
-      // if either missing, assume full day
-      const startMin = minutesOf(p.jamPromoStart || '00:00');
-      const endMin = minutesOf(p.jamPromoEnd || '23:59');
-      if(startMin <= endMin){
-        if(nowMinutes < startMin || nowMinutes > endMin) return false;
-      }else{
-        // spans midnight, e.g. 23:00 - 01:00 => valid if now >= startMin OR now <= endMin
-        if(!(nowMinutes >= startMin || nowMinutes <= endMin)) return false;
-      }
-    }
-    // 3) Edge: if no date and no time provided but p.promo true => treat as always promo
-    return true;
-  }catch(e){
-    return false;
-  }
-}
-
-/* Update countdown display for each product with countdown element id="cd-<id>" */
-function computePromoEndForDisplay(p){
-  const now = new Date();
-  // priority:
-  // if tglPromoEnd exists -> use that date + jamPromoEnd(if exists) otherwise 23:59 of that date
-  if(p.tglPromoEnd){
-    const time = p.jamPromoEnd || '23:59';
-    return new Date(p.tglPromoEnd + 'T' + time + ':00');
-  }
-  // else if tglPromoStart exists -> that date + jamPromoEnd or 23:59
-  if(p.tglPromoStart){
-    const time = p.jamPromoEnd || '23:59';
-    return new Date(p.tglPromoStart + 'T' + time + ':00');
-  }
-  // else if only jamPromoEnd provided -> today at jamPromoEnd; if jam spans midnight and end < start, then if now <= end, end is today at end; otherwise, end = tomorrow at end
-  if(p.jamPromoEnd){
-    const endMin = minutesOf(p.jamPromoEnd);
-    const startMin = minutesOf(p.jamPromoStart || '00:00');
-    const nowMin = now.getHours()*60 + now.getMinutes();
-    let end = new Date();
-    end.setHours(Number(p.jamPromoEnd.split(':')[0]), Number(p.jamPromoEnd.split(':')[1]||0), 0, 0);
-    if(startMin > endMin){
-      // spans midnight
-      // if nowMinutes <= endMin -> we are after midnight before end -> end is today at end
-      // else end is tomorrow at end
-      if(nowMin > endMin && nowMin < startMin){
-        // not in promo period actually, but return end tomorrow to show near-ending (edge case)
-        end.setDate(end.getDate()+1);
-      } else {
-        if(nowMin > endMin) end.setDate(end.getDate()+1);
-      }
-    } else {
-      // normal day window
-      if(nowMin > endMin) end.setDate(end.getDate()+1); // next day's end
-    }
-    return end;
-  }
-  // fallback: no specific end -> show generic
-  return null;
-}
-function updateAllCountdowns(){
-  (window.PRODUCTS || []).forEach(p=>{
-    const el = document.getElementById('cd-'+p.id);
-    if(!el) return;
-    if(!isInPromo(p)){ el.style.display='none'; return; }
-    const end = computePromoEndForDisplay(p);
-    if(!end){ el.textContent = 'Promo aktif'; return; }
-    const diff = end - new Date();
-    if(diff <= 0){ el.textContent = 'Promo berakhir'; return; }
-    const days = Math.floor(diff / (24*3600*1000));
-    const hours = Math.floor(diff % (24*3600*1000) / 3600000);
-    const mins = Math.floor(diff % 3600000 / 60000);
-    el.style.display = 'block';
-    el.textContent = days>0 ? `Berakhir dalam ${days}h ${hours}j ${mins}m` : `Berakhir dalam ${hours}j ${mins}m`;
-  });
-}
-
-/* ----------------------
-   RENDER PRODUCTS (with promo logic)
-   ---------------------- */
 function renderProducts(){
   const grid = $('#productsGrid');
   grid.innerHTML = '';
-  (window.PRODUCTS || []).forEach(p=>{
-    const inPromo = isInPromo(p);
-    const card = document.createElement('article'); card.className = 'card';
-    card.innerHTML = `
-      <div style="position:relative">
-        <img src="${p.img}" alt="${p.name}" loading="lazy">
-        ${inPromo ? `<div class="promo-label">PROMO</div>` : ''}
+  const prods = window.PRODUCTS || [];
+  prods.forEach(p=>{
+    const art = document.createElement('article');
+    art.className = 'card';
+    art.setAttribute('data-name', p.name);
+    art.setAttribute('data-price', p.price);
+    art.setAttribute('data-oldprice', p.oldPrice || '');
+    art.setAttribute('data-stock', p.stock || 0);
+    art.setAttribute('data-promo', p.promo ? 'true' : 'false');
+    art.setAttribute('data-desc', p.desc || '');
+    art.setAttribute('data-img', p.img || '');
+    art.innerHTML = `
+      <div class="img-wrapper">
+        <img src="${p.img}" alt="${p.name} Navid Snack" loading="lazy" onclick="openProductModal(this)">
+        ${p.promo ? '<div class="promo-label">PROMO</div>' : ''}
+        ${p.promo ? `<div class="countdown-overlay" data-cid>Promo sampai ${p.jamPromoEnd || ''}</div>` : ''}
       </div>
       <h3>${p.name}</h3>
-      <p>${p.desc}</p>
       <div class="price-row">
-        ${p.oldPrice ? `<span class="price-old">Rp ${Number(p.oldPrice).toLocaleString('id-ID')}</span>` : ''}
-        <span class="price-new">Rp ${Number(p.price).toLocaleString('id-ID')}</span>
+        <span class="price-old">${p.oldPrice? formatRupiah(p.oldPrice) : ''}</span>
+        <span class="price-new">${formatRupiah(p.price)}</span>
       </div>
-      ${inPromo ? `<div class="countdown-overlay" id="cd-${p.id}">Memuat...</div>` : ''}
+      <div class="stars" aria-hidden="true">${'★★★★★'.slice(0, p.rating || 5)}</div>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
+        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
+        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('${escapeQuotes(p.name)}',${p.price})">Pesan Cepat</button>
+      </div>
     `;
-    grid.appendChild(card);
+    grid.appendChild(art);
   });
-  // Immediately update countdowns and set interval
-  updateAllCountdowns();
-  if(window._promoInterval) clearInterval(window._promoInterval);
-  window._promoInterval = setInterval(updateAllCountdowns, 30000); // update per 30s
+
+  // populate quick order select
+  const qSel = $('#qProduct');
+  qSel.innerHTML = '<option value="">Pilih produk...</option>';
+  prods.forEach(p=> qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`));
 }
 
-/* ----------------------
-   GALLERY slider + lightbox (buttons + swipe)
-   ---------------------- */
-let galleryIndex = 0, galleryImgs = [];
+// helper to escape single quotes in onclick inline string
+function escapeQuotes(s){ return (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+
+/* ============================
+   CART (persist in localStorage)
+   ============================ */
+let cart = []; // {name, price, qty, stock}
+const floatingCartBtn = $('#floatingCart');
+const cartBadge = $('#cartBadge');
+const cartItemsWrap = $('#cartItems');
+const cartTotalEl = $('#cartTotal');
+
+function loadCartFromStorage(){
+  try{
+    const raw = localStorage.getItem('navid_cart');
+    if(raw) cart = JSON.parse(raw);
+    else cart = [];
+  }catch(e){ cart = []; }
+  renderCart();
+  if(cart.length===0) floatingCartBtn.style.display='none';
+  else floatingCartBtn.style.display='flex';
+}
+function saveCartToStorage(){ localStorage.setItem('navid_cart', JSON.stringify(cart)); }
+
+function addToCart(btn){
+  const card = btn.closest('.card');
+  addProductToCartFromCard(card);
+}
+function addProductToCartFromCard(card){
+  const name = card.dataset.name;
+  const price = Number(card.dataset.price || 0);
+  const stock = Number(card.dataset.stock || 999);
+  let found = cart.find(x=>x.name===name);
+  if(found){
+    if(found.qty+1 > stock){ showToast('Stok tidak cukup untuk ' + name); return; }
+    found.qty++;
+  } else {
+    cart.push({name, price, qty:1, stock});
+  }
+  saveCartToStorage();
+  renderCart();
+  showToast(name + ' ditambahkan ke keranjang');
+  floatingCartBtn.style.display = 'flex';
+}
+function addToCartFromModal(){
+  const name = $('#modalName').textContent;
+  const priceText = $('#modalPrice').getAttribute('data-price') || $('#modalPrice').textContent.replace(/[^0-9]/g,'') || 0;
+  const price = Number(priceText);
+  let found = cart.find(x=>x.name===name);
+  if(found) found.qty++;
+  else cart.push({name, price, qty:1, stock:99});
+  saveCartToStorage();
+  renderCart();
+  showToast(name + ' ditambahkan ke keranjang');
+  floatingCartBtn.style.display = 'flex';
+  closeProductModal();
+}
+
+function renderCart(){
+  if(!cartItemsWrap) return;
+  cartItemsWrap.innerHTML = '';
+  let total = 0;
+  cart.forEach((it, i) => {
+    total += it.price * it.qty;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.style.padding = '10px 0';
+    div.innerHTML = `
+      <strong>${it.name}</strong><div style="margin-top:6px">Rp ${it.price.toLocaleString('id-ID')} &nbsp;
+      <button onclick="decQty(${i})">-</button>
+      <input type="number" value="${it.qty}" min="1" style="width:56px" onchange="setQty(${i}, this.value)">
+      <button onclick="incQty(${i})">+</button>
+      &nbsp; = <strong>Rp ${(it.price*it.qty).toLocaleString('id-ID')}</strong>
+      <button style="float:right;background:transparent;border:none;color:var(--danger);cursor:pointer" onclick="removeItem(${i})">Hapus</button>
+      </div>
+    `;
+    cartItemsWrap.appendChild(div);
+  });
+  cartTotalEl.textContent = total.toLocaleString('id-ID');
+  cartBadge.textContent = cart.reduce((s,i)=>s+i.qty,0);
+}
+
+function incQty(i){ if(cart[i].qty < cart[i].stock) cart[i].qty++; saveCartToStorage(); renderCart(); }
+function decQty(i){ if(cart[i].qty > 1) cart[i].qty--; saveCartToStorage(); renderCart(); }
+function setQty(i, val){ let q = Number(val); if(isNaN(q) || q<1) q=1; if(q>cart[i].stock){ showToast('Melebihi stok tersedia'); q = cart[i].stock; } cart[i].qty = q; saveCartToStorage(); renderCart(); }
+function removeItem(i){ cart.splice(i,1); saveCartToStorage(); renderCart(); if(cart.length===0){ floatingCartBtn.style.display='none'; } }
+function clearCart(){ cart=[]; saveCartToStorage(); renderCart(); toggleCart(); showToast('Keranjang dibersihkan'); floatingCartBtn.style.display='none'; }
+
+function toggleCart(){ $('#cartPanel').classList.toggle('active'); }
+
+/* ====== CHECKOUT via WA (uses SITE.wa) ====== */
+function checkout(){
+  if(cart.length===0){ showToast('Keranjang masih kosong'); return; }
+  let msg = 'Halo, saya ingin pesan:%0A';
+  let subtotal = 0;
+  cart.forEach(it=>{
+    msg += `${it.name} x ${it.qty} = Rp ${ (it.price*it.qty).toLocaleString('id-ID') }%0A`;
+    subtotal += it.price * it.qty;
+  });
+  msg += `%0ASubtotal: Rp ${subtotal.toLocaleString('id-ID')} (belum termasuk ongkir)`;
+  const wa = (window.SITE && window.SITE.wa) ? window.SITE.wa : '6281234567890';
+  window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(msg));
+}
+
+/* ====== QUICK ORDER FORM ====== */
+function quickOrderPref(name, price){
+  $('#qProduct').value = `${name}|${price}`;
+  $('#qQty').value = 1;
+  $('#qName').focus();
+  window.scrollTo({top:document.getElementById('quickOrderForm').offsetTop-80,behavior:'smooth'});
+}
+function submitQuickOrder(e){
+  e.preventDefault();
+  const name = $('#qName').value.trim(), wa = $('#qWA').value.trim(), addr = $('#qAddr').value.trim();
+  const prod = $('#qProduct').value, qty = Number($('#qQty').value), note = $('#qNote').value;
+  if(!prod){ showToast('Pilih produk'); return; }
+  const [pname,pprice] = prod.split('|'); const subtotal = Number(pprice)*qty;
+  let text = `Halo, saya *${name}* ingin memesan:%0A- ${pname} x ${qty} = Rp ${subtotal}%0AAlamat: ${addr}%0ANo WA: ${wa}%0ANote: ${note||'-'}%0A(Subtotal belum termasuk ongkir)`;
+  const waNum = (window.SITE && window.SITE.wa) ? window.SITE.wa : '6281234567890';
+  window.open('https://wa.me/' + waNum + '?text=' + encodeURIComponent(text));
+}
+
+/* ====== TOAST notification ====== */
+function showToast(text, delay = 4000){
+  const t = document.createElement('div'); t.className='toast';
+  t.style.opacity = '1';
+  t.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" style="opacity:.9;margin-right:8px"><circle cx="12" cy="12" r="10" fill="#ffcf6b"/></svg><div>${text}</div>`;
+  $('#toastPlace').appendChild(t);
+  setTimeout(()=>{ t.style.transition='opacity .5s'; t.style.opacity=0; t.addEventListener('transitionend', ()=>t.remove()); }, delay);
+}
+const salesSamples = (window.NOTIFIKASI || []).map(n=>[n.nama,n.kota,n.produk]);
+if(salesSamples.length>0) setInterval(()=>{ const s = salesSamples[Math.floor(Math.random()*salesSamples.length)]; showToast(`${s[0]} dari ${s[1]} baru saja membeli ${s[2]}`); }, 14000);
+
+/* =========================
+   GALLERY slider & lightbox
+   ========================= */
+let galleryIndex = 0;
 function renderGallery(){
   const gallery = window.GALLERY || [];
   const track = $('#galleryTrack');
-  galleryImgs = gallery.map(g => g.src);
   track.innerHTML = '';
-  if(!gallery.length) { track.innerHTML = '<div style="padding:12px">Tidak ada gambar</div>'; return; }
-  // render slides (single group; we'll manage index & wrap)
-  gallery.forEach((g,i)=>{
+  // render slides (duplicate to make wrap feel continuous)
+  const slidesToRender = gallery.concat(gallery).concat(gallery); // tripled for smoother swipe wrap
+  slidesToRender.forEach((g,i)=>{
     const el = document.createElement('div'); el.className = 'gallery-slide';
-    el.innerHTML = `<img src="${g.src}" alt="${g.alt||''}" loading="lazy" data-idx="${i}">`;
-    el.querySelector('img').addEventListener('click', ()=> openLightbox(i));
+    el.innerHTML = `<img src="${g.src}" alt="${g.alt||''}" loading="lazy" data-original-index="${i % gallery.length}" onclick="openLightboxByIndex(${i % gallery.length})">`;
     track.appendChild(el);
   });
-  galleryIndex = 0;
+  // track width handled by CSS flex; start in middle group so prev/next can move
+  galleryIndex = gallery.length; // middle
   updateGalleryTransform();
 }
 function updateGalleryTransform(){
   const track = $('#galleryTrack');
-  const child = track.querySelector('.gallery-slide');
-  if(!child) return;
-  const slideW = child.offsetWidth + 16; // margin
-  track.style.transform = `translateX(-${galleryIndex * slideW}px)`;
+  const slideW = track.querySelector('.gallery-slide') ? track.querySelector('.gallery-slide').offsetWidth + 16 : 260;
+  track.style.transform = `translateX(-${galleryIndex * (slideW)}px)`;
 }
-function galleryPrev(){ const track = $('#galleryTrack'); galleryIndex = (galleryIndex - 1 + track.children.length) % track.children.length; updateGalleryTransform(); }
-function galleryNext(){ const track = $('#galleryTrack'); galleryIndex = (galleryIndex + 1) % track.children.length; updateGalleryTransform(); }
-
-/* Lightbox controls */
-let lbIndex = 0;
-function openLightbox(i){
-  lbIndex = i;
-  $('#lightboxImg').src = galleryImgs[lbIndex];
+function prevGallery(){ galleryIndex = (galleryIndex - 1 + $('#galleryTrack').children.length) % $('#galleryTrack').children.length; updateGalleryTransform(); }
+function nextGallery(){ galleryIndex = (galleryIndex + 1) % $('#galleryTrack').children.length; updateGalleryTransform(); }
+function openLightboxByIndex(i){
+  const imgs = (window.GALLERY || []).map(g=>g.src);
+  const idx = i % imgs.length;
+  $('#lightboxImg').src = imgs[idx];
   $('#lightbox').style.display = 'flex';
   $('#lightbox').setAttribute('aria-hidden','false');
 }
 function closeLightbox(){ $('#lightbox').style.display = 'none'; $('#lightbox').setAttribute('aria-hidden','true'); }
-function lightboxPrev(){ lbIndex = (lbIndex - 1 + galleryImgs.length) % galleryImgs.length; $('#lightboxImg').src = galleryImgs[lbIndex]; }
-function lightboxNext(){ lbIndex = (lbIndex + 1) % galleryImgs.length; $('#lightboxImg').src = galleryImgs[lbIndex]; }
 
-/* enable swipe on gallery track */
-function enableSwipe(el, prevFn, nextFn){
-  if(!el) return;
-  let startX=0, dx=0, isDown=false;
-  el.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
-  el.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
-  el.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) prevFn(); else nextFn(); } dx=0; });
+/* allow swipe on gallery */
+function enableGallerySwipe(){
+  const track = $('#galleryTrack');
+  if(!track) return;
+  let startX = 0, dx = 0, isDown=false;
+  track.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
+  track.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
+  track.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) prevGallery(); else nextGallery(); } dx=0; });
 }
-enableSwipe(document.getElementById('galleryTrack'), galleryPrev, galleryNext);
 
-/* ----------------------
-   TESTIMONIAL slider
-   ---------------------- */
-let testiIndex = 0, testiTimer = null;
+/* =========================
+   TESTIMONIAL slider (looping + swipe)
+   ========================= */
+let testiIdx = 0, testiInterval = null;
 function renderTestimonials(){
   const t = window.TESTIMONIALS || [];
-  const track = $('#testiTrack');
-  track.innerHTML = '';
-  if(!t.length){ track.innerHTML = '<div style="padding:12px">Belum ada testimoni</div>'; return; }
-  t.forEach((p)=>{
+  const track = $('#testiTrack'); track.innerHTML = '';
+  // clone to allow loop feel
+  const slides = t.concat(t).concat(t);
+  slides.forEach(s=>{
     const el = document.createElement('div'); el.className = 'testimonial-card';
-    el.innerHTML = `<img src="${p.img}" alt="${p.name}" loading="lazy"><h4 style="margin:8px 0 6px 0">${p.name}${p.kota? ', '+p.kota: ''}</h4><p style="color:var(--muted)">${p.text}</p>`;
+    el.innerHTML = `<img src="${s.img}" alt="${s.name}" loading="lazy"/><p><strong>${s.name}, ${s.kota || ''}</strong></p><p>"${s.text}"</p>`;
     track.appendChild(el);
   });
-  testiIndex = 0;
-  updateTestiTransform();
-  if(testiTimer) clearInterval(testiTimer);
-  testiTimer = setInterval(()=> testiNext(), 6000);
+  testiIdx = t.length; updateTestiTransform();
+  if(testiInterval) clearInterval(testiInterval);
+  testiInterval = setInterval(testiNext, 5000);
 }
 function updateTestiTransform(){
-  const track = $('#testiTrack'); const card = track.querySelector('.testimonial-card');
-  if(!card) return;
-  const w = card.offsetWidth + 16;
-  track.style.transform = `translateX(-${testiIndex * w}px)`;
+  const track = $('#testiTrack');
+  const width = track.querySelector('.testimonial-card') ? track.querySelector('.testimonial-card').offsetWidth : 300;
+  track.style.transform = `translateX(-${testiIdx * width}px)`;
 }
-function testiNext(){ const track = $('#testiTrack'); if(!track.children.length) return; testiIndex = (testiIndex + 1) % track.children.length; updateTestiTransform(); }
-function testiPrev(){ const track = $('#testiTrack'); if(!track.children.length) return; testiIndex = (testiIndex - 1 + track.children.length) % track.children.length; updateTestiTransform(); }
-enableSwipe(document.getElementById('testiTrack'), testiPrev, testiNext);
-
-/* ----------------------
-   Quick Order form behaviors
-   ---------------------- */
-function populateQuickProducts(){
-  const sel = $('#qProduct'); sel.innerHTML = '<option value="">Pilih produk...</option>';
-  (window.PRODUCTS || []).forEach(p=>{
-    sel.insertAdjacentHTML('beforeend', `<option value="${p.id}">${p.name} — Rp ${Number(p.price).toLocaleString('id-ID')}</option>`);
-  });
-}
-function submitQuickOrder(e){
-  e.preventDefault();
-  const name = $('#qName').value.trim();
-  const wa = $('#qWA').value.trim();
-  const addr = $('#qAddr').value.trim();
-  const pid = $('#qProduct').value;
-  const qty = Number($('#qQty').value) || 1;
-  const note = $('#qNote').value.trim();
-  if(!pid){ alert('Pilih produk'); return; }
-  const product = (window.PRODUCTS||[]).find(x=>x.id===pid);
-  const subtotal = product ? product.price * qty : 0;
-  const waNum = window._SITE_WA || '6281234567890';
-  const text = `Halo, saya ${name} ingin memesan:%0A- ${product.name} x ${qty} = Rp ${subtotal.toLocaleString('id-ID')}%0AAlamat: ${addr}%0ANo WA pembeli: ${wa}%0ANote: ${note||'-'}%0A(Total belum termasuk ongkir)`;
-  window.open('https://wa.me/' + waNum + '?text=' + encodeURIComponent(text));
+function testiNext(){ testiIdx = (testiIdx + 1) % $('#testiTrack').children.length; updateTestiTransform(); }
+function testiPrev(){ testiIdx = (testiIdx - 1 + $('#testiTrack').children.length) % $('#testiTrack').children.length; updateTestiTransform(); }
+function enableTestiSwipe(){
+  const track = $('#testiTrack');
+  if(!track) return;
+  let startX = 0, dx = 0, isDown=false;
+  track.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
+  track.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
+  track.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) testiPrev(); else testiNext(); } dx=0; });
 }
 
-/* ----------------------
-   Misc: IG/YouTube render and init
-   ---------------------- */
-function renderFeed(){
-  // IG: just show embed hint or provided URL (window.IG_URLS)
-  const ig = window.IG_URLS || [];
-  const igWrap = $('#igEmbedContainer');
-  igWrap.innerHTML = '';
-  if(!ig.length){
-    igWrap.innerHTML = `<div style="padding:12px;color:var(--muted)">Tambahkan URL embed Instagram di data.js (IG_URLS)</div>`;
-  } else {
-    // show first embed link as anchor (real embed requires Instagram script)
-    const a = document.createElement('a'); a.href = ig[0].replace('/embed',''); a.target='_blank'; a.textContent = 'Lihat posting Instagram';
-    igWrap.appendChild(a);
+/* =========================
+   PRODUCT MODAL (unchanged names)
+   ========================= */
+function openProductModal(imgEl){
+  const card = imgEl.closest('.card');
+  $('#modalImg').src = card.dataset.img || imgEl.src;
+  $('#modalName').textContent = card.dataset.name || '';
+  $('#modalDesc').textContent = card.dataset.desc || '';
+  const price = card.dataset.price || '';
+  $('#modalPrice').textContent = price ? formatRupiah(price) : '';
+  $('#modalPrice').setAttribute('data-price', price || '');
+  $('#productModal').style.display = 'flex';
+}
+function closeProductModal(){ $('#productModal').style.display = 'none'; }
+
+/* ====== INSTAGRAM embed (kept as-is: uses array igUrls in original file or you can set in data.js) */
+(function renderRandomIG(){
+  const container = $('#igEmbedContainer');
+  if(!container) return;
+  const igUrls = window.IG_URLS || [
+    // fallback placeholders; you can put actual embed URLs into window.IG_URLS in data.js
+  ];
+  const url = igUrls.length ? igUrls[Math.floor(Math.random()*igUrls.length)] : '';
+  if(!url || !url.includes('/p/')){
+    container.innerHTML = `<div style="padding:20px;background:var(--surface);border-radius:8px">Silakan ganti array <code>IG_URLS</code> di <code>data.js</code> dengan URL embed post dari akun Instagram Anda</div>`;
+    return;
   }
-  // YouTube: use first id if provided
-  if(window.YT_EMBED){
-    $('#ytFrame').src = window.YT_EMBED;
-  } else if(window.YT_ID){
-    $('#ytFrame').src = `https://www.youtube.com/embed/${window.YT_ID}`;
-  } else {
-    $('#ytFrame').src = '';
+  const block = document.createElement('blockquote'); block.className = 'instagram-media'; block.setAttribute('data-instgrm-permalink', url.replace('/embed','')); block.style = "width:100%;max-width:540px";
+  block.innerHTML = `<a href="${url.replace('/embed','')}" target="_blank" rel="noopener noreferrer">Lihat di Instagram</a>`;
+  container.appendChild(block);
+  if(window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === 'function'){
+    try{ window.instgrm.Embeds.process(); }catch(e){ /* ignore */ }
   }
-}
+})();
 
-/* ----------------------
-   INIT
-   ---------------------- */
-document.addEventListener('DOMContentLoaded', ()=>{
-  applySiteMeta();
-  renderHero();
-  renderProducts();
-  renderGallery();
-  renderTestimonials();
-  populateQuickProducts();
-  renderFeed();
-  // update transforms after layout
+/* ==============
+   INIT / on DOM ready
+   ============== */
+window.addEventListener('DOMContentLoaded', ()=>{
+  applySiteMeta();     // update title, logos, OG
+  renderHero();        // hero from SLIDES
+  renderProducts();    // render products grid from PRODUCTS
+  renderGallery();     // render gallery slider from GALLERY
+  renderTestimonials();// render testimonials slider
+  enableGallerySwipe();
+  enableTestiSwipe();
+  applyDarkModeFromStorage();
+  loadCartFromStorage();
+
+  // Ensure floating cart hidden if empty
+  if(cart.length===0) floatingCartBtn.style.display = 'none';
+
+  // responsive transform update after images load
   setTimeout(()=>{ updateGalleryTransform(); updateTestiTransform(); }, 300);
-  // ensure countdowns tick
-  updateAllCountdowns();
+
+  // expose some globals (keeps original names)
+  window.slides = slides;
+  window.nextSlide = nextSlide;
+  window.prevSlide = prevSlide;
 });
 
-/* responsiveness: update transform on resize */
-window.addEventListener('resize', ()=>{ updateGalleryTransform(); updateTestiTransform(); });
-
-/* small helper: toggle menu (if later used) */
-function toggleMenu(){ const nav = document.querySelector('nav'); nav.classList.toggle('open'); }
-
-/* Keyboard: close lightbox ESC */
+/* Accessibility: ESC to close modals/side menu */
 document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape') closeLightbox();
-  if(e.key === 'ArrowLeft') lightboxPrev();
-  if(e.key === 'ArrowRight') lightboxNext();
+  if(e.key === 'Escape'){
+    closeLightbox();
+    closeProductModal();
+    $('#sideMenu').classList.remove('active');
+  }
 });
+
+/* SCROLL TOP */
+function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
+window.addEventListener('scroll', ()=>{ $('#scrollTopBtn').style.display = (window.scrollY>200)?'inline-block':'none'; });
 
 </script>
 </body>
