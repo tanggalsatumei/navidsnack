@@ -32,11 +32,8 @@ body{
 /* Dark mode overrides (toggle class on body) */
 body.dark-mode{
   --bg:#071021;--surface:#0f1724;--muted:#9aa6b2;--text:#e6eef4;
-  --brand:#0a1629;--accent:#ffcf6b;--accent-2:#ff9f1c;--soft:#081226;
+  --brand:#071127;--accent:#ffb703;--accent-2:#ff9f1c;--soft:#081226;
 }
-
-.promo-marquee{background:linear-gradient(90deg,#ff0000,#ff7b00);color:#fff;font-weight:800;text-align:center;padding:10px;letter-spacing:0.5px}
-.promo-marquee marquee{font-size:15px}
 
 /* Header */
 header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
@@ -60,16 +57,14 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s}
 .slide.active{opacity:1}
 .slide::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.35),rgba(2,6,23,0.12))}
-.slide-content{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:28px;color:#fff;display:flex;gap:24px;align-items:center;justify-content:center;text-align:center}
-.slide-content img{width:200px;height:200px;border-radius:16px;object-fit:cover}
-.slide-text h1{margin:0;font-size:32px;color:#fff}
-@media(max-width:600px){
-  .slide-content{flex-direction:column}
-  .slide-content img{width:140px;height:140px}
-  .arrow{top:70%!important}
-}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.4);border:none;color:#fff;padding:10px;border-radius:50%;cursor:pointer;font-size:20px;z-index:10}
-.arrow-left{left:12px}.arrow-right{right:12px}
+.slide-content{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:28px;color:var(--accent);display:flex;gap:24px;align-items:center;justify-content:center}
+.slide-text h1{margin:0;font-size:34px;color:#fff}
+.btn{background:var(--accent);color:var(--brand);border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(251,133,0,0.12)}
+.dots{position:absolute;bottom:18px;width:100%;text-align:center;z-index:3}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.6);margin:0 6px;cursor:pointer;opacity:.7}
+.dot.active{background:var(--accent-2);opacity:1}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:20px}
+.arrow-left{left:18px}.arrow-right{right:18px}
 
 /* layout & cards */
 .container{max-width:var(--maxw);margin:0 auto;padding:28px}
@@ -104,19 +99,6 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .testimonial-card{min-width:300px;padding:16px;text-align:center;flex-shrink:0}
 .testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
 
-.quick-order{background:var(--surface);padding:20px;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,0.06);display:grid;gap:14px;grid-template-columns:1fr 1fr}
-.quick-order input,.quick-order textarea,.quick-order select{
-  padding:12px 14px;border-radius:10px;border:1px solid rgba(0,0,0,0.1);background:var(--bg);color:var(--text);font-size:15px
-}
-.quick-order textarea{grid-column:1/-1}
-.quick-order button{grid-column:1/-1;background:var(--accent);color:#000;font-weight:700;padding:12px;border:none;border-radius:12px;cursor:pointer;box-shadow:0 4px 12px rgba(251,133,0,0.3)}
-body.dark-mode .quick-order input,body.dark-mode .quick-order textarea,body.dark-mode .quick-order select{
-  background:#081226;border-color:#1c2836;color:#e6eef4
-}
-
-.feed-grid{display:grid;grid-template-columns:30% 70%;gap:20px}
-@media(max-width:800px){.feed-grid{grid-template-columns:1fr}}
-  
 /* cart & floats */
 .whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
 .whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
@@ -218,16 +200,20 @@ body.dark-mode .quick-order input,body.dark-mode .quick-order textarea,body.dark
   </div>
 </section>
 
-<section class="container" style="padding:30px;max-width:1100px;margin:auto">
-  <h2 style="text-align:center;margin-bottom:20px">Form Pemesanan Cepat</h2>
-  <form class="quick-order">
-    <input type="text" placeholder="Nama Lengkap" required/>
-    <input type="tel" placeholder="Nomor WhatsApp" required/>
-    <input type="text" placeholder="Alamat (kelurahan/kota)" required/>
-    <select required><option>Pilih Produk...</option></select>
-    <input type="number" min="1" value="1"/>
-    <textarea rows="2" placeholder="Catatan (opsional)"></textarea>
-    <button>Kirim ke WhatsApp</button>
+<!-- QUICK ORDER FORM -->
+<section class="container" aria-labelledby="quickOrderTitle" style="margin-top:18px">
+  <div class="section-title"><h2 id="quickOrderTitle">Form Pemesanan Cepat</h2></div>
+  <form id="quickOrderForm" class="quick-order" onsubmit="submitQuickOrder(event)">
+    <input id="qName" type="text" placeholder="Nama lengkap" required aria-label="Nama"/>
+    <input id="qWA" type="tel" placeholder="Nomor WhatsApp (contoh: 0812...)" required aria-label="Nomor WA"/>
+    <input id="qAddr" type="text" placeholder="Alamat (kelurahan/kota)" required aria-label="Alamat"/>
+    <select id="qProduct" required aria-label="Pilih produk"></select>
+    <input id="qQty" type="number" min="1" value="1" required aria-label="Jumlah"/>
+    <textarea id="qNote" rows="2" placeholder="Catatan / request (opsional)"></textarea>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button class="btn" type="submit">Kirim ke WhatsApp Admin</button>
+      <small style="color:var(--muted)">Subtotal akan disertakan sebelum ongkir</small>
+    </div>
   </form>
 </section>
 
@@ -264,16 +250,19 @@ body.dark-mode .quick-order input,body.dark-mode .quick-order textarea,body.dark
   </div>
 </div>
 
-<section class="container" style="padding:30px;max-width:1100px;margin:auto">
-  <h2 style="text-align:center;margin-bottom:20px">Media Sosial</h2>
-  <div class="feed-grid">
-    <div style="background:var(--surface);padding:16px;border-radius:12px">
-      <h3>Instagram</h3>
-      <div style="background:#ccc;height:300px;border-radius:10px"></div>
+<!-- feed (instagram + youtube) -->
+<section id="feed" class="container" aria-labelledby="feedTitle">
+  <div class="section-title"><h2 id="feedTitle">Media Sosial</h2></div>
+  <div class="feed-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="feed-ig" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
+      <h3 style="margin-bottom:10px;color:var(--brand)">Instagram</h3>
+      <div id="igEmbedContainer"></div>
     </div>
-    <div style="background:var(--surface);padding:16px;border-radius:12px">
-      <h3>YouTube</h3>
-      <iframe src="https://www.youtube.com/embed/" style="width:100%;height:320px;border-radius:12px" frameborder="0" allowfullscreen></iframe>
+    <div class="feed-yt" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
+      <h3 style="margin-bottom:10px;color:var(--brand)">YouTube</h3>
+      <div class="yt-wrapper">
+        <iframe id="ytFrame" src="" title="Navid Snack YouTube" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%;height:315px;border-radius:12px"></iframe>
+      </div>
     </div>
   </div>
 </section>
@@ -302,7 +291,7 @@ body.dark-mode .quick-order input,body.dark-mode .quick-order textarea,body.dark
 <script async defer src="//www.instagram.com/embed.js"></script>
 
 <!-- load data.js first (you uploaded it as data.js) -->
-<script src="js/data.js"></script>
+<script src="data.js"></script>
 
 <script>
 /* =============
@@ -431,45 +420,153 @@ function toggleDarkMode(){
    ============================ */
 function formatRupiah(v){ if(!v) return ''; return 'Rp ' + Number(v).toLocaleString('id-ID'); }
 
+/* ============================
+   PRODUCTS (dengan countdown promo)
+   ============================ */
+function isPromoActive(prod){
+  const now = new Date();
+  const tzOffset = now.getTimezoneOffset() * 60000; // supaya jam lokal
+  const todayStr = now.toISOString().slice(0,10);
+
+  const tglStart = prod.tglPromoStart || '';
+  const tglEnd = prod.tglPromoEnd || tglStart || '';
+  const jamStart = prod.jamPromoStart || '';
+  const jamEnd = prod.jamPromoEnd || '';
+
+  // buat Date dari kombinasi tgl+jam
+  function combine(tgl, jam){
+    if(!tgl) return null;
+    const hh = jam? jam.split(':')[0] : '00';
+    const mm = jam? jam.split(':')[1] : '00';
+    return new Date(`${tgl}T${hh}:${mm}:00`);
+  }
+
+  // kasus 1: tanggal saja (full-day)
+  if(tglStart && !jamStart){
+    const start = combine(tglStart,'00:00');
+    const end = combine(tglEnd||tglStart,'23:59');
+    return now >= start && now <= end;
+  }
+
+  // kasus 2: jam saja (berulang setiap hari)
+  if(!tglStart && jamStart){
+    const today = todayStr;
+    const start = combine(today,jamStart);
+    const end = combine(today,jamEnd||jamStart);
+    if(jamEnd && jamEnd < jamStart){ // lintas tengah malam
+      const endTomorrow = combine(new Date(now.getTime()+86400000).toISOString().slice(0,10),jamEnd);
+      return now >= start || now <= endTomorrow;
+    }
+    return now >= start && now <= end;
+  }
+
+  // kasus 3: tanggal + jam
+  if(tglStart && jamStart){
+    const start = combine(tglStart,jamStart);
+    const end = combine(tglEnd||tglStart,jamEnd||jamStart);
+    if(jamEnd && jamEnd < jamStart && tglStart===tglEnd){
+      const endNext = new Date(end.getTime()+86400000);
+      return now >= start && now <= endNext;
+    }
+    return now >= start && now <= end;
+  }
+  return false;
+}
+
+function getPromoRemaining(prod){
+  // kembalikan sisa waktu dalam ms
+  const now = new Date();
+  const tglStart = prod.tglPromoStart || '';
+  const tglEnd = prod.tglPromoEnd || tglStart || '';
+  const jamStart = prod.jamPromoStart || '';
+  const jamEnd = prod.jamPromoEnd || '';
+
+  function combine(tgl, jam){
+    const hh = jam? jam.split(':')[0] : '00';
+    const mm = jam? jam.split(':')[1] : '00';
+    return new Date(`${tgl}T${hh}:${mm}:00`);
+  }
+
+  if(tglStart && !jamStart){
+    return combine(tglEnd,'23:59') - now;
+  }
+  if(!tglStart && jamStart){
+    const today = new Date().toISOString().slice(0,10);
+    let end = combine(today,jamEnd||jamStart);
+    if(jamEnd && jamEnd < jamStart){
+      const tomorrow = new Date(now.getTime()+86400000).toISOString().slice(0,10);
+      end = combine(tomorrow,jamEnd);
+    }
+    return end - now;
+  }
+  if(tglStart && jamStart){
+    let end = combine(tglEnd||tglStart,jamEnd||jamStart);
+    if(jamEnd && jamEnd < jamStart && tglStart===tglEnd){
+      end = new Date(end.getTime()+86400000);
+    }
+    return end - now;
+  }
+  return 0;
+}
+
+function formatCountdown(ms){
+  if(ms<=0) return '00:00:00';
+  let sec = Math.floor(ms/1000);
+  const h = String(Math.floor(sec/3600)).padStart(2,'0');
+  sec %= 3600;
+  const m = String(Math.floor(sec/60)).padStart(2,'0');
+  const s = String(sec%60).padStart(2,'0');
+  return `${h}:${m}:${s}`;
+}
+
 function renderProducts(){
   const grid = $('#productsGrid');
   grid.innerHTML = '';
   const prods = window.PRODUCTS || [];
   prods.forEach(p=>{
+    const active = isPromoActive(p);
     const art = document.createElement('article');
     art.className = 'card';
-    art.setAttribute('data-name', p.name);
-    art.setAttribute('data-price', p.price);
-    art.setAttribute('data-oldprice', p.oldPrice || '');
-    art.setAttribute('data-stock', p.stock || 0);
-    art.setAttribute('data-promo', p.promo ? 'true' : 'false');
-    art.setAttribute('data-desc', p.desc || '');
-    art.setAttribute('data-img', p.img || '');
+    art.dataset.name = p.name;
+    art.dataset.price = p.price;
+    art.dataset.oldprice = p.oldPrice || '';
+    art.dataset.stock = p.stock || 0;
+    art.dataset.promo = active ? 'true' : 'false';
+    art.dataset.desc = p.desc || '';
+    art.dataset.img = p.img || '';
+
     art.innerHTML = `
       <div class="img-wrapper">
-        <img src="${p.img}" alt="${p.name} Navid Snack" loading="lazy" onclick="openProductModal(this)">
-        ${p.promo ? '<div class="promo-label">PROMO</div>' : ''}
-        ${p.promo ? `<div class="countdown-overlay" data-cid>Promo sampai ${p.jamPromoEnd || ''}</div>` : ''}
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openProductModal(this)">
+        ${active ? '<div class="promo-label">PROMO</div>' : ''}
+        ${active ? `<div class="countdown-overlay" data-cid></div>` : ''}
       </div>
       <h3>${p.name}</h3>
       <div class="price-row">
         <span class="price-old">${p.oldPrice? formatRupiah(p.oldPrice) : ''}</span>
         <span class="price-new">${formatRupiah(p.price)}</span>
       </div>
-      <div class="stars" aria-hidden="true">${'★★★★★'.slice(0, p.rating || 5)}</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
+      <div class="stars">${'★★★★★'.slice(0,p.rating||5)}</div>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
         <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('${escapeQuotes(p.name)}',${p.price})">Pesan Cepat</button>
+        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06)" onclick="quickOrderPref('${escapeQuotes(p.name)}',${p.price})">Pesan Cepat</button>
       </div>
     `;
     grid.appendChild(art);
-  });
 
-  // populate quick order select
-  const qSel = $('#qProduct');
-  qSel.innerHTML = '<option value="">Pilih produk...</option>';
-  prods.forEach(p=> qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`));
+    if(active){
+      const countdownEl = art.querySelector('[data-cid]');
+      const tick = ()=>{
+        const ms = getPromoRemaining(p);
+        countdownEl.textContent = `Berakhir dalam ${formatCountdown(ms)}`;
+        if(ms<=0) { countdownEl.parentElement.querySelector('.promo-label').remove(); countdownEl.remove(); }
+      };
+      tick();
+      setInterval(tick, 1000);
+    }
+  });
 }
+
 
 // helper to escape single quotes in onclick inline string
 function escapeQuotes(s){ return (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
@@ -607,81 +704,100 @@ if(salesSamples.length>0) setInterval(()=>{ const s = salesSamples[Math.floor(Ma
 /* =========================
    GALLERY slider & lightbox
    ========================= */
+/* =========================
+   GALLERY slider + tombol + swipe di lightbox
+   ========================= */
 let galleryIndex = 0;
 function renderGallery(){
-  const gallery = window.GALLERY || [];
+  const data = window.GALLERY || [];
   const track = $('#galleryTrack');
   track.innerHTML = '';
-  // render slides (duplicate to make wrap feel continuous)
-  const slidesToRender = gallery.concat(gallery).concat(gallery); // tripled for smoother swipe wrap
-  slidesToRender.forEach((g,i)=>{
-    const el = document.createElement('div'); el.className = 'gallery-slide';
-    el.innerHTML = `<img src="${g.src}" alt="${g.alt||''}" loading="lazy" data-original-index="${i % gallery.length}" onclick="openLightboxByIndex(${i % gallery.length})">`;
+  const slides = data.concat(data).concat(data);
+  slides.forEach((g,i)=>{
+    const el = document.createElement('div');
+    el.className = 'gallery-slide';
+    el.innerHTML = `<img src="${g.src}" alt="${g.alt||''}" loading="lazy" data-idx="${i%data.length}" onclick="openLightbox(${i%data.length})">`;
     track.appendChild(el);
   });
-  // track width handled by CSS flex; start in middle group so prev/next can move
-  galleryIndex = gallery.length; // middle
+  galleryIndex = data.length;
   updateGalleryTransform();
 }
+
 function updateGalleryTransform(){
   const track = $('#galleryTrack');
-  const slideW = track.querySelector('.gallery-slide') ? track.querySelector('.gallery-slide').offsetWidth + 16 : 260;
-  track.style.transform = `translateX(-${galleryIndex * (slideW)}px)`;
+  const w = track.querySelector('.gallery-slide')?.offsetWidth || 260;
+  track.style.transform = `translateX(-${galleryIndex * (w+16)}px)`;
 }
-function prevGallery(){ galleryIndex = (galleryIndex - 1 + $('#galleryTrack').children.length) % $('#galleryTrack').children.length; updateGalleryTransform(); }
-function nextGallery(){ galleryIndex = (galleryIndex + 1) % $('#galleryTrack').children.length; updateGalleryTransform(); }
-function openLightboxByIndex(i){
-  const imgs = (window.GALLERY || []).map(g=>g.src);
-  const idx = i % imgs.length;
-  $('#lightboxImg').src = imgs[idx];
-  $('#lightbox').style.display = 'flex';
-  $('#lightbox').setAttribute('aria-hidden','false');
-}
-function closeLightbox(){ $('#lightbox').style.display = 'none'; $('#lightbox').setAttribute('aria-hidden','true'); }
+function prevGallery(){ galleryIndex=(galleryIndex-1+$('#galleryTrack').children.length)%$('#galleryTrack').children.length; updateGalleryTransform(); }
+function nextGallery(){ galleryIndex=(galleryIndex+1)%$('#galleryTrack').children.length; updateGalleryTransform(); }
 
-/* allow swipe on gallery */
+let lightboxIdx = 0;
+function openLightbox(i){
+  lightboxIdx = i;
+  showLightboxImage();
+  $('#lightbox').style.display='flex';
+}
+function showLightboxImage(){
+  $('#lightboxImg').src = window.GALLERY[lightboxIdx].src;
+}
+function prevLightbox(){ lightboxIdx = (lightboxIdx-1+window.GALLERY.length)%window.GALLERY.length; showLightboxImage(); }
+function nextLightbox(){ lightboxIdx = (lightboxIdx+1)%window.GALLERY.length; showLightboxImage(); }
+$('#lightbox .prev').onclick = prevLightbox;
+$('#lightbox .next').onclick = nextLightbox;
+function closeLightbox(){ $('#lightbox').style.display='none'; }
+
 function enableGallerySwipe(){
   const track = $('#galleryTrack');
-  if(!track) return;
-  let startX = 0, dx = 0, isDown=false;
-  track.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
-  track.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
-  track.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) prevGallery(); else nextGallery(); } dx=0; });
+  let startX=0,dx=0,isDown=false;
+  track.addEventListener('touchstart',e=>{isDown=true;startX=e.touches[0].clientX});
+  track.addEventListener('touchmove',e=>{if(!isDown)return;dx=e.touches[0].clientX-startX});
+  track.addEventListener('touchend',()=>{if(!isDown)return;isDown=false;if(Math.abs(dx)>40){dx>0?prevGallery():nextGallery();}dx=0});
 }
+/* swipe dalam lightbox */
+(function(){
+  const img=$('#lightboxImg');
+  let startX=0,dx=0,isDown=false;
+  img.addEventListener('touchstart',e=>{isDown=true;startX=e.touches[0].clientX});
+  img.addEventListener('touchmove',e=>{if(!isDown)return;dx=e.touches[0].clientX-startX});
+  img.addEventListener('touchend',()=>{if(!isDown)return;isDown=false;if(Math.abs(dx)>40){dx>0?prevLightbox():nextLightbox();}dx=0});
+})();
+
 
 /* =========================
    TESTIMONIAL slider (looping + swipe)
    ========================= */
-let testiIdx = 0, testiInterval = null;
+/* =========================
+   TESTIMONIAL slider (tombol + swipe)
+   ========================= */
+let testiIdx=0;
 function renderTestimonials(){
   const t = window.TESTIMONIALS || [];
-  const track = $('#testiTrack'); track.innerHTML = '';
-  // clone to allow loop feel
+  const track = $('#testiTrack'); track.innerHTML='';
   const slides = t.concat(t).concat(t);
   slides.forEach(s=>{
-    const el = document.createElement('div'); el.className = 'testimonial-card';
-    el.innerHTML = `<img src="${s.img}" alt="${s.name}" loading="lazy"/><p><strong>${s.name}, ${s.kota || ''}</strong></p><p>"${s.text}"</p>`;
+    const el=document.createElement('div');
+    el.className='testimonial-card';
+    el.innerHTML=`<img src="${s.img}" alt="${s.name}" loading="lazy"/><p><strong>${s.name}, ${s.kota||''}</strong></p><p>"${s.text}"</p>`;
     track.appendChild(el);
   });
-  testiIdx = t.length; updateTestiTransform();
-  if(testiInterval) clearInterval(testiInterval);
-  testiInterval = setInterval(testiNext, 5000);
+  testiIdx=t.length; updateTestiTransform();
 }
 function updateTestiTransform(){
   const track = $('#testiTrack');
-  const width = track.querySelector('.testimonial-card') ? track.querySelector('.testimonial-card').offsetWidth : 300;
-  track.style.transform = `translateX(-${testiIdx * width}px)`;
+  const w = track.querySelector('.testimonial-card')?.offsetWidth || 300;
+  track.style.transform = `translateX(-${testiIdx*w}px)`;
 }
-function testiNext(){ testiIdx = (testiIdx + 1) % $('#testiTrack').children.length; updateTestiTransform(); }
-function testiPrev(){ testiIdx = (testiIdx - 1 + $('#testiTrack').children.length) % $('#testiTrack').children.length; updateTestiTransform(); }
+function testiNext(){ testiIdx=(testiIdx+1)%$('#testiTrack').children.length; updateTestiTransform(); }
+function testiPrev(){ testiIdx=(testiIdx-1+$('#testiTrack').children.length)%$('#testiTrack').children.length; updateTestiTransform(); }
+
 function enableTestiSwipe(){
   const track = $('#testiTrack');
-  if(!track) return;
-  let startX = 0, dx = 0, isDown=false;
-  track.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
-  track.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
-  track.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) testiPrev(); else testiNext(); } dx=0; });
+  let startX=0,dx=0,isDown=false;
+  track.addEventListener('touchstart',e=>{isDown=true;startX=e.touches[0].clientX});
+  track.addEventListener('touchmove',e=>{if(!isDown)return;dx=e.touches[0].clientX-startX});
+  track.addEventListener('touchend',()=>{if(!isDown)return;isDown=false;if(Math.abs(dx)>40){dx>0?testiPrev():testiNext();}dx=0});
 }
+
 
 /* =========================
    PRODUCT MODAL (unchanged names)
