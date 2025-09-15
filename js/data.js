@@ -1,66 +1,111 @@
-// js/data.js
-// =======================
-// INFO WEBSITE & SEO + KONFIG
-// =======================
-window.SITE = {
-  img: "assets/logo.png",
-  brand: "Navid Snack",
-  wa: "6281234567890",
-  alamat: "Deket, Lamongan, Jawa Timur",
-  keywords: "navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat, snack lamongan, oleh-oleh lamongan",
-  description: "Navid Snack — Camilan sehat & lezat khas Lamongan, higienis dan bergizi. Pesan cepat via WhatsApp.",
-  url: "https://navidsnack.vercel.app",
-  sertifikat: [
-    { src: "assets/halal.png", alt: "Sertifikat Halal" },
-    { src: "assets/bpom.png", alt: "Sertifikat BPOM" }
+window.DATA_ALL = {
+  settings: {
+    site_title: "Navid Snack",
+    logo: "/assets/logo.png",
+    icon: "/assets/logo.png",
+    warna: "#FFD700",
+    textpromo: "🔥 Promo Spesial Hari Ini 🔥",
+    wa: "6281234567890",
+    wa_message: "Halo Navid Snack, saya mau pesan produk Anda.",
+    alamat: "Jl. Mawar No.10, Lamongan",
+    "jam buka": "08.00 - 17.00",
+    deskripsi: "UMKM lokal yang memproduksi camilan khas: Keripik Pisang, Corn Milk Drink, Sari Kemangi, dan Kerupuk Telur Asin.",
+    maps: "https://maps.google.com/...",
+    video_embed: "https://www.youtube.com/embed/xxxxxx",
+    keywords: "keripik pisang, corn milk drink, sari kemangi, kerupuk telur asin, camilan khas lamongan, navid snack, snack rumahan, minuman herbal, minuman jagung, makanan ringan"
+  },
+
+  slides: [
+    {
+      bg: "/assets/bg.jpg",
+      img: "/assets/logo.png",
+      alt: "Keripik Pisang",
+      title: "Keripik Pisang Premium",
+      caption: "Gurih, manis, dan renyah setiap gigitan.",
+      btn_text: "Pesan Sekarang",
+      btn_link: "#products"
+    },
+    {
+      bg: "/assets/bg.jpg",
+      img: "/assets/logo.png",
+      alt: "Corn Milk Drink",
+      title: "Corn Milk Drink",
+      caption: "Minuman jagung manis yang menyegarkan.",
+      btn_text: "Coba Sekarang",
+      btn_link: "#products"
+    }
+  ],
+
+  products: [
+    {
+      id: "P1",
+      nama: "Keripik Pisang",
+      gbr: "/assets/bg.png",
+      alt: "Keripik Pisang Renyah",
+      hargaawal: 15000,
+      hargadiskon: 12000,
+      promostart: "08:00",
+      promoend: "20:00",
+      desc: "Keripik pisang manis dengan tekstur renyah. Cocok untuk camilan keluarga.",
+      aktif: true,
+      tags: ["keripik", "pisang", "camilan"]
+    },
+    {
+      id: "P2",
+      nama: "Corn Milk Drink",
+      gbr: "/assets/logo.png",
+      alt: "Minuman Jagung Susu",
+      hargaawal: 10000,
+      hargadiskon: "",
+      promostart: "",
+      promoend: "",
+      desc: "Minuman sehat berbahan jagung manis dan susu segar.",
+      aktif: true,
+      tags: ["minuman", "jagung", "segar"]
+    },
+    {
+      id: "P3",
+      nama: "Sari Kemangi",
+      gbr: "/assets/bg.png",
+      alt: "Sari Kemangi",
+      hargaawal: 8000,
+      desc: "Minuman herbal alami yang menyegarkan dan menyehatkan.",
+      aktif: true,
+      tags: ["herbal", "kemangi", "minuman"]
+    },
+    {
+      id: "P4",
+      nama: "Kerupuk Telur Asin",
+      gbr: "/assets/logo.png",
+      alt: "Kerupuk Telur Asin",
+      hargaawal: 12000,
+      desc: "Kerupuk gurih dengan cita rasa telur asin yang khas.",
+      aktif: true,
+      tags: ["kerupuk", "telur asin", "camilan"]
+    }
+  ],
+
+  gallery: [
+    { url: "/assets/bg.jpg", alt: "Proses produksi" },
+    { url: "/assets/logo.jpg", alt: "Produk jadi" },
+    { url: "/assets/bg.jpg", alt: "Kemasan produk" },
+    { url: "/assets/logo.jpg", alt: "Produk jadi" },
+    { url: "/assets/bg.jpg", alt: "Kemasan produk" },
+    { url: "/assets/logo.jpg", alt: "Produk jadi" },
+    { url: "/assets/bg.jpg", alt: "Kemasan produk" }
+  ],
+
+  testimonials: [
+    { nama: "Budi", jabatan: "Pelanggan", gambar: "/assets/bg.jpg", alt: "Budi puas" },
+    { nama: "Sari", jabatan: "Pelanggan", gambar: "/assets/logo.jpg", alt: "Sari senang" },
+    { nama: "Wawan", jabatan: "Pelanggan", gambar: "/assets/bg.jpg", alt: "Budi puas" },
+    { nama: "Bari", jabatan: "Pelanggan", gambar: "/assets/logo.jpg", alt: "Sari senang" },
+    { nama: "Muin", jabatan: "Pelanggan", gambar: "/assets/bg.jpg", alt: "Budi puas" },
+    { nama: "Sardi", jabatan: "Pelanggan", gambar: "/assets/logo.jpg", alt: "Sari senang" }
+  ],
+
+  articles: [
+    { judul: "Tips Menyimpan Keripik Pisang", slug: "tips-keripik", deskripsi: "Agar keripik tetap renyah dan awet.", gambar: "/assets/artikel1.jpg" },
+    { judul: "Manfaat Minuman Jagung", slug: "manfaat-cornmilk", deskripsi: "Corn Milk Drink kaya serat dan vitamin.", gambar: "/assets/artikel2.jpg" }
   ]
 };
-
-// teks promo (dari data.js)
-window.PROMO_TEXT = "🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥";
-
-// =======================
-// SLIDER HERO
-// =======================
-window.SLIDES = [
-  { bg:"assets/bg.jpg", img: "assets/logo.png", title: "Navid Snack — Camilan Sehat & Lezat", text: "Snack khas Lamongan, dibuat higienis dan rasa yang konsisten.", cta: { text: "Hubungi Sekarang", link: "https://wa.me/6281234567890" } },
-  { bg:"assets/bg.jpg", img: "assets/logo.png", title: "Promo Spesial Mingguan", text: "Diskon paket & pengiriman cepat untuk area Deket, Lamongan.", cta: { text: "Lihat Produk", link: "#products" } }
-];
-
-// =======================
-// PRODUK
-// Dates: YYYY-MM-DD ; Times HH:mm (24h). Use null if not set.
-window.PRODUCTS = [
-  { id:"p01", name:"Keripik Pisang", desc:"Keripik pisang renyah khas Navid Snack", img:"assets/bg.jpg", price:15000, oldPrice:20000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:"01:00", jamPromoEnd:"23:00", stock:5, rating:5 },
-  { id:"p02", name:"Keripik Telur Asin", desc:"Keripik telur asin khas Navid Snack", img:"assets/logo.jpg", price:15000, oldPrice:20000, promo:true, tglPromoStart:"2025-09-12", tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:5, rating:5 },
-  { id:"p03", name:"Corn Milk Drink", desc:"Minuman susu jagung khas Navid Snack", img:"assets/bg.jpg", price:15000, oldPrice:20000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:5, rating:5 },
-  { id:"p04", name:"Sari Kemangi", desc:"Minuman sari kemangi khas Navid Snack", img:"assets/logo.jpg", price:15000, oldPrice:20000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:5, rating:5 }
-];
-
-// =======================
-// GALERI
-window.GALLERY = [
-  { src: "assets/logo.jpg", alt: "Galeri 1" },
-  { src: "assets/bg.jpg", alt: "Galeri 2" },
-  { src: "assets/logo.jpg", alt: "Galeri 3" },
-  { src: "assets/bg.jpg", alt: "Galeri 4" },
-  { src: "assets/logo.jpg", alt: "Galeri 5" },
-  { src: "assets/bg.jpg", alt: "Galeri 6" },
-  { src: "assets/logo.jpg", alt: "Galeri 7" }
-];
-
-// =======================
-// TESTIMONI
-window.TESTIMONIALS = [
-  { name:"Ani", kota:"Surabaya", text:"Rasanya enak, pengirimannya cepat!", img:"https://i.pravatar.cc/100?u=ani" },
-  { name:"Budi", kota:"Gresik", text:"Camilan keluarga favorit, gurih dan renyah.", img:"https://i.pravatar.cc/100?u=budi" },
-  { name:"Siti", kota:"Lamongan", text:"Pesan online mudah, respon WA cepat.", img:"https://i.pravatar.cc/100?u=siti" }
-];
-
-// =======================
-// NOTIFIKASI PEMBELIAN
-window.NOTIFIKASI = [
-  { nama:"Budi", kota:"Surabaya", produk:"Keripik Pisang" },
-  { nama:"Ani", kota:"Gresik", produk:"Kacang Gurih" },
-  { nama:"Rina", kota:"Sidoarjo", produk:"Corn Milk Drink" }
-];
