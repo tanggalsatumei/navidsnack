@@ -22,101 +22,104 @@
   --success:#2d6a4f;--danger:#d00000;--glass:rgba(255,255,255,0.7);
   --radius:12px;--shadow:0 8px 24px rgba(17,24,39,0.08);--maxw:1200px;
 }
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-  background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;
-}
-
-/* Dark mode overrides (toggle class on body) */
 body.dark-mode{
   --bg:#071021;--surface:#0f1724;--muted:#9aa6b2;--text:#e6eef4;
   --brand:#071127;--accent:#ffb703;--accent-2:#ff9f1c;--soft:#081226;
 }
 
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  background:var(--bg);color:var(--text);line-height:1.5;
+}
+
+/* Promo marquee */
+.promo-marquee{
+  background:linear-gradient(90deg,#ff4800,#ffb703);
+  color:#fff;font-weight:800;padding:8px 0;text-align:center;
+}
+.promo-marquee marquee{font-size:16px;letter-spacing:.5px}
+
 /* Header */
-header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
+header{position:sticky;top:0;z-index:1000;background:var(--brand);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
 .logo img{width:36px;height:36px;border-radius:8px;background:var(--soft);padding:4px}
 nav{margin-left:auto;display:flex;align-items:center;gap:16px}
-nav ul{display:flex;gap:16px;margin:0;padding:0;list-style:none}
+nav ul{display:flex;gap:16px;list-style:none}
 nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .menu-toggle{display:none;background:none;border:1px solid rgba(255,183,3,0.12);color:var(--accent);padding:8px;border-radius:8px;cursor:pointer}
 .btn-toggle{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--accent);padding:8px 10px;border-radius:10px;cursor:pointer}
 
-/* Side menu (mobile) */
-.side-menu{position:fixed;top:0;left:-100%;width:78%;height:100%;background:var(--brand);color:var(--accent);padding:22px;transition:left .28s;z-index:1300;overflow:auto}
-.side-menu.active{left:0}
-.side-menu .close-btn{background:none;border:none;color:var(--accent);font-size:28px;position:absolute;top:12px;right:18px;cursor:pointer}
-.side-menu ul{list-style:none;padding:40px 0 0 0;margin:0}
-.side-menu li{margin:14px 0}
-
-/* hero */
-#hero{position:relative;height:70vh;min-height:360px;overflow:hidden;border-bottom:1px solid rgba(15,23,36,0.06)}
+/* Hero slider */
+#hero{position:relative;height:70vh;min-height:360px;overflow:hidden}
 .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s}
 .slide.active{opacity:1}
 .slide::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.35),rgba(2,6,23,0.12))}
-.slide-content{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:28px;color:var(--accent);display:flex;gap:24px;align-items:center;justify-content:center}
-.slide-text h1{margin:0;font-size:34px;color:#fff}
+.slide-content{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:28px;color:var(--accent);display:flex;gap:24px;align-items:center;justify-content:center;flex-wrap:wrap}
+.slide-text h1{margin:0;font-size:34px;color:#fff;text-align:center}
+.slide-text p{color:#eee;text-align:center}
+.hero-cta{text-align:center;margin-top:12px}
 .btn{background:var(--accent);color:var(--brand);border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(251,133,0,0.12)}
-.dots{position:absolute;bottom:18px;width:100%;text-align:center;z-index:3}
-.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.6);margin:0 6px;cursor:pointer;opacity:.7}
-.dot.active{background:var(--accent-2);opacity:1}
-.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:20px}
+.arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:20px;z-index:3}
 .arrow-left{left:18px}.arrow-right{right:18px}
 
-/* layout & cards */
+/* Layout umum */
 .container{max-width:var(--maxw);margin:0 auto;padding:28px}
-.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;color:var(--brand)}
+
+/* Produk */
 .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.card{background:var(--surface);padding:14px;border-radius:12px;box-shadow:var(--shadow);position:relative;overflow:visible;border:1px solid rgba(2,6,23,0.04)}
-.img-wrapper{position:relative;border-radius:10px;overflow:hidden}
-.card img{display:block;width:100%;height:220px;object-fit:cover;cursor:pointer}
-.promo-label{position:absolute;top:12px;left:12px;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;padding:6px 8px;border-radius:8px;font-weight:800;font-size:12px;z-index:5}
-.countdown-overlay{position:absolute;left:0;right:0;bottom:0;background:rgba(255,183,3,0.95);color:#071123;padding:6px 8px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;font-weight:700;font-size:13px;text-align:center;z-index:6}
+.card{background:var(--surface);padding:14px;border-radius:12px;box-shadow:var(--shadow);position:relative;border:1px solid rgba(2,6,23,0.04);display:flex;flex-direction:column;justify-content:space-between}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:10px;cursor:pointer}
+.promo-label{position:absolute;top:12px;left:12px;background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#fff;padding:6px 8px;border-radius:8px;font-weight:800;font-size:12px}
+.countdown-overlay{position:absolute;left:0;right:0;bottom:0;background:rgba(255,183,3,0.95);color:#071123;padding:6px 8px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;font-weight:700;font-size:13px;text-align:center}
 .price-row{display:flex;gap:8px;align-items:center;justify-content:center;margin:8px 0}
 .price-old{text-decoration:line-through;color:var(--muted);font-size:13px}
 .price-new{color:var(--danger);font-weight:800}
-.stars{color:#f6c453;margin-bottom:8px}
+.stars{color:#f6c453;margin-bottom:8px;text-align:center}
 
-/* gallery -> slider */
+/* Gallery slider */
 .gallery-slider{position:relative;overflow:hidden}
 .gallery-track{display:flex;transition:transform .45s ease}
 .gallery-slide{min-width:260px;margin:8px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);flex-shrink:0}
 .gallery-slide img{width:100%;height:220px;object-fit:cover;display:block}
+.gallery-nav{position:absolute;top:40%;width:100%;display:flex;justify-content:space-between;pointer-events:none}
+.gallery-nav button{pointer-events:auto;background:rgba(0,0,0,0.4);border:none;color:#fff;font-size:28px;padding:8px;border-radius:8px;cursor:pointer}
 
-/* lightbox */
+/* Lightbox */
 .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,7,18,0.85);z-index:1400}
 .lightbox img{max-width:92%;max-height:86%;border-radius:12px;box-shadow:0 20px 50px rgba(2,6,23,0.6)}
 .lightbox .close-light{position:absolute;top:18px;right:28px;color:#fff;font-size:28px;cursor:pointer}
 .lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:40px;padding:8px;cursor:pointer}
 .lightbox .prev{left:12px}.lightbox .next{right:12px}
 
-/* testimonial slider */
+/* Testimonial slider */
 .testimonial-wrap{position:relative;padding:14px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
 .testimonial-track{display:flex;transition:transform .45s ease}
 .testimonial-card{min-width:300px;padding:16px;text-align:center;flex-shrink:0}
 .testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
+.testimonial-nav{text-align:center;margin-top:12px}
+.testimonial-nav .btn{margin:0 8px}
 
-/* cart & floats */
-.whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
-.whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
-.floating-cart{position:fixed;bottom:86px;right:26px;z-index:1301;background:var(--accent);width:56px;height:56px;border-radius:14px;display:none;align-items:center;justify-content:center;font-weight:800;color:var(--brand);cursor:pointer;box-shadow:0 10px 30px rgba(15,23,36,0.12)}
-.cart-badge{position:absolute;top:-8px;right:-8px;background:var(--danger);color:#fff;padding:4px 7px;border-radius:999px;font-size:12px}
-.cart-panel{position:fixed;top:0;right:-420px;width:380px;height:100%;background:var(--bg);box-shadow:-20px 0 40px rgba(2,6,23,0.12);transition:right .35s;padding:20px;z-index:1350;overflow:auto}
-.cart-panel.active{right:0}
-.close-cart{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer}
+/* Quick order */
+.quick-order{display:grid;gap:12px;background:var(--surface);padding:20px;border-radius:12px;box-shadow:var(--shadow);max-width:600px}
+.quick-order input,.quick-order select,.quick-order textarea{padding:10px;border:1px solid rgba(2,6,23,0.15);border-radius:8px;width:100%}
+.quick-order button{justify-self:start}
 
-/* responsive */
+/* Feed */
+.feed-grid{display:grid;grid-template-columns:30% 70%;gap:20px}
+.feed-grid>div{background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)}
+
+/* Responsive */
 @media(max-width:900px){
-  .slide-content{flex-direction:column;text-align:center}
-  .slide-content img{width:160px;height:160px}
-  .menu-toggle{display:inline-block}
   nav ul{display:none}
+  .menu-toggle{display:inline-block}
+  .slide-content{flex-direction:column;text-align:center}
   .gallery-slide{min-width:220px}
   .testimonial-card{min-width:260px}
+  .feed-grid{grid-template-columns:1fr;gap:16px}
 }
+
 </style>
 </head>
 <body>
@@ -299,9 +302,6 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
    - uses window.SITE, window.SLIDES, window.PRODUCTS, window.GALLERY, window.TESTIMONIALS, window.NOTIFIKASI
    ============= */
 
-/* -------------------------
-   Helper selectors (unchanged)
-   -------------------------*/
 const $ = s=>document.querySelector(s);
 const $$ = s=>Array.from(document.querySelectorAll(s));
 
@@ -313,32 +313,30 @@ function applySiteMeta(){
   const site = window.SITE;
   const brand = site.brand || document.title;
   $('#pageTitle').textContent = brand + (brand.includes('Navid')? '' : ' — Navid Snack');
-  $('#metaDescription').setAttribute('content', (site.description || $('#metaDescription').getAttribute('content')));
-  $('#metaKeywords').setAttribute('content', (site.keywords || $('#metaKeywords').getAttribute('content')));
+  $('#metaDescription').setAttribute('content', site.description || '');
+  $('#metaKeywords').setAttribute('content', site.keywords || '');
   $('#siteBrand').textContent = site.brand || 'Navid Snack';
   $('#footerBrand').textContent = site.brand || 'Navid Snack';
   $('#siteLogo').src = site.img || $('#siteLogo').src;
   $('#favicon').href = site.img || $('#favicon').href;
   $('#waLink').href = site.wa ? `https://wa.me/${site.wa}` : $('#waLink').href;
   $('#footerAddr').textContent = 'Alamat: ' + (site.alamat || '');
-  // certificates
+
   const certRow = $('#certRow');
   certRow.innerHTML = '';
   (site.sertifikat || []).forEach(c=>{
     const img = document.createElement('img');
-    img.src = c.src; img.alt = c.alt; img.style.height='40px'; img.style.borderRadius='6px';
-    img.loading = 'lazy';
+    img.src = c.src; img.alt = c.alt; img.style.height='40px'; img.style.borderRadius='6px'; img.loading = 'lazy';
     certRow.appendChild(img);
   });
 
-  // OG meta
   $('#ogTitle').setAttribute('content', site.brand || document.title);
-  $('#ogDesc').setAttribute('content', site.description || $('#metaDescription').getAttribute('content'));
-  $('#ogImage').setAttribute('content', site.img || $('#ogImage').getAttribute('content'));
+  $('#ogDesc').setAttribute('content', site.description || '');
+  $('#ogImage').setAttribute('content', site.img || '');
 }
 
 /* ======================
-   HERO SLIDER (dynamic)
+   HERO SLIDER
    ====================== */
 let slides = [], dots = [], slideCur = 0, slideTimer = null;
 function renderHero(){
@@ -346,45 +344,34 @@ function renderHero(){
   const dotsWrap = $('#heroDots');
   container.innerHTML = '';
   dotsWrap.innerHTML = '';
-  const data = window.SLIDES || [];
-  data.forEach((s,i)=>{
+  (window.SLIDES || []).forEach((s,i)=>{
     const slide = document.createElement('div');
     slide.className = 'slide' + (i===0?' active':'');
     slide.style.backgroundImage = `url('${s.bg}')`;
-    slide.setAttribute('role','img');
-    slide.setAttribute('aria-label', s.title||('Slide '+(i+1)));
     slide.innerHTML = `
       <div class="slide-content">
         <img src="${s.img}" alt="${s.title}" loading="lazy"/>
         <div class="slide-text">
           <h1>${s.title}</h1>
           <p>${s.text || ''}</p>
-          ${ s.cta ? `<div class="hero-cta"><a href="${s.cta.link}" class="btn" aria-label="${s.cta.text}">${s.cta.text}</a></div>` : '' }
+          ${ s.cta ? `<div class="hero-cta"><a href="${s.cta.link}" class="btn">${s.cta.text}</a></div>` : '' }
         </div>
-      </div>
-    `;
+      </div>`;
     container.appendChild(slide);
-
     const dot = document.createElement('span');
     dot.className = 'dot' + (i===0?' active':'');
     dot.addEventListener('click', ()=> showSlide(i));
     dotsWrap.appendChild(dot);
   });
-  slides = $$('.slide');
-  dots = $$('.dot');
-  slideCur = 0;
+  slides = $$('.slide'); dots = $$('.dot'); slideCur = 0;
   if(slideTimer) clearInterval(slideTimer);
   slideTimer = setInterval(nextSlide, 6000);
 }
-function showSlide(n){
-  slideCur = (n+slides.length)%slides.length;
-  slides.forEach((s,i)=>s.classList.toggle('active', i===slideCur));
-  dots.forEach((d,i)=>d.classList.toggle('active', i===slideCur));
-}
+function showSlide(n){ slideCur = (n+slides.length)%slides.length; slides.forEach((s,i)=>s.classList.toggle('active',i===slideCur)); dots.forEach((d,i)=>d.classList.toggle('active',i===slideCur)); }
 function nextSlide(){ showSlide(slideCur+1) }
 function prevSlide(){ showSlide(slideCur-1) }
 
-/* ====== SIDE MENU (HAMBURGER) - unchanged name ====== */
+/* ====== SIDE MENU ====== */
 function toggleMenu(){
   const menu = $('#sideMenu');
   const isActive = menu.classList.toggle('active');
@@ -392,360 +379,173 @@ function toggleMenu(){
 }
 document.addEventListener('click', (e)=>{
   const side = $('#sideMenu');
-  const btn = e.target.closest('.menu-toggle')!==null;
-  if(!btn && side.classList.contains('active') && !e.target.closest('.side-menu')) {
-    side.classList.remove('active');
-    side.setAttribute('aria-hidden','true');
+  if(!e.target.closest('.menu-toggle') && side.classList.contains('active') && !e.target.closest('.side-menu')){
+    side.classList.remove('active'); side.setAttribute('aria-hidden','true');
   }
 });
 
-/* ====== DARK MODE (with localStorage) ====== */
+/* ====== DARK MODE ====== */
 function applyDarkModeFromStorage(){
   const val = localStorage.getItem('navid_darkmode');
-  if(val === '1') document.body.classList.add('dark-mode');
+  if(val==='1') document.body.classList.add('dark-mode');
   else document.body.classList.remove('dark-mode');
-  const t = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-  $$('.btn-toggle').forEach(b=>b.textContent = t);
+  $$('.btn-toggle').forEach(b=>b.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙');
 }
 function toggleDarkMode(){
   document.body.classList.toggle('dark-mode');
   const active = document.body.classList.contains('dark-mode');
-  localStorage.setItem('navid_darkmode', active ? '1' : '0');
-  const t = active ? '☀️' : '🌙';
-  $$('.btn-toggle').forEach(b=>b.textContent = t);
+  localStorage.setItem('navid_darkmode', active?'1':'0');
+  $$('.btn-toggle').forEach(b=>b.textContent = active ? '☀️':'🌙');
 }
 
 /* ============================
-   PRODUCTS (render from PRODUCTS)
+   PRODUCTS + COUNTDOWN PROMO
    ============================ */
 function formatRupiah(v){ if(!v) return ''; return 'Rp ' + Number(v).toLocaleString('id-ID'); }
+
+function isPromoActive(p){
+  const now = new Date();
+  let startDate = p.tglPromoStart? new Date(p.tglPromoStart+'T00:00') : null;
+  let endDate = p.tglPromoEnd? new Date(p.tglPromoEnd+'T23:59') : null;
+  if(p.tglPromoStart && !p.tglPromoEnd) endDate = new Date(p.tglPromoStart+'T23:59');
+
+  // jika hanya jam
+  if(!p.tglPromoStart && !p.tglPromoEnd && p.jamPromoStart && p.jamPromoEnd){
+    const [sh,sm] = p.jamPromoStart.split(':').map(Number);
+    const [eh,em] = p.jamPromoEnd.split(':').map(Number);
+    const start = new Date(); start.setHours(sh,sm,0,0);
+    const end = new Date(); end.setHours(eh,em,0,0);
+    if(end < start) end.setDate(end.getDate()+1); // melewati tengah malam
+    return now>=start && now<=end;
+  }
+
+  if(startDate && endDate){
+    if(now<startDate || now>endDate) return false;
+    // jika ada jam juga
+    if(p.jamPromoStart && p.jamPromoEnd){
+      const [sh,sm] = p.jamPromoStart.split(':').map(Number);
+      const [eh,em] = p.jamPromoEnd.split(':').map(Number);
+      const start = new Date(now); start.setHours(sh,sm,0,0);
+      const end = new Date(now); end.setHours(eh,em,0,0);
+      if(end < start) end.setDate(end.getDate()+1);
+      return now>=start && now<=end;
+    }
+    return true;
+  }
+  return false;
+}
 
 function renderProducts(){
   const grid = $('#productsGrid');
   grid.innerHTML = '';
-  const prods = window.PRODUCTS || [];
-  prods.forEach(p=>{
+  (window.PRODUCTS || []).forEach(p=>{
     const art = document.createElement('article');
     art.className = 'card';
-    art.setAttribute('data-name', p.name);
-    art.setAttribute('data-price', p.price);
-    art.setAttribute('data-oldprice', p.oldPrice || '');
-    art.setAttribute('data-stock', p.stock || 0);
-    art.setAttribute('data-promo', p.promo ? 'true' : 'false');
-    art.setAttribute('data-desc', p.desc || '');
-    art.setAttribute('data-img', p.img || '');
+    const active = isPromoActive(p);
     art.innerHTML = `
       <div class="img-wrapper">
-        <img src="${p.img}" alt="${p.name} Navid Snack" loading="lazy" onclick="openProductModal(this)">
-        ${p.promo ? '<div class="promo-label">PROMO</div>' : ''}
-        ${p.promo ? `<div class="countdown-overlay" data-cid>Promo sampai ${p.jamPromoEnd || ''}</div>` : ''}
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openProductModal(this)">
+        ${active ? '<div class="promo-label">PROMO</div>' : ''}
+        ${active ? `<div class="countdown-overlay" data-cid></div>` : ''}
       </div>
       <h3>${p.name}</h3>
       <div class="price-row">
         <span class="price-old">${p.oldPrice? formatRupiah(p.oldPrice) : ''}</span>
         <span class="price-new">${formatRupiah(p.price)}</span>
       </div>
-      <div class="stars" aria-hidden="true">${'★★★★★'.slice(0, p.rating || 5)}</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
+      <div class="stars">${'★★★★★'.slice(0, p.rating || 5)}</div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-top:8px">
         <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
         <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('${escapeQuotes(p.name)}',${p.price})">Pesan Cepat</button>
       </div>
     `;
     grid.appendChild(art);
+    if(active) startCountdown(art.querySelector('[data-cid]'), p);
   });
 
-  // populate quick order select
   const qSel = $('#qProduct');
   qSel.innerHTML = '<option value="">Pilih produk...</option>';
-  prods.forEach(p=> qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`));
+  (window.PRODUCTS||[]).forEach(p=> qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`));
 }
 
-// helper to escape single quotes in onclick inline string
+function startCountdown(el, p){
+  function update(){
+    const now = new Date();
+    let end = p.tglPromoEnd? new Date(p.tglPromoEnd+'T23:59') : p.tglPromoStart? new Date(p.tglPromoStart+'T23:59') : null;
+    if(p.jamPromoEnd){
+      const [eh,em] = p.jamPromoEnd.split(':').map(Number);
+      end = new Date(); end.setHours(eh,em,0,0);
+      if(p.jamPromoStart && p.jamPromoEnd){
+        const [sh,sm] = p.jamPromoStart.split(':').map(Number);
+        const start = new Date(); start.setHours(sh,sm,0,0);
+        if(end<start) end.setDate(end.getDate()+1);
+      }
+    }
+    if(!end || now>end){ el.textContent='Promo berakhir'; return; }
+    const diff = end-now;
+    if(diff<=0){ el.textContent='Promo berakhir'; return; }
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    el.textContent = `Berakhir: ${h}j ${m}m ${s}d`;
+  }
+  update(); setInterval(update,1000);
+}
+
 function escapeQuotes(s){ return (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 
 /* ============================
-   CART (persist in localStorage)
+   CART (localStorage)
    ============================ */
-let cart = []; // {name, price, qty, stock}
-const floatingCartBtn = $('#floatingCart');
-const cartBadge = $('#cartBadge');
-const cartItemsWrap = $('#cartItems');
-const cartTotalEl = $('#cartTotal');
-
-function loadCartFromStorage(){
-  try{
-    const raw = localStorage.getItem('navid_cart');
-    if(raw) cart = JSON.parse(raw);
-    else cart = [];
-  }catch(e){ cart = []; }
-  renderCart();
-  if(cart.length===0) floatingCartBtn.style.display='none';
-  else floatingCartBtn.style.display='flex';
-}
+let cart=[]; const floatingCartBtn=$('#floatingCart'),cartBadge=$('#cartBadge'),cartItemsWrap=$('#cartItems'),cartTotalEl=$('#cartTotal');
+function loadCartFromStorage(){ try{cart=JSON.parse(localStorage.getItem('navid_cart')||'[]')}catch{cart=[]} renderCart(); floatingCartBtn.style.display = cart.length?'flex':'none'; }
 function saveCartToStorage(){ localStorage.setItem('navid_cart', JSON.stringify(cart)); }
-
-function addToCart(btn){
-  const card = btn.closest('.card');
-  addProductToCartFromCard(card);
-}
+function addToCart(btn){ addProductToCartFromCard(btn.closest('.card')); }
 function addProductToCartFromCard(card){
-  const name = card.dataset.name;
-  const price = Number(card.dataset.price || 0);
-  const stock = Number(card.dataset.stock || 999);
-  let found = cart.find(x=>x.name===name);
-  if(found){
-    if(found.qty+1 > stock){ showToast('Stok tidak cukup untuk ' + name); return; }
-    found.qty++;
-  } else {
-    cart.push({name, price, qty:1, stock});
-  }
-  saveCartToStorage();
-  renderCart();
-  showToast(name + ' ditambahkan ke keranjang');
-  floatingCartBtn.style.display = 'flex';
+  const name=card.querySelector('h3').textContent, price=Number(card.dataset.price||0)||Number(card.getAttribute('data-price')||0)||Number(card.dataset.price||0)||0;
+  let found=cart.find(x=>x.name===name); if(found) found.qty++; else cart.push({name,price,qty:1,stock:99});
+  saveCartToStorage(); renderCart(); floatingCartBtn.style.display='flex'; showToast(name+' ditambahkan');
 }
-function addToCartFromModal(){
-  const name = $('#modalName').textContent;
-  const priceText = $('#modalPrice').getAttribute('data-price') || $('#modalPrice').textContent.replace(/[^0-9]/g,'') || 0;
-  const price = Number(priceText);
-  let found = cart.find(x=>x.name===name);
-  if(found) found.qty++;
-  else cart.push({name, price, qty:1, stock:99});
-  saveCartToStorage();
-  renderCart();
-  showToast(name + ' ditambahkan ke keranjang');
-  floatingCartBtn.style.display = 'flex';
-  closeProductModal();
+function renderCart(){ if(!cartItemsWrap) return; cartItemsWrap.innerHTML=''; let total=0;
+  cart.forEach((it,i)=>{ total+=it.price*it.qty; cartItemsWrap.insertAdjacentHTML('beforeend',`
+  <div class="cart-item" style="padding:10px 0">
+    <strong>${it.name}</strong><div style="margin-top:6px">Rp ${it.price.toLocaleString('id-ID')} 
+    <button onclick="decQty(${i})">-</button>
+    <input type="number" value="${it.qty}" min="1" style="width:56px" onchange="setQty(${i}, this.value)">
+    <button onclick="incQty(${i})">+</button> = <strong>Rp ${(it.price*it.qty).toLocaleString('id-ID')}</strong>
+    <button style="float:right;background:transparent;border:none;color:var(--danger)" onclick="removeItem(${i})">Hapus</button></div>
+  </div>`); });
+  cartTotalEl.textContent=total.toLocaleString('id-ID'); cartBadge.textContent = cart.reduce((s,i)=>s+i.qty,0);
 }
-
-function renderCart(){
-  if(!cartItemsWrap) return;
-  cartItemsWrap.innerHTML = '';
-  let total = 0;
-  cart.forEach((it, i) => {
-    total += it.price * it.qty;
-    const div = document.createElement('div');
-    div.className = 'cart-item';
-    div.style.padding = '10px 0';
-    div.innerHTML = `
-      <strong>${it.name}</strong><div style="margin-top:6px">Rp ${it.price.toLocaleString('id-ID')} &nbsp;
-      <button onclick="decQty(${i})">-</button>
-      <input type="number" value="${it.qty}" min="1" style="width:56px" onchange="setQty(${i}, this.value)">
-      <button onclick="incQty(${i})">+</button>
-      &nbsp; = <strong>Rp ${(it.price*it.qty).toLocaleString('id-ID')}</strong>
-      <button style="float:right;background:transparent;border:none;color:var(--danger);cursor:pointer" onclick="removeItem(${i})">Hapus</button>
-      </div>
-    `;
-    cartItemsWrap.appendChild(div);
-  });
-  cartTotalEl.textContent = total.toLocaleString('id-ID');
-  cartBadge.textContent = cart.reduce((s,i)=>s+i.qty,0);
-}
-
-function incQty(i){ if(cart[i].qty < cart[i].stock) cart[i].qty++; saveCartToStorage(); renderCart(); }
-function decQty(i){ if(cart[i].qty > 1) cart[i].qty--; saveCartToStorage(); renderCart(); }
-function setQty(i, val){ let q = Number(val); if(isNaN(q) || q<1) q=1; if(q>cart[i].stock){ showToast('Melebihi stok tersedia'); q = cart[i].stock; } cart[i].qty = q; saveCartToStorage(); renderCart(); }
-function removeItem(i){ cart.splice(i,1); saveCartToStorage(); renderCart(); if(cart.length===0){ floatingCartBtn.style.display='none'; } }
-function clearCart(){ cart=[]; saveCartToStorage(); renderCart(); toggleCart(); showToast('Keranjang dibersihkan'); floatingCartBtn.style.display='none'; }
-
+function incQty(i){ cart[i].qty++; saveCartToStorage(); renderCart(); }
+function decQty(i){ if(cart[i].qty>1) cart[i].qty--; saveCartToStorage(); renderCart(); }
+function setQty(i,v){ let q=Number(v); if(isNaN(q)||q<1) q=1; cart[i].qty=q; saveCartToStorage(); renderCart(); }
+function removeItem(i){ cart.splice(i,1); saveCartToStorage(); renderCart(); if(cart.length===0) floatingCartBtn.style.display='none'; }
 function toggleCart(){ $('#cartPanel').classList.toggle('active'); }
 
-/* ====== CHECKOUT via WA (uses SITE.wa) ====== */
-function checkout(){
-  if(cart.length===0){ showToast('Keranjang masih kosong'); return; }
-  let msg = 'Halo, saya ingin pesan:%0A';
-  let subtotal = 0;
-  cart.forEach(it=>{
-    msg += `${it.name} x ${it.qty} = Rp ${ (it.price*it.qty).toLocaleString('id-ID') }%0A`;
-    subtotal += it.price * it.qty;
-  });
-  msg += `%0ASubtotal: Rp ${subtotal.toLocaleString('id-ID')} (belum termasuk ongkir)`;
-  const wa = (window.SITE && window.SITE.wa) ? window.SITE.wa : '6281234567890';
-  window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(msg));
-}
+/* CHECKOUT via WA */
+function checkout(){ if(!cart.length) return; let msg='Halo, saya ingin pesan:%0A'; let total=0; cart.forEach(it=>{msg+=`${it.name} x${it.qty} = Rp${(it.price*it.qty).toLocaleString('id-ID')}%0A`;total+=it.price*it.qty}); msg+=`Total: Rp${total.toLocaleString('id-ID')}`; const wa=(window.SITE&&window.SITE.wa)||'6281234567890'; window.open('https://wa.me/'+wa+'?text='+encodeURIComponent(msg)); }
 
-/* ====== QUICK ORDER FORM ====== */
-function quickOrderPref(name, price){
-  $('#qProduct').value = `${name}|${price}`;
-  $('#qQty').value = 1;
-  $('#qName').focus();
-  window.scrollTo({top:document.getElementById('quickOrderForm').offsetTop-80,behavior:'smooth'});
-}
-function submitQuickOrder(e){
-  e.preventDefault();
-  const name = $('#qName').value.trim(), wa = $('#qWA').value.trim(), addr = $('#qAddr').value.trim();
-  const prod = $('#qProduct').value, qty = Number($('#qQty').value), note = $('#qNote').value;
-  if(!prod){ showToast('Pilih produk'); return; }
-  const [pname,pprice] = prod.split('|'); const subtotal = Number(pprice)*qty;
-  let text = `Halo, saya *${name}* ingin memesan:%0A- ${pname} x ${qty} = Rp ${subtotal}%0AAlamat: ${addr}%0ANo WA: ${wa}%0ANote: ${note||'-'}%0A(Subtotal belum termasuk ongkir)`;
-  const waNum = (window.SITE && window.SITE.wa) ? window.SITE.wa : '6281234567890';
-  window.open('https://wa.me/' + waNum + '?text=' + encodeURIComponent(text));
-}
+/* QUICK ORDER */
+function quickOrderPref(name,price){ $('#qProduct').value=`${name}|${price}`; $('#qQty').value=1; $('#qName').focus(); window.scrollTo({top:$('#quickOrderForm').offsetTop-80,behavior:'smooth'}); }
 
-/* ====== TOAST notification ====== */
-function showToast(text, delay = 4000){
-  const t = document.createElement('div'); t.className='toast';
-  t.style.opacity = '1';
-  t.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" style="opacity:.9;margin-right:8px"><circle cx="12" cy="12" r="10" fill="#ffcf6b"/></svg><div>${text}</div>`;
-  $('#toastPlace').appendChild(t);
-  setTimeout(()=>{ t.style.transition='opacity .5s'; t.style.opacity=0; t.addEventListener('transitionend', ()=>t.remove()); }, delay);
-}
-const salesSamples = (window.NOTIFIKASI || []).map(n=>[n.nama,n.kota,n.produk]);
-if(salesSamples.length>0) setInterval(()=>{ const s = salesSamples[Math.floor(Math.random()*salesSamples.length)]; showToast(`${s[0]} dari ${s[1]} baru saja membeli ${s[2]}`); }, 14000);
+/* TOAST */
+function showToast(text){ const t=document.createElement('div'); t.className='toast'; t.textContent=text; $('#toastPlace').appendChild(t); setTimeout(()=>t.remove(),3000); }
 
-/* =========================
-   GALLERY slider & lightbox
-   ========================= */
-let galleryIndex = 0;
-function renderGallery(){
-  const gallery = window.GALLERY || [];
-  const track = $('#galleryTrack');
-  track.innerHTML = '';
-  // render slides (duplicate to make wrap feel continuous)
-  const slidesToRender = gallery.concat(gallery).concat(gallery); // tripled for smoother swipe wrap
-  slidesToRender.forEach((g,i)=>{
-    const el = document.createElement('div'); el.className = 'gallery-slide';
-    el.innerHTML = `<img src="${g.src}" alt="${g.alt||''}" loading="lazy" data-original-index="${i % gallery.length}" onclick="openLightboxByIndex(${i % gallery.length})">`;
-    track.appendChild(el);
-  });
-  // track width handled by CSS flex; start in middle group so prev/next can move
-  galleryIndex = gallery.length; // middle
-  updateGalleryTransform();
-}
-function updateGalleryTransform(){
-  const track = $('#galleryTrack');
-  const slideW = track.querySelector('.gallery-slide') ? track.querySelector('.gallery-slide').offsetWidth + 16 : 260;
-  track.style.transform = `translateX(-${galleryIndex * (slideW)}px)`;
-}
-function prevGallery(){ galleryIndex = (galleryIndex - 1 + $('#galleryTrack').children.length) % $('#galleryTrack').children.length; updateGalleryTransform(); }
-function nextGallery(){ galleryIndex = (galleryIndex + 1) % $('#galleryTrack').children.length; updateGalleryTransform(); }
-function openLightboxByIndex(i){
-  const imgs = (window.GALLERY || []).map(g=>g.src);
-  const idx = i % imgs.length;
-  $('#lightboxImg').src = imgs[idx];
-  $('#lightbox').style.display = 'flex';
-  $('#lightbox').setAttribute('aria-hidden','false');
-}
-function closeLightbox(){ $('#lightbox').style.display = 'none'; $('#lightbox').setAttribute('aria-hidden','true'); }
+/* GALLERY */
+function renderGallery(){ const g=window.GALLERY||[]; const track=$('#galleryTrack'); track.innerHTML=''; g.concat(g).forEach((x,i)=>track.insertAdjacentHTML('beforeend',`<div class="gallery-slide"><img src="${x.src}" loading="lazy" onclick="openLightboxByIndex(${i%g.length})"></div>`)); }
+function openLightboxByIndex(i){ const imgs=(window.GALLERY||[]).map(g=>g.src); $('#lightboxImg').src=imgs[i]; $('#lightbox').style.display='flex'; }
+function closeLightbox(){ $('#lightbox').style.display='none'; }
 
-/* allow swipe on gallery */
-function enableGallerySwipe(){
-  const track = $('#galleryTrack');
-  if(!track) return;
-  let startX = 0, dx = 0, isDown=false;
-  track.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
-  track.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
-  track.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) prevGallery(); else nextGallery(); } dx=0; });
-}
+/* TESTIMONI */
+function renderTestimonials(){ const t=window.TESTIMONIALS||[]; const track=$('#testiTrack'); track.innerHTML=''; t.concat(t).forEach(s=>track.insertAdjacentHTML('beforeend',`<div class="testimonial-card"><img src="${s.img}" alt="${s.name}"><p><strong>${s.name}</strong></p><p>"${s.text}"</p></div>`)); }
 
-/* =========================
-   TESTIMONIAL slider (looping + swipe)
-   ========================= */
-let testiIdx = 0, testiInterval = null;
-function renderTestimonials(){
-  const t = window.TESTIMONIALS || [];
-  const track = $('#testiTrack'); track.innerHTML = '';
-  // clone to allow loop feel
-  const slides = t.concat(t).concat(t);
-  slides.forEach(s=>{
-    const el = document.createElement('div'); el.className = 'testimonial-card';
-    el.innerHTML = `<img src="${s.img}" alt="${s.name}" loading="lazy"/><p><strong>${s.name}, ${s.kota || ''}</strong></p><p>"${s.text}"</p>`;
-    track.appendChild(el);
-  });
-  testiIdx = t.length; updateTestiTransform();
-  if(testiInterval) clearInterval(testiInterval);
-  testiInterval = setInterval(testiNext, 5000);
-}
-function updateTestiTransform(){
-  const track = $('#testiTrack');
-  const width = track.querySelector('.testimonial-card') ? track.querySelector('.testimonial-card').offsetWidth : 300;
-  track.style.transform = `translateX(-${testiIdx * width}px)`;
-}
-function testiNext(){ testiIdx = (testiIdx + 1) % $('#testiTrack').children.length; updateTestiTransform(); }
-function testiPrev(){ testiIdx = (testiIdx - 1 + $('#testiTrack').children.length) % $('#testiTrack').children.length; updateTestiTransform(); }
-function enableTestiSwipe(){
-  const track = $('#testiTrack');
-  if(!track) return;
-  let startX = 0, dx = 0, isDown=false;
-  track.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
-  track.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
-  track.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) testiPrev(); else testiNext(); } dx=0; });
-}
-
-/* =========================
-   PRODUCT MODAL (unchanged names)
-   ========================= */
-function openProductModal(imgEl){
-  const card = imgEl.closest('.card');
-  $('#modalImg').src = card.dataset.img || imgEl.src;
-  $('#modalName').textContent = card.dataset.name || '';
-  $('#modalDesc').textContent = card.dataset.desc || '';
-  const price = card.dataset.price || '';
-  $('#modalPrice').textContent = price ? formatRupiah(price) : '';
-  $('#modalPrice').setAttribute('data-price', price || '');
-  $('#productModal').style.display = 'flex';
-}
-function closeProductModal(){ $('#productModal').style.display = 'none'; }
-
-/* ====== INSTAGRAM embed (kept as-is: uses array igUrls in original file or you can set in data.js) */
-(function renderRandomIG(){
-  const container = $('#igEmbedContainer');
-  if(!container) return;
-  const igUrls = window.IG_URLS || [
-    // fallback placeholders; you can put actual embed URLs into window.IG_URLS in data.js
-  ];
-  const url = igUrls.length ? igUrls[Math.floor(Math.random()*igUrls.length)] : '';
-  if(!url || !url.includes('/p/')){
-    container.innerHTML = `<div style="padding:20px;background:var(--surface);border-radius:8px">Silakan ganti array <code>IG_URLS</code> di <code>data.js</code> dengan URL embed post dari akun Instagram Anda</div>`;
-    return;
-  }
-  const block = document.createElement('blockquote'); block.className = 'instagram-media'; block.setAttribute('data-instgrm-permalink', url.replace('/embed','')); block.style = "width:100%;max-width:540px";
-  block.innerHTML = `<a href="${url.replace('/embed','')}" target="_blank" rel="noopener noreferrer">Lihat di Instagram</a>`;
-  container.appendChild(block);
-  if(window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === 'function'){
-    try{ window.instgrm.Embeds.process(); }catch(e){ /* ignore */ }
-  }
-})();
-
-/* ==============
-   INIT / on DOM ready
-   ============== */
-window.addEventListener('DOMContentLoaded', ()=>{
-  applySiteMeta();     // update title, logos, OG
-  renderHero();        // hero from SLIDES
-  renderProducts();    // render products grid from PRODUCTS
-  renderGallery();     // render gallery slider from GALLERY
-  renderTestimonials();// render testimonials slider
-  enableGallerySwipe();
-  enableTestiSwipe();
-  applyDarkModeFromStorage();
-  loadCartFromStorage();
-
-  // Ensure floating cart hidden if empty
-  if(cart.length===0) floatingCartBtn.style.display = 'none';
-
-  // responsive transform update after images load
-  setTimeout(()=>{ updateGalleryTransform(); updateTestiTransform(); }, 300);
-
-  // expose some globals (keeps original names)
-  window.slides = slides;
-  window.nextSlide = nextSlide;
-  window.prevSlide = prevSlide;
+/* INIT */
+window.addEventListener('DOMContentLoaded',()=>{
+  applySiteMeta(); renderHero(); renderProducts(); renderGallery(); renderTestimonials();
+  applyDarkModeFromStorage(); loadCartFromStorage();
 });
-
-/* Accessibility: ESC to close modals/side menu */
-document.addEventListener('keydown', (e)=>{
-  if(e.key === 'Escape'){
-    closeLightbox();
-    closeProductModal();
-    $('#sideMenu').classList.remove('active');
-  }
-});
-
-/* SCROLL TOP */
-function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
-window.addEventListener('scroll', ()=>{ $('#scrollTopBtn').style.display = (window.scrollY>200)?'inline-block':'none'; });
-
 </script>
+
 </body>
 </html>
