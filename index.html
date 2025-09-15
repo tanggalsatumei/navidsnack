@@ -3,10 +3,18 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Navid Snack — Camilan Sehat & Lezat Lamongan</title>
-<meta name="description" content="Navid Snack - Camilan sehat & lezat dari Lamongan. Pesan cepat via WhatsApp. Halal, higienis, bergizi."/>
-<meta name="keywords" content="navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat"/>
-<link rel="icon" href="assets/logo.png" type="image/png"/>
+<title id="pageTitle">Navid Snack — Camilan Sehat & Lezat Lamongan</title>
+<meta name="description" id="metaDescription" content="Navid Snack - Camilan sehat & lezat dari Lamongan. Pesan cepat via WhatsApp. Halal, higienis, bergizi."/>
+<meta name="keywords" id="metaKeywords" content="navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat"/>
+
+<!-- Open Graph (akan diupdate ke nilai dari data.js setelah data.js dimuat) -->
+<meta property="og:title" content="" id="ogTitle"/>
+<meta property="og:description" content="" id="ogDesc"/>
+<meta property="og:image" content="" id="ogImage"/>
+<meta property="og:type" content="website"/>
+
+<link rel="icon" id="favicon" href="assets/logo.png" type="image/png"/>
+
 <style>
 :root{
   --bg:#fff;--surface:#fbfaf8;--muted:#7b7b7b;--text:#17202a;
@@ -72,11 +80,11 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .price-new{color:var(--danger);font-weight:800}
 .stars{color:#f6c453;margin-bottom:8px}
 
-/* gallery */
-.gallery-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-.gallery-card{width:180px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;background:#fff}
-.gallery-card img{width:100%;height:240px;object-fit:cover;display:block;transition:transform .25s}
-.gallery-card:hover img{transform:scale(1.05)}
+/* gallery -> slider */
+.gallery-slider{position:relative;overflow:hidden}
+.gallery-track{display:flex;transition:transform .45s ease}
+.gallery-slide{min-width:260px;margin:8px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);flex-shrink:0}
+.gallery-slide img{width:100%;height:220px;object-fit:cover;display:block}
 
 /* lightbox */
 .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,7,18,0.85);z-index:1400}
@@ -85,77 +93,40 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:40px;padding:8px;cursor:pointer}
 .lightbox .prev{left:12px}.lightbox .next{right:12px}
 
-/* testimonial */
+/* testimonial slider */
 .testimonial-wrap{position:relative;padding:14px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
-.testimonial-slider{display:flex;transition:transform .45s ease}
-.testimonial-card{min-width:300px;padding:16px;text-align:center}
+.testimonial-track{display:flex;transition:transform .45s ease}
+.testimonial-card{min-width:300px;padding:16px;text-align:center;flex-shrink:0}
 .testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
 
 /* cart & floats */
 .whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
 .whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
-/* floating cart hidden by default; shown when user adds item */
 .floating-cart{position:fixed;bottom:86px;right:26px;z-index:1301;background:var(--accent);width:56px;height:56px;border-radius:14px;display:none;align-items:center;justify-content:center;font-weight:800;color:var(--brand);cursor:pointer;box-shadow:0 10px 30px rgba(15,23,36,0.12)}
 .cart-badge{position:absolute;top:-8px;right:-8px;background:var(--danger);color:#fff;padding:4px 7px;border-radius:999px;font-size:12px}
 .cart-panel{position:fixed;top:0;right:-420px;width:380px;height:100%;background:var(--bg);box-shadow:-20px 0 40px rgba(2,6,23,0.12);transition:right .35s;padding:20px;z-index:1350;overflow:auto}
 .cart-panel.active{right:0}
 .close-cart{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer}
 
-/* quick order */
-.quick-order{display:flex;flex-direction:column;gap:10px;padding:14px;background:var(--surface);border-radius:12px;box-shadow:var(--shadow)}
-.quick-order input,.quick-order textarea,.quick-order select{padding:10px;border-radius:8px;border:1px solid rgba(2,6,23,0.06);font-size:14px}
-.quick-order button{align-self:flex-start}
-
-  .feed-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-.feed-ig, .feed-yt{
-  background:var(--surface);
-  padding:16px;
-  border-radius:12px;
-  box-shadow:var(--shadow);
-}
-#igEmbedContainer blockquote.instagram-media{
-  width:100%!important;max-width:100%!important;
-}
-.yt-wrapper iframe{
-  width:100%;height:315px;
-  border-radius:12px;
-}
-@media(max-width:800px){
-  .feed-grid{grid-template-columns:1fr}
-}
-
-
-/* footer */
-footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
-.footer-grid{display:flex;gap:20px;flex-wrap:wrap;max-width:var(--maxw);margin:0 auto}
-.footer-info{flex:1 1 320px}
-.footer-map{flex:1 1 320px}
-
-/* misc */
-.promo-marquee{background:linear-gradient(90deg,var(--accent-2),var(--accent));color:#071123;padding:8px;text-align:center;font-weight:800}
-.toast{position:fixed;left:18px;bottom:26px;background:rgba(3,7,18,0.95);color:#fff;padding:12px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:1450;display:flex;gap:10px;align-items:center}
-.scroll-top{position:fixed;right:18px;bottom:160px;background:transparent;border:1px solid rgba(2,6,23,0.06);padding:8px;border-radius:10px;cursor:pointer;display:none;z-index:1302}
-
+/* responsive */
 @media(max-width:900px){
   .slide-content{flex-direction:column;text-align:center}
   .slide-content img{width:160px;height:160px}
   .menu-toggle{display:inline-block}
   nav ul{display:none}
+  .gallery-slide{min-width:220px}
+  .testimonial-card{min-width:260px}
 }
 </style>
 </head>
 <body>
 <!-- promo -->
-<div class="promo-marquee" id="promoBar"><marquee behavior="scroll" direction="left">🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥</marquee></div>
+<div class="promo-marquee" id="promoBar"><marquee id="promoText" behavior="scroll" direction="left">🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥</marquee></div>
 
 <!-- header -->
 <header>
   <button class="menu-toggle" onclick="toggleMenu()" aria-label="Buka menu">☰</button>
-  <div class="logo"><img src="assets/logo.png" alt="Navid Snack logo"/><span>Navid Snack</span></div>
+  <div class="logo"><img id="siteLogo" src="assets/logo.png" alt="Navid Snack logo"/><span id="siteBrand">Navid Snack</span></div>
   <nav>
     <ul>
       <li><a href="#hero">Beranda</a></li>
@@ -187,127 +158,23 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
   <button class="arrow arrow-left" onclick="prevSlide()" aria-label="Sebelumnya">❮</button>
   <button class="arrow arrow-right" onclick="nextSlide()" aria-label="Berikutnya">❯</button>
 
-  <div class="slide active" style="background-image:url('assets/bg.jpg')" role="img" aria-label="Navid Snack hero image">
-    <div class="slide-content">
-      <img src="assets/logo.png" alt="Navid Snack product"/>
-      <div class="slide-text">
-        <h1>Navid Snack — Camilan Sehat & Lezat</h1>
-        <p>Snack khas Lamongan, dibuat higienis dan rasa yang konsisten. Pesan langsung via WhatsApp — cepat & mudah.</p>
-        <div class="hero-cta"><a href="https://wa.me/6281234567890" class="btn" aria-label="Hubungi via WhatsApp">Hubungi Sekarang</a></div>
-      </div>
-    </div>
-  </div>
+  <!-- slides will be rendered here -->
+  <div id="slidesContainer"></div>
 
-  <div class="slide" style="background-image:url('assets/bg.jpg')">
-    <div class="slide-content">
-      <img src="assets/logo.png" alt="Promo Navid Snack"/>
-      <div class="slide-text">
-        <h1>Promo Spesial Mingguan</h1>
-        <p>Diskon paket & pengiriman cepat untuk area Deket, Lamongan.</p>
-        <a href="#products" class="btn">Lihat Produk</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="dots">
-    <span class="dot active" onclick="showSlide(0)"></span>
-    <span class="dot" onclick="showSlide(1)"></span>
-  </div>
+  <div class="dots" id="heroDots"></div>
 </section>
 
 <!-- PRODUCTS -->
 <section id="products" class="container" aria-labelledby="productsTitle">
   <div class="section-title"><h2 id="productsTitle">Produk Unggulan</h2></div>
-  <div class="products-grid" id="productsGrid">
-    <!-- Card 1 (promo: true) -->
-    <article class="card" data-name="Keripik Pisang" data-price="15000" data-oldprice="20000" data-stock="3" data-promo="true" data-desc="Keripik pisang renyah khas Navid Snack" data-img="assets/bg.jpg" aria-label="Keripik Pisang">
-      <div class="img-wrapper">
-        <img src="assets/bg.jpg" alt="Keripik Pisang Navid Snack" onclick="openProductModal(this)">
-        <div class="promo-label">PROMO</div>
-        <div class="countdown-overlay" data-cid>Promo sampai 11:00</div>
-      </div>
-      <h3>Keripik Pisang</h3>
-      <div class="price-row">
-        <span class="price-old">Rp 20.000</span>
-        <span class="price-new">Rp 15.000</span>
-      </div>
-      <div class="stars" aria-hidden="true">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Keripik Pisang',15000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-    <!-- Card 2 (promo: false) -->
-    <article class="card" data-name="Kacang Gurih" data-price="22000" data-stock="8" data-promo="false" data-desc="Kacang gurih renyah" data-img="assets/bg.jpg" aria-label="Kacang Gurih">
-      <div class="img-wrapper">
-        <img src="assets/bg.jpg" alt="Kacang Gurih Navid Snack" onclick="openProductModal(this)">
-        <!-- countdown-overlay absent when no promo -->
-      </div>
-      <h3>Kacang Gurih</h3>
-      <div class="price-row">
-        <!-- price-old will be hidden by JS if not promo -->
-        <span class="price-old">Rp 25.000</span>
-        <span class="price-new">Rp 22.000</span>
-      </div>
-      <div class="stars">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Kacang Gurih',22000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-    <!-- Card 3 (promo: false) -->
-    <article class="card" data-name="Corn Milk Drink" data-price="22000" data-stock="8" data-promo="false" data-desc="Corn Milk Drink" data-img="assets/bg.jpg" aria-label="Corn Milk Drink">
-      <div class="img-wrapper">
-        <img src="assets/bg.jpg" alt="Corn Milk Drink Navid Snack" onclick="openProductModal(this)">
-        <!-- countdown-overlay absent when no promo -->
-      </div>
-      <h3>Corn Milk Drink</h3>
-      <div class="price-row">
-        <!-- price-old will be hidden by JS if not promo -->
-        <span class="price-old">Rp 25.000</span>
-        <span class="price-new">Rp 22.000</span>
-      </div>
-      <div class="stars">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Corn Milk Drink',22000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-    <!-- Card 4 (promo: false) -->
-    <article class="card" data-name="Minuman Kemangi" data-price="22000" data-stock="8" data-promo="false" data-desc="Minuman Kemangi" data-img="assets/bg.jpg" aria-label="Minuman Kemangi">
-      <div class="img-wrapper">
-        <img src="assets/bg.jpg" alt="Minuman Kemangi Navid Snack" onclick="openProductModal(this)">
-        <!-- countdown-overlay absent when no promo -->
-      </div>
-      <h3>Minuman Kemangi</h3>
-      <div class="price-row">
-        <!-- price-old will be hidden by JS if not promo -->
-        <span class="price-old">Rp 25.000</span>
-        <span class="price-new">Rp 22.000</span>
-      </div>
-      <div class="stars">★★★★★</div>
-      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
-        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('Minuman Kemangi',22000)">Pesan Cepat</button>
-      </div>
-    </article>
-
-  </div>
+  <div class="products-grid" id="productsGrid"></div>
 </section>
 
 <!-- GALLERY -->
 <section id="gallery" class="container" aria-labelledby="galleryTitle">
   <div class="section-title"><h2 id="galleryTitle">Galeri Produk</h2></div>
-  <div class="gallery-grid" id="galleryGrid">
-    <div class="gallery-card"><img src="assets/bg.jpg" alt="Galeri 1" onclick="openLightboxByIndex(0)"></div>
-    <div class="gallery-card"><img src="assets/logo.jpg" alt="Galeri 2" onclick="openLightboxByIndex(1)"></div>
-    <div class="gallery-card"><img src="assets/bg.jpg" alt="Galeri 3" onclick="openLightboxByIndex(2)"></div>
-    <div class="gallery-card"><img src="assets/logo.jpg" alt="Galeri 4" onclick="openLightboxByIndex(3)"></div>
-    <div class="gallery-card"><img src="assets/bg.jpg" alt="Galeri 5" onclick="openLightboxByIndex(4)"></div>
-    <div class="gallery-card"><img src="assets/logo.jpg" alt="Galeri 6" onclick="openLightboxByIndex(5)"></div>
+  <div class="gallery-slider" id="gallerySlider">
+    <div class="gallery-track" id="galleryTrack"></div>
   </div>
 </section>
 
@@ -324,11 +191,7 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
   <div class="section-title"><h2 id="testiTitle">Testimoni Pelanggan</h2></div>
   <div class="testimonial-wrap">
     <div style="overflow:hidden">
-      <div id="testiSlider" class="testimonial-slider">
-        <div class="testimonial-card"><img src="https://i.pravatar.cc/100?u=a" alt="Foto pelanggan A"/><p><strong>Ani, Surabaya</strong></p><p>"Rasanya enak, pengirimannya cepat. Recomended!"</p></div>
-        <div class="testimonial-card"><img src="https://i.pravatar.cc/100?u=b" alt="Foto pelanggan B"/><p><strong>Budi, Gresik</strong></p><p>"Camilan keluarga favorit, gurih dan renyah."</p></div>
-        <div class="testimonial-card"><img src="https://i.pravatar.cc/100?u=c" alt="Foto pelanggan C"/><p><strong>Siti, Lamongan</strong></p><p>"Pesan online mudah, respon WA cepat."</p></div>
-      </div>
+      <div id="testiTrack" class="testimonial-track"></div>
     </div>
     <div class="testimonial-nav" style="margin-top:12px">
       <button class="btn" onclick="testiPrev()">❮</button>
@@ -344,11 +207,7 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
     <input id="qName" type="text" placeholder="Nama lengkap" required aria-label="Nama"/>
     <input id="qWA" type="tel" placeholder="Nomor WhatsApp (contoh: 0812...)" required aria-label="Nomor WA"/>
     <input id="qAddr" type="text" placeholder="Alamat (kelurahan/kota)" required aria-label="Alamat"/>
-    <select id="qProduct" required aria-label="Pilih produk">
-      <option value="">Pilih produk...</option>
-      <option value="Keripik Pisang|15000">Keripik Pisang - Rp15.000</option>
-      <option value="Kacang Gurih|22000">Kacang Gurih - Rp22.000</option>
-    </select>
+    <select id="qProduct" required aria-label="Pilih produk"></select>
     <input id="qQty" type="number" min="1" value="1" required aria-label="Jumlah"/>
     <textarea id="qNote" rows="2" placeholder="Catatan / request (opsional)"></textarea>
     <div style="display:flex;gap:10px;align-items:center">
@@ -360,7 +219,7 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 
 <!-- floating elements -->
 <button class="floating-cart" id="floatingCart" onclick="toggleCart()" aria-label="Buka keranjang">🛒<span class="cart-badge" id="cartBadge">0</span></button>
-<div class="whatsapp-float" title="Chat via WhatsApp"><a id="waLink" href="https://wa.me/6281234567890" target="_blank" rel="noreferrer"><img src="https://img.icons8.com/color/96/whatsapp.png" alt="WhatsApp Navid Snack"/></a></div>
+<div class="whatsapp-float" title="Chat via WhatsApp"><a id="waLink" href="#" target="_blank" rel="noreferrer"><img src="https://img.icons8.com/color/96/whatsapp.png" alt="WhatsApp Navid Snack"/></a></div>
 <button class="scroll-top" id="scrollTopBtn" onclick="scrollToTop()" aria-label="Kembali ke atas">↑</button>
 
 <!-- cart panel -->
@@ -369,7 +228,7 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
   <h3>Keranjang</h3>
   <div id="cartItems" style="margin-top:14px"></div>
   <p style="margin-top:12px"><strong>Subtotal:</strong> Rp <span id="cartTotal">0</span></p>
-  <p style="font-size:13px;color:var(--muted)">Belum termasuk ongkir dari Deket, Lamongan</p>
+  <p style="font-size:13px;color:var(--muted)">Belum termasuk ongkir</p>
   <div style="display:flex;gap:8px;margin-top:12px">
     <button class="btn" onclick="checkout()">Checkout via WhatsApp</button>
     <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06)" onclick="clearCart()">Bersihkan</button>
@@ -394,48 +253,33 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <!-- feed (instagram + youtube) -->
 <section id="feed" class="container" aria-labelledby="feedTitle">
   <div class="section-title"><h2 id="feedTitle">Media Sosial</h2></div>
-
-  <div class="feed-grid">
-    <!-- Instagram embed -->
-    <div class="feed-ig">
+  <div class="feed-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+    <div class="feed-ig" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
       <h3 style="margin-bottom:10px;color:var(--brand)">Instagram</h3>
       <div id="igEmbedContainer"></div>
     </div>
-
-    <!-- YouTube embed -->
-    <div class="feed-yt">
+    <div class="feed-yt" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
       <h3 style="margin-bottom:10px;color:var(--brand)">YouTube</h3>
       <div class="yt-wrapper">
-        <!-- Ganti VIDEO_ID di bawah dengan ID video/playlist channel kamu -->
-        <iframe 
-          src="https://www.youtube.com/embed/GIGHFb40bps?list=RDGIGHFb40bps" 
-          title="Navid Snack YouTube"
-          frameborder="0"
-          allowfullscreen
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        ></iframe>
+        <iframe id="ytFrame" src="" title="Navid Snack YouTube" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%;height:315px;border-radius:12px"></iframe>
       </div>
     </div>
   </div>
 </section>
 
-
 <!-- footer -->
 <footer id="contact">
-  <div class="footer-grid">
-    <div class="footer-info">
-      <h3>Navid Snack</h3>
-      <p>Alamat: Deket, Lamongan, Jawa Timur</p>
-      <p>Telp: +62 812-3456-7890</p>
+  <div class="footer-grid" style="display:flex;gap:20px;flex-wrap:wrap;max-width:var(--maxw);margin:0 auto;padding:28px;background:#08101a;color:#fff">
+    <div class="footer-info" style="flex:1 1 320px">
+      <h3 id="footerBrand">Navid Snack</h3>
+      <p id="footerAddr">Alamat: Deket, Lamongan, Jawa Timur</p>
+      <p id="footerPhone">Telp: +62 812-3456-7890</p>
       <p style="margin-top:8px"><strong>Certificate:</strong></p>
-      <div style="display:flex;gap:8px;align-items:center;margin-top:8px">
-        <img src="https://via.placeholder.com/80x40?text=Halal" alt="Sertifikat Halal" style="height:40px;border-radius:6px"/>
-        <img src="https://via.placeholder.com/80x40?text=BPOM" alt="Sertifikat BPOM" style="height:40px;border-radius:6px"/>
-      </div>
+      <div id="certRow" style="display:flex;gap:8px;align-items:center;margin-top:8px"></div>
     </div>
-    <div class="footer-map">
+    <div class="footer-map" style="flex:1 1 320px">
       <h4>Lokasi</h4>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!..." style="width:100%;height:220px;border:0;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Navid Snack"></iframe>
+      <iframe id="mapFrame" src="https://www.google.com/maps/embed?pb=!1m18!..." style="width:100%;height:220px;border:0;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Navid Snack"></iframe>
     </div>
   </div>
 </footer>
@@ -446,15 +290,92 @@ footer{background:#08101a;color:#fff;padding:28px 20px;margin-top:40px}
 <!-- Instagram embed script (official) -->
 <script async defer src="//www.instagram.com/embed.js"></script>
 
+<!-- load data.js first (you uploaded it as data.js) -->
+<script src="js/data.js"></script>
+
 <script>
+/* =============
+   MAIN SCRIPT
+   - uses window.SITE, window.SLIDES, window.PRODUCTS, window.GALLERY, window.TESTIMONIALS, window.NOTIFIKASI
+   ============= */
+
 /* -------------------------
-   Simple helper functions
+   Helper selectors (unchanged)
    -------------------------*/
 const $ = s=>document.querySelector(s);
 const $$ = s=>Array.from(document.querySelectorAll(s));
 
-/* ====== HERO SLIDER ====== */
-let slides = $$('.slide'), dots = $$('.dot'), slideCur = 0;
+/* -------------------------
+   Update head/meta from SITE
+   -------------------------*/
+function applySiteMeta(){
+  if(!window.SITE) return;
+  const site = window.SITE;
+  const brand = site.brand || document.title;
+  $('#pageTitle').textContent = brand + (brand.includes('Navid')? '' : ' — Navid Snack');
+  $('#metaDescription').setAttribute('content', (site.description || $('#metaDescription').getAttribute('content')));
+  $('#metaKeywords').setAttribute('content', (site.keywords || $('#metaKeywords').getAttribute('content')));
+  $('#siteBrand').textContent = site.brand || 'Navid Snack';
+  $('#footerBrand').textContent = site.brand || 'Navid Snack';
+  $('#siteLogo').src = site.img || $('#siteLogo').src;
+  $('#favicon').href = site.img || $('#favicon').href;
+  $('#waLink').href = site.wa ? `https://wa.me/${site.wa}` : $('#waLink').href;
+  $('#footerAddr').textContent = 'Alamat: ' + (site.alamat || '');
+  // certificates
+  const certRow = $('#certRow');
+  certRow.innerHTML = '';
+  (site.sertifikat || []).forEach(c=>{
+    const img = document.createElement('img');
+    img.src = c.src; img.alt = c.alt; img.style.height='40px'; img.style.borderRadius='6px';
+    img.loading = 'lazy';
+    certRow.appendChild(img);
+  });
+
+  // OG meta
+  $('#ogTitle').setAttribute('content', site.brand || document.title);
+  $('#ogDesc').setAttribute('content', site.description || $('#metaDescription').getAttribute('content'));
+  $('#ogImage').setAttribute('content', site.img || $('#ogImage').getAttribute('content'));
+}
+
+/* ======================
+   HERO SLIDER (dynamic)
+   ====================== */
+let slides = [], dots = [], slideCur = 0, slideTimer = null;
+function renderHero(){
+  const container = $('#slidesContainer');
+  const dotsWrap = $('#heroDots');
+  container.innerHTML = '';
+  dotsWrap.innerHTML = '';
+  const data = window.SLIDES || [];
+  data.forEach((s,i)=>{
+    const slide = document.createElement('div');
+    slide.className = 'slide' + (i===0?' active':'');
+    slide.style.backgroundImage = `url('${s.bg}')`;
+    slide.setAttribute('role','img');
+    slide.setAttribute('aria-label', s.title||('Slide '+(i+1)));
+    slide.innerHTML = `
+      <div class="slide-content">
+        <img src="${s.img}" alt="${s.title}" loading="lazy"/>
+        <div class="slide-text">
+          <h1>${s.title}</h1>
+          <p>${s.text || ''}</p>
+          ${ s.cta ? `<div class="hero-cta"><a href="${s.cta.link}" class="btn" aria-label="${s.cta.text}">${s.cta.text}</a></div>` : '' }
+        </div>
+      </div>
+    `;
+    container.appendChild(slide);
+
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (i===0?' active':'');
+    dot.addEventListener('click', ()=> showSlide(i));
+    dotsWrap.appendChild(dot);
+  });
+  slides = $$('.slide');
+  dots = $$('.dot');
+  slideCur = 0;
+  if(slideTimer) clearInterval(slideTimer);
+  slideTimer = setInterval(nextSlide, 6000);
+}
 function showSlide(n){
   slideCur = (n+slides.length)%slides.length;
   slides.forEach((s,i)=>s.classList.toggle('active', i===slideCur));
@@ -462,15 +383,13 @@ function showSlide(n){
 }
 function nextSlide(){ showSlide(slideCur+1) }
 function prevSlide(){ showSlide(slideCur-1) }
-let slideTimer = setInterval(nextSlide, 6000);
 
-/* ====== SIDE MENU (HAMBURGER) ====== */
+/* ====== SIDE MENU (HAMBURGER) - unchanged name ====== */
 function toggleMenu(){
   const menu = $('#sideMenu');
   const isActive = menu.classList.toggle('active');
   menu.setAttribute('aria-hidden', !isActive);
 }
-/* hide side menu when clicking outside (optional) */
 document.addEventListener('click', (e)=>{
   const side = $('#sideMenu');
   const btn = e.target.closest('.menu-toggle')!==null;
@@ -480,51 +399,90 @@ document.addEventListener('click', (e)=>{
   }
 });
 
-/* ====== DARK MODE ====== */
-function toggleDarkMode(){
-  document.body.classList.toggle('dark-mode');
+/* ====== DARK MODE (with localStorage) ====== */
+function applyDarkModeFromStorage(){
+  const val = localStorage.getItem('navid_darkmode');
+  if(val === '1') document.body.classList.add('dark-mode');
+  else document.body.classList.remove('dark-mode');
   const t = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
   $$('.btn-toggle').forEach(b=>b.textContent = t);
 }
-
-/* ====== PRODUCTS: handle promo/price & countdown position ====== */
-function initProductCards(){
-  $$('.card').forEach((card, idx) => {
-    // ensure countdown inside image wrapper; we already placed it in HTML
-    // Hide price-old if not promo
-    const isPromo = card.dataset.promo === 'true' || card.classList.contains('promo');
-    const oldEl = card.querySelector('.price-old');
-    if(!isPromo && oldEl) {
-      oldEl.style.display = 'none';
-    }
-    // If no promo and only price-new should show original price, ensure price-new shows data-price
-    if(!isPromo){
-      const priceNew = card.querySelector('.price-new');
-      if(priceNew) priceNew.textContent = formatRupiah(card.dataset.price);
-    } else {
-      // If promo true but data-oldprice exists, format values
-      if(card.dataset.oldprice){
-        const old = card.querySelector('.price-old');
-        const nw = card.querySelector('.price-new');
-        if(old) old.textContent = formatRupiah(card.dataset.oldprice);
-        if(nw) nw.textContent = formatRupiah(card.dataset.price);
-      }
-    }
-    // If countdown present, you may implement live countdown based on data-start/data-end.
-    const cd = card.querySelector('[data-cid]');
-    if(cd && card.dataset.end){
-      // simple static text or compute based on server time; here we keep the text as in HTML.
-    }
-  });
+function toggleDarkMode(){
+  document.body.classList.toggle('dark-mode');
+  const active = document.body.classList.contains('dark-mode');
+  localStorage.setItem('navid_darkmode', active ? '1' : '0');
+  const t = active ? '☀️' : '🌙';
+  $$('.btn-toggle').forEach(b=>b.textContent = t);
 }
+
+/* ============================
+   PRODUCTS (render from PRODUCTS)
+   ============================ */
 function formatRupiah(v){ if(!v) return ''; return 'Rp ' + Number(v).toLocaleString('id-ID'); }
 
-/* ====== CART ====== */
+function renderProducts(){
+  const grid = $('#productsGrid');
+  grid.innerHTML = '';
+  const prods = window.PRODUCTS || [];
+  prods.forEach(p=>{
+    const art = document.createElement('article');
+    art.className = 'card';
+    art.setAttribute('data-name', p.name);
+    art.setAttribute('data-price', p.price);
+    art.setAttribute('data-oldprice', p.oldPrice || '');
+    art.setAttribute('data-stock', p.stock || 0);
+    art.setAttribute('data-promo', p.promo ? 'true' : 'false');
+    art.setAttribute('data-desc', p.desc || '');
+    art.setAttribute('data-img', p.img || '');
+    art.innerHTML = `
+      <div class="img-wrapper">
+        <img src="${p.img}" alt="${p.name} Navid Snack" loading="lazy" onclick="openProductModal(this)">
+        ${p.promo ? '<div class="promo-label">PROMO</div>' : ''}
+        ${p.promo ? `<div class="countdown-overlay" data-cid>Promo sampai ${p.jamPromoEnd || ''}</div>` : ''}
+      </div>
+      <h3>${p.name}</h3>
+      <div class="price-row">
+        <span class="price-old">${p.oldPrice? formatRupiah(p.oldPrice) : ''}</span>
+        <span class="price-new">${formatRupiah(p.price)}</span>
+      </div>
+      <div class="stars" aria-hidden="true">${'★★★★★'.slice(0, p.rating || 5)}</div>
+      <div style="margin-top:10px;display:flex;gap:8px;justify-content:center;align-items:center">
+        <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
+        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06);color:var(--brand)" onclick="quickOrderPref('${escapeQuotes(p.name)}',${p.price})">Pesan Cepat</button>
+      </div>
+    `;
+    grid.appendChild(art);
+  });
+
+  // populate quick order select
+  const qSel = $('#qProduct');
+  qSel.innerHTML = '<option value="">Pilih produk...</option>';
+  prods.forEach(p=> qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`));
+}
+
+// helper to escape single quotes in onclick inline string
+function escapeQuotes(s){ return (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
+
+/* ============================
+   CART (persist in localStorage)
+   ============================ */
 let cart = []; // {name, price, qty, stock}
 const floatingCartBtn = $('#floatingCart');
 const cartBadge = $('#cartBadge');
 const cartItemsWrap = $('#cartItems');
 const cartTotalEl = $('#cartTotal');
+
+function loadCartFromStorage(){
+  try{
+    const raw = localStorage.getItem('navid_cart');
+    if(raw) cart = JSON.parse(raw);
+    else cart = [];
+  }catch(e){ cart = []; }
+  renderCart();
+  if(cart.length===0) floatingCartBtn.style.display='none';
+  else floatingCartBtn.style.display='flex';
+}
+function saveCartToStorage(){ localStorage.setItem('navid_cart', JSON.stringify(cart)); }
 
 function addToCart(btn){
   const card = btn.closest('.card');
@@ -541,9 +499,9 @@ function addProductToCartFromCard(card){
   } else {
     cart.push({name, price, qty:1, stock});
   }
+  saveCartToStorage();
   renderCart();
   showToast(name + ' ditambahkan ke keranjang');
-  // show floating cart when first item added
   floatingCartBtn.style.display = 'flex';
 }
 function addToCartFromModal(){
@@ -553,6 +511,7 @@ function addToCartFromModal(){
   let found = cart.find(x=>x.name===name);
   if(found) found.qty++;
   else cart.push({name, price, qty:1, stock:99});
+  saveCartToStorage();
   renderCart();
   showToast(name + ' ditambahkan ke keranjang');
   floatingCartBtn.style.display = 'flex';
@@ -583,15 +542,15 @@ function renderCart(){
   cartBadge.textContent = cart.reduce((s,i)=>s+i.qty,0);
 }
 
-function incQty(i){ if(cart[i].qty < cart[i].stock) cart[i].qty++; renderCart(); }
-function decQty(i){ if(cart[i].qty > 1) cart[i].qty--; renderCart(); }
-function setQty(i, val){ let q = Number(val); if(isNaN(q) || q<1) q=1; if(q>cart[i].stock){ showToast('Melebihi stok tersedia'); q = cart[i].stock; } cart[i].qty = q; renderCart(); }
-function removeItem(i){ cart.splice(i,1); renderCart(); if(cart.length===0){ floatingCartBtn.style.display='none'; } }
-function clearCart(){ cart=[]; renderCart(); toggleCart(); showToast('Keranjang dibersihkan'); floatingCartBtn.style.display='none'; }
+function incQty(i){ if(cart[i].qty < cart[i].stock) cart[i].qty++; saveCartToStorage(); renderCart(); }
+function decQty(i){ if(cart[i].qty > 1) cart[i].qty--; saveCartToStorage(); renderCart(); }
+function setQty(i, val){ let q = Number(val); if(isNaN(q) || q<1) q=1; if(q>cart[i].stock){ showToast('Melebihi stok tersedia'); q = cart[i].stock; } cart[i].qty = q; saveCartToStorage(); renderCart(); }
+function removeItem(i){ cart.splice(i,1); saveCartToStorage(); renderCart(); if(cart.length===0){ floatingCartBtn.style.display='none'; } }
+function clearCart(){ cart=[]; saveCartToStorage(); renderCart(); toggleCart(); showToast('Keranjang dibersihkan'); floatingCartBtn.style.display='none'; }
 
 function toggleCart(){ $('#cartPanel').classList.toggle('active'); }
 
-/* ====== CHECKOUT via WA ====== */
+/* ====== CHECKOUT via WA (uses SITE.wa) ====== */
 function checkout(){
   if(cart.length===0){ showToast('Keranjang masih kosong'); return; }
   let msg = 'Halo, saya ingin pesan:%0A';
@@ -600,8 +559,9 @@ function checkout(){
     msg += `${it.name} x ${it.qty} = Rp ${ (it.price*it.qty).toLocaleString('id-ID') }%0A`;
     subtotal += it.price * it.qty;
   });
-  msg += `%0ASubtotal: Rp ${subtotal.toLocaleString('id-ID')} (belum termasuk ongkir dari Deket, Lamongan)`;
-  window.open('https://wa.me/6281234567890?text=' + encodeURIComponent(msg));
+  msg += `%0ASubtotal: Rp ${subtotal.toLocaleString('id-ID')} (belum termasuk ongkir)`;
+  const wa = (window.SITE && window.SITE.wa) ? window.SITE.wa : '6281234567890';
+  window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(msg));
 }
 
 /* ====== QUICK ORDER FORM ====== */
@@ -617,11 +577,12 @@ function submitQuickOrder(e){
   const prod = $('#qProduct').value, qty = Number($('#qQty').value), note = $('#qNote').value;
   if(!prod){ showToast('Pilih produk'); return; }
   const [pname,pprice] = prod.split('|'); const subtotal = Number(pprice)*qty;
-  let text = `Halo, saya *${name}* ingin memesan:%0A- ${pname} x ${qty} = Rp ${subtotal}%0AAlamat: ${addr}%0ANo WA: ${wa}%0ANote: ${note||'-'}%0A(Subtotal belum termasuk ongkir dari Deket, Lamongan)`;
-  window.open('https://wa.me/6281234567890?text=' + encodeURIComponent(text));
+  let text = `Halo, saya *${name}* ingin memesan:%0A- ${pname} x ${qty} = Rp ${subtotal}%0AAlamat: ${addr}%0ANo WA: ${wa}%0ANote: ${note||'-'}%0A(Subtotal belum termasuk ongkir)`;
+  const waNum = (window.SITE && window.SITE.wa) ? window.SITE.wa : '6281234567890';
+  window.open('https://wa.me/' + waNum + '?text=' + encodeURIComponent(text));
 }
 
-/* ====== TOAST notification (e.g. simulated recent purchase) ====== */
+/* ====== TOAST notification ====== */
 function showToast(text, delay = 4000){
   const t = document.createElement('div'); t.className='toast';
   t.style.opacity = '1';
@@ -629,29 +590,91 @@ function showToast(text, delay = 4000){
   $('#toastPlace').appendChild(t);
   setTimeout(()=>{ t.style.transition='opacity .5s'; t.style.opacity=0; t.addEventListener('transitionend', ()=>t.remove()); }, delay);
 }
-/* simulate sale notices */
-const salesSamples=[['Budi','Surabaya','Keripik Pisang'],['Ani','Gresik','Kacang Gurih'],['Rina','Sidoarjo','Keripik Pisang']];
-setInterval(()=>{ const s = salesSamples[Math.floor(Math.random()*salesSamples.length)]; showToast(`${s[0]} dari ${s[1]} baru saja membeli ${s[2]}`); }, 14000);
+const salesSamples = (window.NOTIFIKASI || []).map(n=>[n.nama,n.kota,n.produk]);
+if(salesSamples.length>0) setInterval(()=>{ const s = salesSamples[Math.floor(Math.random()*salesSamples.length)]; showToast(`${s[0]} dari ${s[1]} baru saja membeli ${s[2]}`); }, 14000);
 
-/* ====== GALLERY LIGHTBOX with navigation ====== */
-const galleryImgs = ['assets/bg.jpg','assets/bg.jpg','assets/bg.jpg']; // update with your hosted images
-let gIndex = 0;
+/* =========================
+   GALLERY slider & lightbox
+   ========================= */
+let galleryIndex = 0;
+function renderGallery(){
+  const gallery = window.GALLERY || [];
+  const track = $('#galleryTrack');
+  track.innerHTML = '';
+  // render slides (duplicate to make wrap feel continuous)
+  const slidesToRender = gallery.concat(gallery).concat(gallery); // tripled for smoother swipe wrap
+  slidesToRender.forEach((g,i)=>{
+    const el = document.createElement('div'); el.className = 'gallery-slide';
+    el.innerHTML = `<img src="${g.src}" alt="${g.alt||''}" loading="lazy" data-original-index="${i % gallery.length}" onclick="openLightboxByIndex(${i % gallery.length})">`;
+    track.appendChild(el);
+  });
+  // track width handled by CSS flex; start in middle group so prev/next can move
+  galleryIndex = gallery.length; // middle
+  updateGalleryTransform();
+}
+function updateGalleryTransform(){
+  const track = $('#galleryTrack');
+  const slideW = track.querySelector('.gallery-slide') ? track.querySelector('.gallery-slide').offsetWidth + 16 : 260;
+  track.style.transform = `translateX(-${galleryIndex * (slideW)}px)`;
+}
+function prevGallery(){ galleryIndex = (galleryIndex - 1 + $('#galleryTrack').children.length) % $('#galleryTrack').children.length; updateGalleryTransform(); }
+function nextGallery(){ galleryIndex = (galleryIndex + 1) % $('#galleryTrack').children.length; updateGalleryTransform(); }
 function openLightboxByIndex(i){
-  gIndex = i % galleryImgs.length;
-  $('#lightboxImg').src = galleryImgs[gIndex];
+  const imgs = (window.GALLERY || []).map(g=>g.src);
+  const idx = i % imgs.length;
+  $('#lightboxImg').src = imgs[idx];
   $('#lightbox').style.display = 'flex';
   $('#lightbox').setAttribute('aria-hidden','false');
 }
 function closeLightbox(){ $('#lightbox').style.display = 'none'; $('#lightbox').setAttribute('aria-hidden','true'); }
-function nextGallery(){ gIndex = (gIndex+1) % galleryImgs.length; $('#lightboxImg').src = galleryImgs[gIndex]; }
-function prevGallery(){ gIndex = (gIndex-1 + galleryImgs.length) % galleryImgs.length; $('#lightboxImg').src = galleryImgs[gIndex]; }
 
-/* ====== TESTIMONIAL slider (looping) ====== */
-let tIdx = 0; const tSlider = $('#testiSlider');
-function testiNext(){ tIdx = (tIdx + 1) % tSlider.children.length; tSlider.style.transform = `translateX(-${tIdx * 300}px)`; }
-function testiPrev(){ tIdx = (tIdx - 1 + tSlider.children.length) % tSlider.children.length; tSlider.style.transform = `translateX(-${tIdx * 300}px)`; }
+/* allow swipe on gallery */
+function enableGallerySwipe(){
+  const track = $('#galleryTrack');
+  if(!track) return;
+  let startX = 0, dx = 0, isDown=false;
+  track.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
+  track.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
+  track.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) prevGallery(); else nextGallery(); } dx=0; });
+}
 
-/* ====== PRODUCT MODAL (detail from dataset) ====== */
+/* =========================
+   TESTIMONIAL slider (looping + swipe)
+   ========================= */
+let testiIdx = 0, testiInterval = null;
+function renderTestimonials(){
+  const t = window.TESTIMONIALS || [];
+  const track = $('#testiTrack'); track.innerHTML = '';
+  // clone to allow loop feel
+  const slides = t.concat(t).concat(t);
+  slides.forEach(s=>{
+    const el = document.createElement('div'); el.className = 'testimonial-card';
+    el.innerHTML = `<img src="${s.img}" alt="${s.name}" loading="lazy"/><p><strong>${s.name}, ${s.kota || ''}</strong></p><p>"${s.text}"</p>`;
+    track.appendChild(el);
+  });
+  testiIdx = t.length; updateTestiTransform();
+  if(testiInterval) clearInterval(testiInterval);
+  testiInterval = setInterval(testiNext, 5000);
+}
+function updateTestiTransform(){
+  const track = $('#testiTrack');
+  const width = track.querySelector('.testimonial-card') ? track.querySelector('.testimonial-card').offsetWidth : 300;
+  track.style.transform = `translateX(-${testiIdx * width}px)`;
+}
+function testiNext(){ testiIdx = (testiIdx + 1) % $('#testiTrack').children.length; updateTestiTransform(); }
+function testiPrev(){ testiIdx = (testiIdx - 1 + $('#testiTrack').children.length) % $('#testiTrack').children.length; updateTestiTransform(); }
+function enableTestiSwipe(){
+  const track = $('#testiTrack');
+  if(!track) return;
+  let startX = 0, dx = 0, isDown=false;
+  track.addEventListener('touchstart', (e)=>{ isDown=true; startX = e.touches[0].clientX; });
+  track.addEventListener('touchmove', (e)=>{ if(!isDown) return; dx = e.touches[0].clientX - startX; });
+  track.addEventListener('touchend', ()=>{ if(!isDown) return; isDown=false; if(Math.abs(dx) > 40){ if(dx>0) testiPrev(); else testiNext(); } dx=0; });
+}
+
+/* =========================
+   PRODUCT MODAL (unchanged names)
+   ========================= */
 function openProductModal(imgEl){
   const card = imgEl.closest('.card');
   $('#modalImg').src = card.dataset.img || imgEl.src;
@@ -664,29 +687,18 @@ function openProductModal(imgEl){
 }
 function closeProductModal(){ $('#productModal').style.display = 'none'; }
 
-/* ====== INSTAGRAM embed (1 random post) ====== */
-/* NOTE: Replace the sample entries with **actual embed URLs** from your account:
-   Example: "https://www.instagram.com/p/POST_ID/embed"
-   You can obtain embed code from Instagram >> three-dot >> Embed (copy).
-*/
-const igUrls = [
-  // Put real embed URLs here for navid_snack posts:
-  "https://www.instagram.com/p/CxsfPbPyvW0/?hl=en&img_index=2",
-  "https://www.instagram.com/p/Cim8OTdp49J/?hl=en&img_index=2",
-  "https://www.instagram.com/p/CGxXMP_lDIh/?hl=en"
-];
-// If there are real embed URLs, inject a blockquote so instagram's embed.js renders it.
+/* ====== INSTAGRAM embed (kept as-is: uses array igUrls in original file or you can set in data.js) */
 (function renderRandomIG(){
   const container = $('#igEmbedContainer');
   if(!container) return;
-  // choose random
-  const url = igUrls[Math.floor(Math.random()*igUrls.length)];
-  // if url is placeholder, show small note
-  if(!url.includes('/p/')){
-    container.innerHTML = `<div style="padding:20px;background:var(--surface);border-radius:8px">Silakan ganti array <code>igUrls</code> di script dengan URL embed post dari akun https://www.instagram.com/navid_snack/</div>`;
+  const igUrls = window.IG_URLS || [
+    // fallback placeholders; you can put actual embed URLs into window.IG_URLS in data.js
+  ];
+  const url = igUrls.length ? igUrls[Math.floor(Math.random()*igUrls.length)] : '';
+  if(!url || !url.includes('/p/')){
+    container.innerHTML = `<div style="padding:20px;background:var(--surface);border-radius:8px">Silakan ganti array <code>IG_URLS</code> di <code>data.js</code> dengan URL embed post dari akun Instagram Anda</div>`;
     return;
   }
-  // create blockquote as Instagram expects
   const block = document.createElement('blockquote'); block.className = 'instagram-media'; block.setAttribute('data-instgrm-permalink', url.replace('/embed','')); block.style = "width:100%;max-width:540px";
   block.innerHTML = `<a href="${url.replace('/embed','')}" target="_blank" rel="noopener noreferrer">Lihat di Instagram</a>`;
   container.appendChild(block);
@@ -695,16 +707,30 @@ const igUrls = [
   }
 })();
 
-/* ====== helpers & init ====== */
-function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
-window.addEventListener('scroll', ()=>{ $('#scrollTopBtn').style.display = (window.scrollY>200)?'inline-block':'none'; });
+/* ==============
+   INIT / on DOM ready
+   ============== */
+window.addEventListener('DOMContentLoaded', ()=>{
+  applySiteMeta();     // update title, logos, OG
+  renderHero();        // hero from SLIDES
+  renderProducts();    // render products grid from PRODUCTS
+  renderGallery();     // render gallery slider from GALLERY
+  renderTestimonials();// render testimonials slider
+  enableGallerySwipe();
+  enableTestiSwipe();
+  applyDarkModeFromStorage();
+  loadCartFromStorage();
 
-/* Hide price-old for non-promo cards and initialize countdown placement */
-document.addEventListener('DOMContentLoaded', ()=>{
-  initProductCards();
-  renderCart();
-  // ensure floating cart hidden if empty
+  // Ensure floating cart hidden if empty
   if(cart.length===0) floatingCartBtn.style.display = 'none';
+
+  // responsive transform update after images load
+  setTimeout(()=>{ updateGalleryTransform(); updateTestiTransform(); }, 300);
+
+  // expose some globals (keeps original names)
+  window.slides = slides;
+  window.nextSlide = nextSlide;
+  window.prevSlide = prevSlide;
 });
 
 /* Accessibility: ESC to close modals/side menu */
@@ -715,6 +741,11 @@ document.addEventListener('keydown', (e)=>{
     $('#sideMenu').classList.remove('active');
   }
 });
+
+/* SCROLL TOP */
+function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
+window.addEventListener('scroll', ()=>{ $('#scrollTopBtn').style.display = (window.scrollY>200)?'inline-block':'none'; });
+
 </script>
 </body>
 </html>
