@@ -313,28 +313,26 @@ function applySiteMeta(){
   const site = window.SITE;
   const brand = site.brand || document.title;
   $('#pageTitle').textContent = brand + (brand.includes('Navid')? '' : ' — Navid Snack');
-  $('#metaDescription').setAttribute('content', (site.description || $('#metaDescription').getAttribute('content')));
-  $('#metaKeywords').setAttribute('content', (site.keywords || $('#metaKeywords').getAttribute('content')));
+  $('#metaDescription').setAttribute('content', site.description || '');
+  $('#metaKeywords').setAttribute('content', site.keywords || '');
   $('#siteBrand').textContent = site.brand || 'Navid Snack';
   $('#footerBrand').textContent = site.brand || 'Navid Snack';
   $('#siteLogo').src = site.img || $('#siteLogo').src;
   $('#favicon').href = site.img || $('#favicon').href;
   $('#waLink').href = site.wa ? `https://wa.me/${site.wa}` : $('#waLink').href;
   $('#footerAddr').textContent = 'Alamat: ' + (site.alamat || '');
-  // certificates
+
   const certRow = $('#certRow');
   certRow.innerHTML = '';
   (site.sertifikat || []).forEach(c=>{
     const img = document.createElement('img');
-    img.src = c.src; img.alt = c.alt; img.style.height='40px'; img.style.borderRadius='6px';
-    img.loading = 'lazy';
+    img.src = c.src; img.alt = c.alt; img.style.height='40px'; img.style.borderRadius='6px'; img.loading = 'lazy';
     certRow.appendChild(img);
   });
 
-  // OG meta
   $('#ogTitle').setAttribute('content', site.brand || document.title);
-  $('#ogDesc').setAttribute('content', site.description || $('#metaDescription').getAttribute('content'));
-  $('#ogImage').setAttribute('content', site.img || $('#ogImage').getAttribute('content'));
+  $('#ogDesc').setAttribute('content', site.description || '');
+  $('#ogImage').setAttribute('content', site.img || '');
 }
 
 /* ======================
@@ -346,41 +344,30 @@ function renderHero(){
   const dotsWrap = $('#heroDots');
   container.innerHTML = '';
   dotsWrap.innerHTML = '';
-  const data = window.SLIDES || [];
-  data.forEach((s,i)=>{
+  (window.SLIDES || []).forEach((s,i)=>{
     const slide = document.createElement('div');
     slide.className = 'slide' + (i===0?' active':'');
     slide.style.backgroundImage = `url('${s.bg}')`;
-    slide.setAttribute('role','img');
-    slide.setAttribute('aria-label', s.title||('Slide '+(i+1)));
     slide.innerHTML = `
       <div class="slide-content">
         <img src="${s.img}" alt="${s.title}" loading="lazy"/>
         <div class="slide-text">
           <h1>${s.title}</h1>
           <p>${s.text || ''}</p>
-          ${ s.cta ? `<div class="hero-cta"><a href="${s.cta.link}" class="btn" aria-label="${s.cta.text}">${s.cta.text}</a></div>` : '' }
+          ${ s.cta ? `<div class="hero-cta"><a href="${s.cta.link}" class="btn">${s.cta.text}</a></div>` : '' }
         </div>
-      </div>
-    `;
+      </div>`;
     container.appendChild(slide);
-
     const dot = document.createElement('span');
     dot.className = 'dot' + (i===0?' active':'');
     dot.addEventListener('click', ()=> showSlide(i));
     dotsWrap.appendChild(dot);
   });
-  slides = $$('.slide');
-  dots = $$('.dot');
-  slideCur = 0;
+  slides = $$('.slide'); dots = $$('.dot'); slideCur = 0;
   if(slideTimer) clearInterval(slideTimer);
   slideTimer = setInterval(nextSlide, 6000);
 }
-function showSlide(n){
-  slideCur = (n+slides.length)%slides.length;
-  slides.forEach((s,i)=>s.classList.toggle('active', i===slideCur));
-  dots.forEach((d,i)=>d.classList.toggle('active', i===slideCur));
-}
+function showSlide(n){ slideCur = (n+slides.length)%slides.length; slides.forEach((s,i)=>s.classList.toggle('active',i===slideCur)); dots.forEach((d,i)=>d.classList.toggle('active',i===slideCur)); }
 function nextSlide(){ showSlide(slideCur+1) }
 function prevSlide(){ showSlide(slideCur-1) }
 
@@ -392,27 +379,23 @@ function toggleMenu(){
 }
 document.addEventListener('click', (e)=>{
   const side = $('#sideMenu');
-  const btn = e.target.closest('.menu-toggle')!==null;
-  if(!btn && side.classList.contains('active') && !e.target.closest('.side-menu')) {
-    side.classList.remove('active');
-    side.setAttribute('aria-hidden','true');
+  if(!e.target.closest('.menu-toggle') && side.classList.contains('active') && !e.target.closest('.side-menu')){
+    side.classList.remove('active'); side.setAttribute('aria-hidden','true');
   }
 });
 
 /* ====== DARK MODE (with localStorage) ====== */
 function applyDarkModeFromStorage(){
   const val = localStorage.getItem('navid_darkmode');
-  if(val === '1') document.body.classList.add('dark-mode');
+  if(val==='1') document.body.classList.add('dark-mode');
   else document.body.classList.remove('dark-mode');
-  const t = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
-  $$('.btn-toggle').forEach(b=>b.textContent = t);
+  $$('.btn-toggle').forEach(b=>b.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙');
 }
 function toggleDarkMode(){
   document.body.classList.toggle('dark-mode');
   const active = document.body.classList.contains('dark-mode');
-  localStorage.setItem('navid_darkmode', active ? '1' : '0');
-  const t = active ? '☀️' : '🌙';
-  $$('.btn-toggle').forEach(b=>b.textContent = t);
+  localStorage.setItem('navid_darkmode', active?'1':'0');
+  $$('.btn-toggle').forEach(b=>b.textContent = active ? '☀️':'🌙');
 }
 
 /* ============================
@@ -420,6 +403,38 @@ function toggleDarkMode(){
    ============================ */
 function formatRupiah(v){ if(!v) return ''; return 'Rp ' + Number(v).toLocaleString('id-ID'); }
 
+function isPromoActive(p){
+  const now = new Date();
+  let startDate = p.tglPromoStart? new Date(p.tglPromoStart+'T00:00') : null;
+  let endDate = p.tglPromoEnd? new Date(p.tglPromoEnd+'T23:59') : null;
+  if(p.tglPromoStart && !p.tglPromoEnd) endDate = new Date(p.tglPromoStart+'T23:59');
+
+  // jika hanya jam
+  if(!p.tglPromoStart && !p.tglPromoEnd && p.jamPromoStart && p.jamPromoEnd){
+    const [sh,sm] = p.jamPromoStart.split(':').map(Number);
+    const [eh,em] = p.jamPromoEnd.split(':').map(Number);
+    const start = new Date(); start.setHours(sh,sm,0,0);
+    const end = new Date(); end.setHours(eh,em,0,0);
+    if(end < start) end.setDate(end.getDate()+1); // melewati tengah malam
+    return now>=start && now<=end;
+  }
+
+  if(startDate && endDate){
+    if(now<startDate || now>endDate) return false;
+    // jika ada jam juga
+    if(p.jamPromoStart && p.jamPromoEnd){
+      const [sh,sm] = p.jamPromoStart.split(':').map(Number);
+      const [eh,em] = p.jamPromoEnd.split(':').map(Number);
+      const start = new Date(now); start.setHours(sh,sm,0,0);
+      const end = new Date(now); end.setHours(eh,em,0,0);
+      if(end < start) end.setDate(end.getDate()+1);
+      return now>=start && now<=end;
+    }
+    return true;
+  }
+  return false;
+}
+  
 function renderProducts(){
   const grid = $('#productsGrid');
   grid.innerHTML = '';
@@ -436,9 +451,9 @@ function renderProducts(){
     art.setAttribute('data-img', p.img || '');
     art.innerHTML = `
       <div class="img-wrapper">
-        <img src="${p.img}" alt="${p.name} Navid Snack" loading="lazy" onclick="openProductModal(this)">
-        ${p.promo ? '<div class="promo-label">PROMO</div>' : ''}
-        ${p.promo ? `<div class="countdown-overlay" data-cid>Promo sampai ${p.jamPromoEnd || ''}</div>` : ''}
+        <img src="${p.img}" alt="${p.name}" loading="lazy" onclick="openProductModal(this)">
+        ${active ? '<div class="promo-label">PROMO</div>' : ''}
+        ${active ? `<div class="countdown-overlay" data-cid></div>` : ''}
       </div>
       <h3>${p.name}</h3>
       <div class="price-row">
@@ -460,6 +475,30 @@ function renderProducts(){
   prods.forEach(p=> qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`));
 }
 
+  function startCountdown(el, p){
+  function update(){
+    const now = new Date();
+    let end = p.tglPromoEnd? new Date(p.tglPromoEnd+'T23:59') : p.tglPromoStart? new Date(p.tglPromoStart+'T23:59') : null;
+    if(p.jamPromoEnd){
+      const [eh,em] = p.jamPromoEnd.split(':').map(Number);
+      end = new Date(); end.setHours(eh,em,0,0);
+      if(p.jamPromoStart && p.jamPromoEnd){
+        const [sh,sm] = p.jamPromoStart.split(':').map(Number);
+        const start = new Date(); start.setHours(sh,sm,0,0);
+        if(end<start) end.setDate(end.getDate()+1);
+      }
+    }
+    if(!end || now>end){ el.textContent='Promo berakhir'; return; }
+    const diff = end-now;
+    if(diff<=0){ el.textContent='Promo berakhir'; return; }
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    el.textContent = `Berakhir: ${h}j ${m}m ${s}d`;
+  }
+  update(); setInterval(update,1000);
+}
+  
 // helper to escape single quotes in onclick inline string
 function escapeQuotes(s){ return (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 
