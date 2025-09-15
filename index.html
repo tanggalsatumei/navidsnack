@@ -35,6 +35,24 @@ body.dark-mode{
   --brand:#071127;--accent:#ffb703;--accent-2:#ff9f1c;--soft:#081226;
 }
 
+body.dark-mode .card h3,
+body.dark-mode .price-new,
+body.dark-mode .price-old,
+body.dark-mode .stars {
+  color: var(--text);
+}
+
+  .promo-marquee {
+  background: linear-gradient(90deg, #ff0044, #ff9900);
+  color: #fff;
+  font-weight: 800;
+  padding: 10px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+
 /* Header */
 header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
@@ -66,6 +84,26 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .arrow{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);border:none;color:#fff;padding:8px 12px;border-radius:10px;cursor:pointer;font-size:20px}
 .arrow-left{left:18px}.arrow-right{right:18px}
 
+@media (max-width: 768px) {
+  .slide-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+  }
+  .slide-content img {
+    width: 140px;
+    height: 140px;
+  }
+  .slide-text h1 {
+    font-size: 24px;
+  }
+  .hero-cta .btn {
+    font-size: 16px;
+    padding: 8px 14px;
+  }
+}
+
+  
 /* layout & cards */
 .container{max-width:var(--maxw);margin:0 auto;padding:28px}
 .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
@@ -99,6 +137,38 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .testimonial-card{min-width:300px;padding:16px;text-align:center;flex-shrink:0}
 .testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
 
+.quick-order {
+  display: grid;
+  gap: 12px;
+  background: var(--surface);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+}
+.quick-order input,
+.quick-order select,
+.quick-order textarea {
+  padding: 10px;
+  border: 1px solid rgba(2,6,23,0.1);
+  border-radius: 8px;
+  width: 100%;
+  font-size: 15px;
+}
+.quick-order button {
+  width: fit-content;
+}
+
+.feed-grid {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 20px;
+}
+@media (max-width: 768px) {
+  .feed-grid {
+    grid-template-columns: 1fr;
+  }
+}
+  
 /* cart & floats */
 .whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
 .whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
@@ -107,7 +177,52 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .cart-panel{position:fixed;top:0;right:-420px;width:380px;height:100%;background:var(--bg);box-shadow:-20px 0 40px rgba(2,6,23,0.12);transition:right .35s;padding:20px;z-index:1350;overflow:auto}
 .cart-panel.active{right:0}
 .close-cart{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer}
+#scrollTopBtn {
+  position: fixed;
+  bottom: 18px;
+  right: 90px;
+  background: var(--accent);
+  color: var(--brand);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  z-index: 1400;
+}
 
+  #toastPlace {
+  position: fixed;
+  bottom: 120px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1600;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--brand);
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  max-width: 260px;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn {
+  from {opacity:0;transform:translateY(10px);}
+  to {opacity:1;transform:translateY(0);}
+}
+
+  
 /* responsive */
 @media(max-width:900px){
   .slide-content{flex-direction:column;text-align:center}
@@ -641,7 +756,7 @@ function renderCart(){
       <input type="number" value="${it.qty}" min="1" style="width:56px" onchange="setQty(${i}, this.value)">
       <button onclick="incQty(${i})">+</button>
       &nbsp; = <strong>Rp ${(it.price*it.qty).toLocaleString('id-ID')}</strong>
-      <button style="float:right;background:transparent;border:none;color:var(--danger);cursor:pointer" onclick="removeItem(${i})">Hapus</button>
+      <button style="float:right;background:transparent;border:none;color:var(--danger);cursor:pointer" onclick="removeItem(${i})">🗑️</button>
       </div>
     `;
     cartItemsWrap.appendChild(div);
