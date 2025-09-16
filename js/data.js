@@ -64,3 +64,9 @@ window.NOTIFIKASI = [
   { nama:"Ani", kota:"Gresik", produk:"Kacang Gurih" },
   { nama:"Rina", kota:"Sidoarjo", produk:"Corn Milk Drink" }
 ];
+
+window.PACKAGES = [
+  { name:'Paket Hemat (5 item)', price: 45000 },
+  { name:'Paket Keluarga (10 item)', price: 80000 }
+];
+
