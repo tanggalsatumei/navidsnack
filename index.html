@@ -730,7 +730,7 @@ function renderProducts(){
       </div>
       <h3>${p.name}</h3>
       <div class="price-row">
-        ${active && p.oldPrice ? `<span class="price-old">${formatRupiah(p.oldPrice)}</span>` : ''}
+        <span class="price-old">${p.oldPrice? formatRupiah(p.oldPrice) : ''}</span>
         <span class="price-new">${formatRupiah(p.price)}</span>
       </div>
       <div class="stars">${'★★★★★'.slice(0,p.rating||5)}</div>
@@ -741,18 +741,17 @@ function renderProducts(){
     `;
     grid.appendChild(art);
 
+    // Countdown promo jika aktif
     if(active){
       const countdownEl = art.querySelector('[data-cid]');
       const tick = ()=>{
         const ms = getPromoRemaining(p);
         countdownEl.textContent = `Berakhir dalam ${formatCountdown(ms)}`;
         if(ms<=0) {
+          // Hapus label promo & countdown jika waktu habis
           const lbl = countdownEl.parentElement.querySelector('.promo-label');
           if(lbl) lbl.remove();
           countdownEl.remove();
-          // hilangkan harga coret setelah promo habis
-          const old = art.querySelector('.price-old');
-          if(old) old.remove();
         }
       };
       tick();
@@ -760,16 +759,23 @@ function renderProducts(){
     }
   });
 
-  // isi dropdown form (produk + paket)
+  // ================
+  // isi dropdown form (produk + paket khusus)
+  // ================
   const qSel = $('#qProduct');
   qSel.innerHTML = '<option value="">Pilih produk atau paket...</option>';
+
+  // produk
   prods.forEach(p=> 
     qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`)
   );
+
+  // paket khusus dari data.js
   (window.PACKAGES || []).forEach(pkg=>{
     qSel.insertAdjacentHTML('beforeend', `<option value="${pkg.name}|${pkg.price}">🌟 ${pkg.name} - ${formatRupiah(pkg.price)}</option>`);
   });
 }
+
 
 
   // ================
