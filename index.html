@@ -771,26 +771,6 @@ function renderProducts(){
   });
 }
 
-
-  // ================
-  // isi dropdown form (produk + paket khusus)
-  // ================
-  const qSel = $('#qProduct');
-  qSel.innerHTML = '<option value="">Pilih produk atau paket...</option>';
-
-  // produk
-  prods.forEach(p=> 
-    qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`)
-  );
-
-  // paket khusus dari data.js
-  (window.PACKAGES || []).forEach(pkg=>{
-    qSel.insertAdjacentHTML('beforeend', `<option value="${pkg.name}|${pkg.price}">🌟 ${pkg.name} - ${formatRupiah(pkg.price)}</option>`);
-  });
-}
-
-
-
 // helper to escape single quotes in onclick inline string
 function escapeQuotes(s){ return (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 
