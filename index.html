@@ -741,7 +741,7 @@ function renderProducts(){
       <div class="stars">${'★★★★★'.slice(0,p.rating||5)}</div>
       <div style="margin-top:10px;display:flex;gap:8px;justify-content:center">
         <button class="btn" onclick="addToCart(this)">Tambah ke Keranjang</button>
-        <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06)" onclick="quickOrderPref('${escapeQuotes(p.name)}',${p.price})">Pesan Cepat</button>
+        <button class="btn" style="background:#d3d3d3;border:1px solid rgba(2,6,23,0.06)" onclick="quickOrderPref('${escapeQuotes(p.name)}',${p.price})">Pesan Cepat</button>
       </div>
     `;
     grid.appendChild(art);
