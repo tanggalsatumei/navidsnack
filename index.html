@@ -461,7 +461,7 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
       <p id="footerAddr">Alamat: Deket, Lamongan, Jawa Timur</p>
       <p id="footerPhone">Telp: +62 812-3456-7890</p>
       <p style="margin-top:8px"><strong>Certificate:</strong></p>
-      <div id="certRow" style="display:flex;gap:8px;align-items:center;margin-top:8px"></div>
+      <div id="certRow" style="display:flex;gap:8px;align-items:center;margin-top:8px;height:100px;weight:auto"></div>
     </div>
     <div class="footer-map" style="flex:1 1 320px">
       <h4>Lokasi</h4>
@@ -730,7 +730,7 @@ function renderProducts(){
       </div>
       <h3>${p.name}</h3>
       <div class="price-row">
-        <span class="price-old">${p.oldPrice? formatRupiah(p.oldPrice) : ''}</span>
+        ${active && p.oldPrice ? `<span class="price-old">${formatRupiah(p.oldPrice)}</span>` : ''}
         <span class="price-new">${formatRupiah(p.price)}</span>
       </div>
       <div class="stars">${'★★★★★'.slice(0,p.rating||5)}</div>
@@ -741,17 +741,18 @@ function renderProducts(){
     `;
     grid.appendChild(art);
 
-    // Countdown promo jika aktif
     if(active){
       const countdownEl = art.querySelector('[data-cid]');
       const tick = ()=>{
         const ms = getPromoRemaining(p);
         countdownEl.textContent = `Berakhir dalam ${formatCountdown(ms)}`;
         if(ms<=0) {
-          // Hapus label promo & countdown jika waktu habis
           const lbl = countdownEl.parentElement.querySelector('.promo-label');
           if(lbl) lbl.remove();
           countdownEl.remove();
+          // hilangkan harga coret setelah promo habis
+          const old = art.querySelector('.price-old');
+          if(old) old.remove();
         }
       };
       tick();
@@ -759,23 +760,16 @@ function renderProducts(){
     }
   });
 
-  // ================
-  // isi dropdown form (produk + paket khusus)
-  // ================
+  // isi dropdown form (produk + paket)
   const qSel = $('#qProduct');
   qSel.innerHTML = '<option value="">Pilih produk atau paket...</option>';
-
-  // produk
   prods.forEach(p=> 
     qSel.insertAdjacentHTML('beforeend', `<option value="${p.name}|${p.price}">${p.name} - ${formatRupiah(p.price)}</option>`)
   );
-
-  // paket khusus dari data.js
   (window.PACKAGES || []).forEach(pkg=>{
     qSel.insertAdjacentHTML('beforeend', `<option value="${pkg.name}|${pkg.price}">🌟 ${pkg.name} - ${formatRupiah(pkg.price)}</option>`);
   });
 }
-
 
 
   // ================
