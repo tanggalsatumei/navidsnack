@@ -5,14 +5,15 @@
 window.SITE = {
   img: "assets/logo.png",
   brand: "Navid Snack",
-  wa: "6281234567890",
+  wa: "085856481915",
   alamat: "Deket, Lamongan, Jawa Timur",
   keywords: "navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat, snack lamongan, oleh-oleh lamongan",
   description: "Navid Snack — Camilan sehat & lezat khas Lamongan, higienis dan bergizi. Pesan cepat via WhatsApp.",
   url: "https://navidsnack.vercel.app",
   sertifikat: [
-    { src: "assets/halal.png", alt: "Sertifikat Halal" },
-    { src: "assets/bpom.png", alt: "Sertifikat BPOM" }
+    { src: "assets/logohalal.png", alt: "Sertifikat Halal" },
+    { src: "assets/logobpom.png", alt: "Sertifikat BPOM" },
+    { src: "assets/100indoensia.jpeg", alt: "100% Indonesia" }
   ]
 };
 
@@ -33,8 +34,8 @@ window.SLIDES = [
 window.PRODUCTS = [
   { id:"p01", name:"Keripik Pisang", desc:"Keripik pisang renyah khas Navid Snack", img:"assets/bg.jpg", price:15000, oldPrice:20000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:"01:00", jamPromoEnd:"23:00", stock:5, rating:5 },
   { id:"p02", name:"Keripik Telur Asin", desc:"Keripik telur asin khas Navid Snack", img:"assets/logo.jpg", price:15000, oldPrice:20000, promo:true, tglPromoStart:"2025-09-12", tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:5, rating:5 },
-  { id:"p03", name:"Corn Milk Drink", desc:"Minuman susu jagung khas Navid Snack", img:"assets/bg.jpg", price:15000, oldPrice:20000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:5, rating:5 },
-  { id:"p04", name:"Sari Kemangi", desc:"Minuman sari kemangi khas Navid Snack", img:"assets/logo.jpg", price:15000, oldPrice:20000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:5, rating:5 }
+  { id:"p03", name:"Corn Milk Drink", desc:"Minuman susu jagung khas Navid Snack", img:"assets/bg.jpg", price:12000, oldPrice:15000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:100, rating:5 },
+  { id:"p04", name:"Sari Kemangi Drink", desc:"Minuman sari kemangi khas Navid Snack", img:"assets/logo.jpg", price:12000, oldPrice:15000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:100, rating:4 }
 ];
 
 // =======================
