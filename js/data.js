@@ -52,12 +52,12 @@ window.PRODUCTS = [
 // GALERI
 window.GALLERY = [
   { src: "assets/keripikpisang.jpg", alt: "Keripik Pisang Kepok Navid Snack Khas Lamongan" },
-  { src: "assets/pameran.webp", alt: "Keripik Pisang Kepok Navid Snack Khas Lamongan" },
-  { src: "assets/pameran.jpg", alt: "Keripik Pisang Kepok Navid Snack Khas Lamongan" },
-  { src: "assets/visitasi.jpg", alt: "Keripik Pisang Kepok Navid Snack Khas Lamongan" },
-  { src: "assets/minimarket.jpg", alt: "Keripik Pisang Kepok Navid Snack Khas Lamongan" },
-  { src: "assets/alfamart.jpg", alt: "Keripik Pisang Kepok Navid Snack Khas Lamongan" },
-  { src: "assets/pesanan.jpg", alt: "Keripik Pisang Kepok Navid Snack Khas Lamongan" }
+  { src: "assets/pameran.webp", alt: "Pameran produk bersama Paguyuban Kecamatan Deket" },
+  { src: "assets/pameran.jpg", alt: "Bazar UMKM di Hari Bhayangkara" },
+  { src: "assets/visitasi.jpg", alt: "Kurasi produk UMKM" },
+  { src: "assets/minimarket.jpg", alt: "Produk Navid Snack di Pusat oleh-oleh" },
+  { src: "assets/alfamart.jpg", alt: "Produk Navid Snack di Alfamart" },
+  { src: "assets/pesanan.jpg", alt: "Pesanan Nasi Kotak" }
 ];
 
 // =======================
