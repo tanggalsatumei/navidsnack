@@ -39,22 +39,12 @@ body.dark-mode .card h3,
 body.dark-mode .price-new,
 body.dark-mode .price-old,
 body.dark-mode .stars
-body.dark-mode .btn{
+{
   color: var(--text);
 }
 
-  .promo-marquee {
-  background: linear-gradient(90deg, #ff0044, #ff9900);
-  color: #fff;
-  font-weight: 800;
-  padding: 10px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
-}
+.promo-marquee { background: linear-gradient(90deg, #ff0044, #ff9900);color: #fff;font-weight: 800;padding: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 1.1rem; letter-spacing: 0.5px;}
 
-
-/* Header */
 header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
 .logo img{width:36px;height:36px;border-radius:8px;background:var(--soft);padding:4px}
@@ -64,71 +54,20 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .menu-toggle{display:none;background:none;border:1px solid rgba(255,183,3,0.12);color:var(--accent);padding:8px;border-radius:8px;cursor:pointer}
 .btn-toggle{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--accent);padding:8px 10px;border-radius:10px;cursor:pointer}
 
-/* Side menu (mobile) */
-.side-menu {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 80%;
-  height: 100%;
-  background: var(--brand);
-  color: #fff;
-  padding: 40px 28px;
-  transition: left .3s;
-  z-index: 1300;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-
+.side-menu { position: fixed; top: 0; left: -100%; width: 80%; height: 100%; background: var(--brand); color: #fff; padding: 40px 28px; transition: left .3s; z-index: 1300; display: flex; flex-direction: column; gap: 28px;}
 .side-menu.active { left: 0; }
+.side-menu .close-btn { background: none; border: none; color: var(--accent); font-size: 36px; position: absolute; top: 16px; right: 22px; cursor: pointer;}
+.side-menu ul { list-style: none; padding: 0; margin: 40px 0 0 0; display: flex; flex-direction: column; gap: 22px;}
+.side-menu li a { color: #fff; text-decoration: none; font-size: 1.4rem; font-weight: 600; padding: 6px 0; display: block; border-bottom: 1px solid rgba(255,255,255,0.08);}
+.side-menu li a:hover { color: var(--accent);}
 
-.side-menu .close-btn {
-  background: none;
-  border: none;
-  color: var(--accent);
-  font-size: 36px;
-  position: absolute;
-  top: 16px;
-  right: 22px;
-  cursor: pointer;
-}
-
-.side-menu ul {
-  list-style: none;
-  padding: 0;
-  margin: 40px 0 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.side-menu li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.4rem;
-  font-weight: 600;
-  padding: 6px 0;
-  display: block;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.side-menu li a:hover {
-  color: var(--accent);
-}
-
-
-/* hero */
 #hero{position:relative;height:70vh;min-height:360px;overflow:hidden;border-bottom:1px solid rgba(15,23,36,0.06)}
 .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .6s}
 .slide.active{opacity:1}
 .slide::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.35),rgba(2,6,23,0.12))}
 .slide-content{position:relative;z-index:2;max-width:var(--maxw);margin:0 auto;padding:28px;color:var(--accent);display:flex;gap:24px;align-items:center;justify-content:center}
-.slide-content img {
-    width: 300px;
-    height: 300px;
-  }
-  .slide-text h1{margin:0;font-size:34px;color:#fff}
+.slide-content img { width: 300px; height: 300px;}
+.slide-text h1{margin:0;font-size:34px;color:#fff}
 .btn{background:var(--accent);color:var(--brand);border:none;padding:10px 16px;border-radius:10px;font-weight:700;cursor:pointer;box-shadow:0 6px 18px rgba(251,133,0,0.12)}
 .dots{position:absolute;bottom:18px;width:100%;text-align:center;z-index:3}
 .dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,0.6);margin:0 6px;cursor:pointer;opacity:.7}
@@ -137,26 +76,12 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .arrow-left{left:18px}.arrow-right{right:18px}
 
 @media (max-width: 768px) {
-  .slide-content {
-    flex-direction: column;
-    text-align: center;
-    gap: 14px;
-  }
-  .slide-content img {
-    width: 140px;
-    height: 140px;
-  }
-  .slide-text h1 {
-    font-size: 24px;
-  }
-  .hero-cta .btn {
-    font-size: 16px;
-    padding: 8px 14px;
-  }
+  .slide-content {flex-direction: column; text-align: center; gap: 14px; }
+  .slide-content img { width: 140px; height: 140px;}
+  .slide-text h1 { font-size: 24px; }
+  .hero-cta .btn { font-size: 16px; padding: 8px 14px; }
 }
 
-  
-/* layout & cards */
 .container{max-width:var(--maxw);margin:0 auto;padding:28px}
 .section-title{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
 .products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
@@ -170,33 +95,23 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .price-new{color:var(--danger);font-weight:800}
 .stars{color:#f6c453;margin-bottom:8px}
 
-/* gallery -> slider */
 .gallery-slider{position:relative;overflow:hidden}
 .gallery-track{display:flex;transition:transform .45s ease}
 .gallery-slide{min-width:260px;margin:8px;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);flex-shrink:0}
 .gallery-slide img{width:100%;height:220px;object-fit:cover;display:block}
 
-/* lightbox */
 .lightbox{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(3,7,18,0.85);z-index:1400}
 .lightbox img{max-width:92%;max-height:86%;border-radius:12px;box-shadow:0 20px 50px rgba(2,6,23,0.6)}
 .lightbox .close-light{position:absolute;top:18px;right:28px;color:#fff;font-size:28px;cursor:pointer}
 .lightbox .nav-btn{position:absolute;top:50%;transform:translateY(-50%);background:none;border:none;color:#fff;font-size:40px;padding:8px;cursor:pointer}
 .lightbox .prev{left:12px}.lightbox .next{right:12px}
 
-/* testimonial slider */
 .testimonial-wrap{position:relative;padding:14px;background:linear-gradient(180deg,#fff,#fbfbfb);border-radius:12px;box-shadow:var(--shadow);overflow:hidden}
 .testimonial-track{display:flex;transition:transform .45s ease}
 .testimonial-card{min-width:300px;padding:16px;text-align:center;flex-shrink:0}
 .testimonial-card img{width:80px;height:80px;border-radius:50%;object-fit:cover;margin-bottom:12px}
 
-.quick-order {
-  display: grid;
-  gap: 12px;
-  background: var(--surface);
-  padding: 20px;
-  border-radius: 14px;
-  box-shadow: var(--shadow);
-}
+.quick-order {display: grid; gap: 12px; background: var(--surface); padding: 20px; border-radius: 14px; box-shadow: var(--shadow);}
 .quick-order input,
 .quick-order select,
 .quick-order textarea {
@@ -206,22 +121,13 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
   width: 100%;
   font-size: 15px;
 }
-.quick-order button {
-  width: fit-content;
-}
-
-.feed-grid {
-  display: grid;
-  grid-template-columns: 30% 70%;
-  gap: 20px;
-}
+.quick-order button {width: fit-content;}
+.feed-grid { display: grid; grid-template-columns: 30% 70%; gap: 20px;}
+  
 @media (max-width: 768px) {
-  .feed-grid {
-    grid-template-columns: 1fr;
-  }
+  .feed-grid { grid-template-columns: 1fr; }
 }
   
-/* cart & floats */
 .whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
 .whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
 .floating-cart{position:fixed;bottom:86px;right:26px;z-index:1301;background:var(--accent);width:56px;height:56px;border-radius:14px;display:none;align-items:center;justify-content:center;font-weight:800;color:var(--brand);cursor:pointer;box-shadow:0 10px 30px rgba(15,23,36,0.12)}
@@ -229,53 +135,14 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .cart-panel{position:fixed;top:0;right:-420px;width:380px;height:100%;background:var(--bg);box-shadow:-20px 0 40px rgba(2,6,23,0.12);transition:right .35s;padding:20px;z-index:1350;overflow:auto}
 .cart-panel.active{right:0}
 .close-cart{position:absolute;top:12px;right:16px;font-size:22px;cursor:pointer}
-#scrollTopBtn {
-  position: fixed;
-  bottom: 18px;
-  right: 90px;
-  background: var(--accent);
-  color: var(--brand);
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  box-shadow: var(--shadow);
-  cursor: pointer;
-  z-index: 1400;
-}
-
-  #toastPlace {
-  position: fixed;
-  bottom: 120px;
-  left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 1600;
-}
-.toast {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--brand);
-  color: #fff;
-  padding: 10px 14px;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  max-width: 260px;
-  animation: fadeIn .3s ease;
-}
+#scrollTopBtn { position: fixed; bottom: 18px; right: 90px; background: var(--accent); color: var(--brand); border: none; border-radius: 50%; width: 44px; height: 44px; display: none; align-items: center; justify-content: center; font-weight: 800; box-shadow: var(--shadow); cursor: pointer; z-index: 1400;}
+#toastPlace {position: fixed; bottom: 120px; left: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1600;}
+.toast { display: flex; align-items: center; gap: 8px; background: var(--brand); color: #fff; padding: 10px 14px; border-radius: 10px; box-shadow: var(--shadow); max-width: 260px; animation: fadeIn .3s ease;}
 @keyframes fadeIn {
   from {opacity:0;transform:translateY(10px);}
   to {opacity:1;transform:translateY(0);}
 }
 
-  
-/* responsive */
 @media(max-width:900px){
   .slide-content{flex-direction:column;text-align:center}
   .slide-content img{width:160px;height:160px}
@@ -285,26 +152,9 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
   .testimonial-card{min-width:260px}
 }
 
-.floating-buttons {
-  position: fixed;
-  bottom: 18px;
-  right: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  z-index: 1400;
-}
-
+.floating-buttons { position: fixed; bottom: 18px; right: 18px; display: flex; flex-direction: column; gap: 14px; z-index: 1400;}
 .floating-buttons button,
-.floating-buttons a img {
-  width: 56px;
-  height: 56px;
-  border-radius: 14px;
-  box-shadow: var(--shadow);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+.floating-buttons a img { width: 56px; height: 56px; border-radius: 14px; box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center;}
 
 </style>
 </head>
@@ -436,7 +286,7 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
     <p id="modalPrice" style="font-weight:800;color:var(--danger)"></p>
     <div style="display:flex;gap:8px;margin-top:10px">
       <button class="btn" onclick="addToCartFromModal()">Tambah ke Keranjang</button>
-      <button class="btn" style="background:transparent;border:1px solid rgba(2,6,23,0.06)" onclick="closeProductModal()">Tutup</button>
+      <button class="btn" style="background:#d3d3d3;border:1px solid rgba(2,6,23,0.06)" onclick="closeProductModal()">Tutup</button>
     </div>
   </div>
 </div>
@@ -485,20 +335,9 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 <script src="js/data.js"></script>
 
 <script>
-/* =============
-   MAIN SCRIPT
-   - uses window.SITE, window.SLIDES, window.PRODUCTS, window.GALLERY, window.TESTIMONIALS, window.NOTIFIKASI
-   ============= */
-
-/* -------------------------
-   Helper selectors (unchanged)
-   -------------------------*/
 const $ = s=>document.querySelector(s);
 const $$ = s=>Array.from(document.querySelectorAll(s));
 
-/* -------------------------
-   Update head/meta from SITE
-   -------------------------*/
 function applySiteMeta(){
   if(!window.SITE) return;
   const site = window.SITE;
@@ -528,9 +367,6 @@ function applySiteMeta(){
   $('#ogImage').setAttribute('content', site.img || $('#ogImage').getAttribute('content'));
 }
 
-/* ======================
-   HERO SLIDER (dynamic)
-   ====================== */
 let slides = [], dots = [], slideCur = 0, slideTimer = null;
 function renderHero(){
   const container = $('#slidesContainer');
@@ -575,7 +411,6 @@ function showSlide(n){
 function nextSlide(){ showSlide(slideCur+1) }
 function prevSlide(){ showSlide(slideCur-1) }
 
-/* ====== SIDE MENU (HAMBURGER) - unchanged name ====== */
 function toggleMenu(){
   const menu = $('#sideMenu');
   const isActive = menu.classList.toggle('active');
@@ -590,7 +425,6 @@ document.addEventListener('click', (e)=>{
   }
 });
 
-/* ====== DARK MODE (with localStorage) ====== */
 function applyDarkModeFromStorage(){
   const val = localStorage.getItem('navid_darkmode');
   if(val === '1') document.body.classList.add('dark-mode');
@@ -606,14 +440,8 @@ function toggleDarkMode(){
   $$('.btn-toggle').forEach(b=>b.textContent = t);
 }
 
-/* ============================
-   PRODUCTS (render from PRODUCTS)
-   ============================ */
 function formatRupiah(v){ if(!v) return ''; return 'Rp ' + Number(v).toLocaleString('id-ID'); }
 
-/* ============================
-   PRODUCTS (dengan countdown promo)
-   ============================ */
 function isPromoActive(prod){
   const now = new Date();
   const tzOffset = now.getTimezoneOffset() * 60000; // supaya jam lokal
@@ -775,13 +603,8 @@ function renderProducts(){
     qSel.insertAdjacentHTML('beforeend', `<option value="${pkg.name}|${pkg.price}">🌟 ${pkg.name} - ${formatRupiah(pkg.price)}</option>`);
   });
 }
-
-// helper to escape single quotes in onclick inline string
 function escapeQuotes(s){ return (s||'').replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 
-/* ============================
-   CART (persist in localStorage)
-   ============================ */
 let cart = []; // {name, price, qty, stock}
 const floatingCartBtn = $('#floatingCart');
 const cartBadge = $('#cartBadge');
@@ -866,7 +689,6 @@ function clearCart(){ cart=[]; saveCartToStorage(); renderCart(); toggleCart(); 
 
 function toggleCart(){ $('#cartPanel').classList.toggle('active'); }
 
-/* ====== CHECKOUT via WA (uses SITE.wa) ====== */
 function checkout(){
   if(cart.length===0){ showToast('Keranjang masih kosong'); return; }
   let msg = 'Halo, saya ingin pesan:%0A';
@@ -880,7 +702,6 @@ function checkout(){
   window.open('https://wa.me/' + wa + '?text=' + encodeURIComponent(msg));
 }
 
-/* ====== QUICK ORDER FORM ====== */
 function quickOrderPref(name, price){
   $('#qProduct').value = `${name}|${price}`;
   $('#qQty').value = 1;
@@ -909,12 +730,6 @@ function showToast(text, delay = 4000){
 const salesSamples = (window.NOTIFIKASI || []).map(n=>[n.nama,n.kota,n.produk]);
 if(salesSamples.length>0) setInterval(()=>{ const s = salesSamples[Math.floor(Math.random()*salesSamples.length)]; showToast(`${s[0]} dari ${s[1]} baru saja membeli ${s[2]}`); }, 14000);
 
-/* =========================
-   GALLERY slider & lightbox
-   ========================= */
-/* =========================
-   GALLERY slider + tombol + swipe di lightbox
-   ========================= */
 let galleryIndex = 0;
 function renderGallery(){
   const data = window.GALLERY || [];
@@ -981,14 +796,6 @@ function enableGallerySwipe(){
   img.addEventListener('touchmove',e=>{if(!isDown)return;dx=e.touches[0].clientX-startX});
   img.addEventListener('touchend',()=>{if(!isDown)return;isDown=false;if(Math.abs(dx)>40){dx>0?prevLightbox():nextLightbox();}dx=0});
 })();
-
-
-/* =========================
-   TESTIMONIAL slider (looping + swipe)
-   ========================= */
-/* =========================
-   TESTIMONIAL slider (tombol + swipe)
-   ========================= */
 let testiIdx=0;
 function renderTestimonials(){
   const t = window.TESTIMONIALS || [];
@@ -1018,10 +825,6 @@ function enableTestiSwipe(){
   track.addEventListener('touchend',()=>{if(!isDown)return;isDown=false;if(Math.abs(dx)>40){dx>0?testiPrev():testiNext();}dx=0});
 }
 
-
-/* =========================
-   PRODUCT MODAL (unchanged names)
-   ========================= */
 function openProductModal(imgEl){
   const card = imgEl.closest('.card');
   $('#modalImg').src = card.dataset.img || imgEl.src;
@@ -1033,8 +836,6 @@ function openProductModal(imgEl){
   $('#productModal').style.display = 'flex';
 }
 function closeProductModal(){ $('#productModal').style.display = 'none'; }
-
-/* ====== INSTAGRAM embed (kept as-is: uses array igUrls in original file or you can set in data.js) */
 (function renderRandomIG(){
   const container = $('#igEmbedContainer');
   if(!container) return;
@@ -1054,9 +855,6 @@ function closeProductModal(){ $('#productModal').style.display = 'none'; }
   }
 })();
 
-/* ==============
-   INIT / on DOM ready
-   ============== */
 window.addEventListener('DOMContentLoaded', ()=>{
   applySiteMeta();     // update title, logos, OG
   renderHero();        // hero from SLIDES
