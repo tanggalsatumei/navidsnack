@@ -48,7 +48,7 @@ body.dark-mode .stars
 header{position:sticky;top:0;z-index:1200;background:linear-gradient(180deg,var(--brand),#0b1220);color:var(--accent);padding:12px 20px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(2,6,23,0.15)}
 .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px}
 .logo img{width:36px;height:36px;border-radius:8px;background:var(--soft);padding:4px}
-nav{margin-left:auto;display:flex;align-items:center;gap:16px}
+nav{position:sticky;margin-left:auto;display:flex;align-items:center;gap:16px}
 nav ul{display:flex;gap:16px;margin:0;padding:0;list-style:none}
 nav a{color:var(--accent);text-decoration:none;font-weight:600}
 .menu-toggle{display:none;background:none;border:1px solid rgba(255,183,3,0.12);color:var(--accent);padding:8px;border-radius:8px;cursor:pointer}
@@ -122,11 +122,34 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
   font-size: 15px;
 }
 .quick-order button {width: fit-content;}
-.feed-grid { display: grid; grid-template-columns: 30% 70%; gap: 20px;}
-  
-@media (max-width: 768px) {
-  .feed-grid { grid-template-columns: 1fr; }
+.media-section {
+  display: grid;
+  grid-template-columns: 30% 70%;
+  gap: 24px;
+  align-items: start;
+  max-width: var(--maxw);
+  margin: 40px auto;
+  padding: 0 20px;
 }
+
+.media-section iframe {
+  width: 100%;
+  aspect-ratio: 16/9;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 768px){
+  .media-section {
+    grid-template-columns: 1fr; /* tumpuk vertikal di HP */
+  }
+  .media-section iframe {
+    aspect-ratio: auto;
+    height: 280px;
+  }
+}
+
   
 .whatsapp-float{position:fixed;bottom:18px;right:18px;z-index:1300}
 .whatsapp-float a img{width:56px;height:56px;border-radius:12px;box-shadow:0 8px 22px rgba(11,18,32,0.15)}
@@ -289,20 +312,9 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 </div>
 
 <!-- feed (instagram + youtube) -->
-<section id="feed" class="container" aria-labelledby="feedTitle">
-  <div class="section-title"><h2 id="feedTitle">Media Sosial</h2></div>
-  <div class="feed-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
-    <div class="feed-ig" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
-      <h3 style="margin-bottom:10px;color:var(--brand)">Instagram</h3>
-      <iframe id="igFrame" loading="lazy" style="width:100%;height:480px;border:none;overflow:hidden" allowfullscreen></iframe>
-    </div>
-    <div class="feed-yt" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
-      <h3 style="margin-bottom:10px;color:var(--brand)">YouTube</h3>
-      <div class="yt-wrapper">
-        <iframe id="ytFrame" loading="lazy" style="width:100%;height:360px;border:none" allowfullscreen></iframe>
-      </div>
-    </div>
-  </div>
+<section class="media-section">
+  <iframe id="igFrame" loading="lazy" allowfullscreen></iframe>
+  <iframe id="ytFrame" loading="lazy" allowfullscreen></iframe>
 </section>
 
 <!-- footer -->
@@ -883,13 +895,16 @@ document.addEventListener('DOMContentLoaded',()=>{
   const map = document.getElementById('mapFrame');
   if(map) map.src = window.SITE.mapFrame;
 
-  // Instagram embed
-  const ig = document.getElementById('igFrame');
-  if(ig) ig.src = window.SITE.instagramEmbed;
+  // Instagram random
+  const igFrame = document.getElementById('igFrame');
+  if (igFrame && window.SITE.instagramEmbed?.length){
+    const r = Math.floor(Math.random() * window.SITE.instagramEmbed.length);
+    igFrame.src = window.SITE.instagramEmbed[r];
+  }
 
-  // YouTube embed
-  const yt = document.getElementById('ytFrame');
-  if(yt) yt.src = window.SITE.youtubeFrame;
+  // YouTube
+  const ytFrame = document.getElementById('ytFrame');
+  if (ytFrame) ytFrame.src = window.SITE.youtubeFrame;
 });
 
 window.addEventListener('DOMContentLoaded', ()=>{  
