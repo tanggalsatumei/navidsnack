@@ -854,8 +854,7 @@ function closeProductModal(){ $('#productModal').style.display = 'none'; }
   }
 })();
 
-window.addEventListener('DOMContentLoaded', ()=>{
-  document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener('DOMContentLoaded',()=>{
   // SEO
   document.title = window.SITE.brand;
   document.querySelector('meta[name="description"]').setAttribute('content', window.SITE.description);
@@ -888,7 +887,9 @@ window.addEventListener('DOMContentLoaded', ()=>{
   // YouTube embed
   const yt = document.getElementById('ytFrame');
   if(yt) yt.src = window.SITE.youtubeFrame;
-    
+});
+
+window.addEventListener('DOMContentLoaded', ()=>{  
   applySiteMeta();     // update title, logos, OG
   renderHero();        // hero from SLIDES
   renderProducts();    // render products grid from PRODUCTS
