@@ -32,11 +32,11 @@ window.SLIDES = [
 // PRODUK
 // Dates: YYYY-MM-DD ; Times HH:mm (24h). Use null if not set.
 window.PRODUCTS = [
-  { id:"p01", name:"Keripik Pisang", desc:"Keripik pisang renyah khas Navid Snack", img:"assets/keripikpisang.jpg", price:13000, oldPrice:15000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:"01:00", jamPromoEnd:"23:00", stock:5, rating:5 },
-  { id:"p02", name:"Keripik Telur Asin", desc:"Keripik telur asin khas Navid Snack", img:"assets/kerupuktelurasin.jpeg", price:15000, oldPrice:17000, promo:true, tglPromoStart:"2025-09-12", tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:5, rating:5 },
-  { id:"p03", name:"Keripik Singkong", desc:"Keripik singkong khas Navid Snack", img:"assets/kerupuksingkong.jpeg", price:15000, oldPrice:17000, promo:true, tglPromoStart:"2025-09-12", tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:5, rating:5 },
-  { id:"p04", name:"Corn Milk Drink", desc:"Minuman susu jagung khas Navid Snack", img:"assets/cornmilk.jpeg", price:12000, oldPrice:15000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:100, rating:5 },
-  { id:"p05", name:"Sari Kemangi Drink", desc:"Minuman sari kemangi khas Navid Snack", img:"assets/kemangidrink.jpeg", price:12000, oldPrice:15000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:null, jamPromoEnd:null, stock:100, rating:4 }
+  { id:"p01", name:"Keripik Pisang", desc:"Keripik pisang renyah khas Navid Snack", img:"assets/keripikpisang.jpg", price:13000, oldPrice:15000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:"01:00", jamPromoEnd:"23:00", stock:100, rating:5 },
+  { id:"p02", name:"Keripik Telur Asin", desc:"Keripik telur asin khas Navid Snack", img:"assets/kerupuktelurasin.jpeg", price:15000, oldPrice:17000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:"01:00", jamPromoEnd:"23:00", stock:100, rating:5 },
+  { id:"p03", name:"Keripik Singkong", desc:"Keripik singkong khas Navid Snack", img:"assets/kerupuksingkong.jpeg", price:15000, oldPrice:17000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:"01:00", jamPromoEnd:"23:00", stock:100, rating:5 },
+  { id:"p04", name:"Corn Milk Drink", desc:"Minuman susu jagung khas Navid Snack", img:"assets/cornmilk.jpeg", price:12000, oldPrice:15000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:"01:00", jamPromoEnd:"23:00", stock:100, rating:5 },
+  { id:"p05", name:"Sari Kemangi Drink", desc:"Minuman sari kemangi khas Navid Snack", img:"assets/kemangidrink.jpeg", price:12000, oldPrice:15000, promo:true, tglPromoStart:null, tglPromoEnd:null, jamPromoStart:"01:00", jamPromoEnd:"23:00", stock:100, rating:4 }
 ];
 
 // =======================
