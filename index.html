@@ -895,14 +895,58 @@ document.addEventListener('DOMContentLoaded',()=>{
   const map = document.getElementById('mapFrame');
   if(map) map.src = window.SITE.mapFrame;
 
-  // Instagram embed
-  const ig = document.getElementById('igFrame');
-  if(ig) ig.src = window.SITE.instagramEmbed;
+  // Instagram random
+  const igFrame = document.getElementById('igFrame');
+  if (igFrame && window.SITE.instagramEmbed?.length){
+    const r = Math.floor(Math.random() * window.SITE.instagramEmbed.length);
+    igFrame.src = window.SITE.instagramEmbed[r];
+  }
 
-  // YouTube embed
-  const yt = document.getElementById('ytFrame');
-  if(yt) yt.src = window.SITE.youtubeFrame;
+  // YouTube
+  const ytFrame = document.getElementById('ytFrame');
+  if (ytFrame) ytFrame.src = window.SITE.youtubeFrame;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": window.SITE.brand,
+    "image": window.SITE.url + "/" + window.SITE.img,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": window.SITE.alamat,
+      "addressCountry": "ID"
+    },
+    "telephone": "+62" + window.SITE.wa.replace(/^0/,''),
+    "url": window.SITE.url,
+    "openingHours": convertOpeningHours(window.SITE.hariOperasional, window.SITE.jamOperasional),
+    "description": window.SITE.description,
+    "priceRange": "Rp10.000 - Rp100.000",
+    "sameAs": [
+      window.SITE.instagram,
+      window.SITE.youtube
+    ]
+  };
+
+  const schemaScript = document.createElement('script');
+  schemaScript.type = 'application/ld+json';
+  schemaScript.textContent = JSON.stringify(schema, null, 2);
+  document.head.appendChild(schemaScript);
 });
+
+// Helper ubah hari ke format schema
+function convertOpeningHours(hari, jam){
+  const hariMap = {
+    "Senin": "Mo", "Selasa": "Tu", "Rabu": "We", "Kamis": "Th",
+    "Jumat": "Fr", "Sabtu": "Sa", "Minggu": "Su"
+  };
+  const parts = hari.split('-').map(h => h.trim());
+  if(parts.length === 2 && hariMap[parts[0]] && hariMap[parts[1]]){
+    return `${hariMap[parts[0]]}-${hariMap[parts[1]]} ${jam.replace(/\s+/g,'')}`;
+  } else if(hariMap[hari.trim()]){
+    return `${hariMap[hari.trim()]} ${jam.replace(/\s+/g,'')}`;
+  }
+  return jam;
+}
 
 window.addEventListener('DOMContentLoaded', ()=>{  
   applySiteMeta();     // update title, logos, OG
