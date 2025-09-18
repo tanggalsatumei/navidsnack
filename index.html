@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title id="pageTitle">Navid Snack — Camilan Sehat & Lezat Lamongan</title>
-<meta name="description" id="metaDescription" content="Navid Snack - Camilan sehat & lezat dari Lamongan. Pesan cepat via WhatsApp. Halal, higienis, bergizi."/>
-<meta name="keywords" id="metaKeywords" content="navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat"/>
+<title id="pageTitle"></title>
+<meta name="description" id="metaDescription" />
+<meta name="keywords" id="metaKeywords"/>
 
 <!-- Open Graph (akan diupdate ke nilai dari data.js setelah data.js dimuat) -->
 <meta property="og:title" content="" id="ogTitle"/>
@@ -160,8 +160,8 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 </head>
 <body>
 <!-- promo -->
-<div class="promo-marquee" id="promoBar"><marquee id="promoText" behavior="scroll" direction="left">🔥 FLASH SALE Hari ini — Tersisa 3 item lagi! 🔥</marquee></div>
-
+<marquee id="promoMarquee"></marquee>
+  
 <!-- header -->
 <header>
   <button class="menu-toggle" onclick="toggleMenu()" aria-label="Buka menu">☰</button>
@@ -194,12 +194,9 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 
 <!-- HERO -->
 <section id="hero">
+  <div id="slidesContainer"></div>
   <button class="arrow arrow-left" onclick="prevSlide()" aria-label="Sebelumnya">❮</button>
   <button class="arrow arrow-right" onclick="nextSlide()" aria-label="Berikutnya">❯</button>
-
-  <!-- slides will be rendered here -->
-  <div id="slidesContainer"></div>
-
   <div class="dots" id="heroDots"></div>
 </section>
 
@@ -211,7 +208,7 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 
 <!-- GALLERY -->
 <section id="gallery" class="container" aria-labelledby="galleryTitle">
-  <div class="section-title"><h2 id="galleryTitle">Galeri Produk</h2></div>
+  <div class="section-title"><h2 id="galleryTitle">Galeri </h2></div>
   <div class="gallery-slider" id="gallerySlider">
     <div class="gallery-track" id="galleryTrack"></div>
   </div>
@@ -297,12 +294,12 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
   <div class="feed-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
     <div class="feed-ig" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
       <h3 style="margin-bottom:10px;color:var(--brand)">Instagram</h3>
-      <div id="igEmbedContainer"></div>
+      <iframe id="igFrame" loading="lazy" style="width:100%;height:480px;border:none;overflow:hidden" allowfullscreen></iframe>
     </div>
     <div class="feed-yt" style="background:var(--surface);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
       <h3 style="margin-bottom:10px;color:var(--brand)">YouTube</h3>
       <div class="yt-wrapper">
-        <iframe id="ytFrame" src="https://www.youtube.com/embed/WAt5cQiMlpE" title="Navid Snack YouTube" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="width:100%;height:315px;border-radius:12px"></iframe>
+        <iframe id="ytFrame" loading="lazy" style="width:100%;height:360px;border:none" allowfullscreen></iframe>
       </div>
     </div>
   </div>
@@ -312,15 +309,17 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 <footer id="contact">
   <div class="footer-grid" style="display:flex;gap:20px;flex-wrap:wrap;max-width:var(--maxw);margin:0 auto;padding:28px;background:#08101a;color:#fff">
     <div class="footer-info" style="flex:1 1 320px">
-      <h3 id="footerBrand">Navid Snack</h3>
-      <p id="footerAddr">Alamat: Deket, Lamongan, Jawa Timur</p>
-      <p id="footerPhone">Telp: +62 812-3456-7890</p>
+      <h3 id="footerBrand"></h3>
+      <p id="footerAddr"></p>
+      <p id="footerPhone"></p>
+      <p id="footerJam"></p>
+      <p id="footerHari"></p>
       <p style="margin-top:8px"><strong>Certificate:</strong></p>
       <div id="certRow" style="display:flex;gap:8px;align-items:center;margin-top:8px;height:100px;weight:auto"></div>
     </div>
     <div class="footer-map" style="flex:1 1 320px">
       <h4>Lokasi</h4>
-      <iframe id="mapFrame" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3350.744872691265!2d112.442892!3d-7.1220645!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e77f9138f5d5981%3A0x508c66cab23884d6!2sNavid%20Snack!5e1!3m2!1sen!2sid!4v1758083702298!5m2!1sen!2sid" style="width:100%;height:220px;border:0;border-radius:10px" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Navid Snack"></iframe>
+      <iframe id="mapFrame" loading="lazy" style="width:100%;height:300px;border:none"></iframe>
     </div>
   </div>
 </footer>
@@ -856,6 +855,40 @@ function closeProductModal(){ $('#productModal').style.display = 'none'; }
 })();
 
 window.addEventListener('DOMContentLoaded', ()=>{
+  document.addEventListener('DOMContentLoaded',()=>{
+  // SEO
+  document.title = window.SITE.brand;
+  document.querySelector('meta[name="description"]').setAttribute('content', window.SITE.description);
+  document.querySelector('meta[name="keywords"]').setAttribute('content', window.SITE.keywords);
+
+  // OG meta
+  document.querySelector('meta[property="og:title"]').setAttribute('content', window.SITE.brand);
+  document.querySelector('meta[property="og:description"]').setAttribute('content', window.SITE.description);
+  document.querySelector('meta[property="og:image"]').setAttribute('content', window.SITE.img);
+
+  // Marquee promo
+  const marquee = document.getElementById('promoMarquee');
+  if(marquee) marquee.textContent = window.PROMO_TEXT;
+
+  // Footer
+  document.getElementById('footerBrand').textContent = window.SITE.brand;
+  document.getElementById('footerAddr').textContent = window.SITE.alamat;
+  document.getElementById('footerPhone').textContent = window.SITE.wa;
+  document.getElementById('footerJam').textContent = window.SITE.jamOperasional;
+  document.getElementById('footerHari').textContent = window.SITE.hariOperasional;
+
+  // Map
+  const map = document.getElementById('mapFrame');
+  if(map) map.src = window.SITE.mapFrame;
+
+  // Instagram embed
+  const ig = document.getElementById('igFrame');
+  if(ig) ig.src = window.SITE.instagramEmbed;
+
+  // YouTube embed
+  const yt = document.getElementById('ytFrame');
+  if(yt) yt.src = window.SITE.youtubeFrame;
+    
   applySiteMeta();     // update title, logos, OG
   renderHero();        // hero from SLIDES
   renderProducts();    // render products grid from PRODUCTS
