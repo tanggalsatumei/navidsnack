@@ -160,7 +160,7 @@ nav a{color:var(--accent);text-decoration:none;font-weight:600}
 </head>
 <body>
 <!-- promo -->
-<marquee id="promoMarquee"></marquee>
+<marquee id="promoMarquee" class="promo-marquee"></marquee>
   
 <!-- header -->
 <header>
@@ -350,6 +350,9 @@ function applySiteMeta(){
   $('#favicon').href = site.img || $('#favicon').href;
   $('#waLink').href = site.wa ? `https://wa.me/${site.wa}` : $('#waLink').href;
   $('#footerAddr').textContent = 'Alamat: ' + (site.alamat || '');
+  $('#footerPhone').textContent = 'WA : ' + (site.wa || '');
+  $('#footerJam').textContent = 'Jam Operasional : ' + (site.jamOperasional || '');
+  $('#footerHari').textContent = 'Hari Operasional : ' + (site.hariOperasional || '');
   // certificates
   const certRow = $('#certRow');
   certRow.innerHTML = '';
