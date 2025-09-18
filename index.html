@@ -891,29 +891,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       window.SITE.instagram,
       window.SITE.youtube
     ]
-  };
 
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.textContent = JSON.stringify(schema, null, 2);
-  document.head.appendChild(script);
-});
-
-// Helper untuk ubah hari "Senin - Sabtu" jadi format schema
-function convertOpeningHours(hari, jam){
-  const hariMap = {
-    "Senin": "Mo", "Selasa": "Tu", "Rabu": "We", "Kamis": "Th",
-    "Jumat": "Fr", "Sabtu": "Sa", "Minggu": "Su"
-  };
-  const parts = hari.split('-').map(h => h.trim());
-  if(parts.length === 2 && hariMap[parts[0]] && hariMap[parts[1]]){
-    return `${hariMap[parts[0]]}-${hariMap[parts[1]]} ${jam.replace(/\s+/g,'')}`;
-  } else if(hariMap[hari.trim()]){
-    return `${hariMap[hari.trim()]} ${jam.replace(/\s+/g,'')}`;
-  }
-  return jam;
-  
-  // SEO
+    // SEO
   document.title = window.SITE.brand;
   document.querySelector('meta[name="description"]').setAttribute('content', window.SITE.description);
   document.querySelector('meta[name="keywords"]').setAttribute('content', window.SITE.keywords);
@@ -948,7 +927,29 @@ function convertOpeningHours(hari, jam){
   // YouTube
   const ytFrame = document.getElementById('ytFrame');
   if (ytFrame) ytFrame.src = window.SITE.youtubeFrame;
+  };
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(schema, null, 2);
+  document.head.appendChild(script);
 });
+
+// Helper untuk ubah hari "Senin - Sabtu" jadi format schema
+function convertOpeningHours(hari, jam){
+  const hariMap = {
+    "Senin": "Mo", "Selasa": "Tu", "Rabu": "We", "Kamis": "Th",
+    "Jumat": "Fr", "Sabtu": "Sa", "Minggu": "Su"
+  };
+  const parts = hari.split('-').map(h => h.trim());
+  if(parts.length === 2 && hariMap[parts[0]] && hariMap[parts[1]]){
+    return `${hariMap[parts[0]]}-${hariMap[parts[1]]} ${jam.replace(/\s+/g,'')}`;
+  } else if(hariMap[hari.trim()]){
+    return `${hariMap[hari.trim()]} ${jam.replace(/\s+/g,'')}`;
+  }
+  return jam;
+} 
+
 
 window.addEventListener('DOMContentLoaded', ()=>{  
   applySiteMeta();     // update title, logos, OG
