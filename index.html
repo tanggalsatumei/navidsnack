@@ -920,16 +920,28 @@ function renderGallery(){
   const data = window.GALLERY || [];
   const track = $('#galleryTrack');
   track.innerHTML = '';
+
+  // Gandakan agar slider loop
   const slides = data.concat(data).concat(data);
+
   slides.forEach((g,i)=>{
+    const src = g.src || 'assets/placeholder.jpg'; // fallback
     const el = document.createElement('div');
     el.className = 'gallery-slide';
-    el.innerHTML = `<img src="${g.src}" alt="${g.alt||''}" loading="lazy" data-idx="${i%data.length}" onclick="openLightbox(${i%data.length})">`;
+    el.innerHTML = `
+      <img src="${src}" 
+           alt="${g.alt||''}" 
+           loading="lazy" 
+           data-idx="${i % data.length}" 
+           onclick="openLightbox(${i % data.length})">
+    `;
     track.appendChild(el);
   });
+
   galleryIndex = data.length;
   updateGalleryTransform();
 }
+
 
 function updateGalleryTransform(){
   const track = $('#galleryTrack');
