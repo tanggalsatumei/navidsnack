@@ -870,6 +870,49 @@ function closeProductModal(){ $('#productModal').style.display = 'none'; }
 })();
 
 document.addEventListener('DOMContentLoaded',()=>{
+   if (!window.SITE) return;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": window.SITE.brand,
+    "image": window.SITE.url + "/" + window.SITE.img,
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": window.SITE.alamat,
+      "addressCountry": "ID"
+    },
+    "telephone": "+62" + window.SITE.wa.replace(/^0/,''),
+    "url": window.SITE.url,
+    "openingHours": convertOpeningHours(window.SITE.hariOperasional, window.SITE.jamOperasional),
+    "description": window.SITE.description,
+    "priceRange": "Rp10.000 - Rp100.000",
+    "sameAs": [
+      window.SITE.instagram,
+      window.SITE.youtube
+    ]
+  };
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(schema, null, 2);
+  document.head.appendChild(script);
+});
+
+// Helper untuk ubah hari "Senin - Sabtu" jadi format schema
+function convertOpeningHours(hari, jam){
+  const hariMap = {
+    "Senin": "Mo", "Selasa": "Tu", "Rabu": "We", "Kamis": "Th",
+    "Jumat": "Fr", "Sabtu": "Sa", "Minggu": "Su"
+  };
+  const parts = hari.split('-').map(h => h.trim());
+  if(parts.length === 2 && hariMap[parts[0]] && hariMap[parts[1]]){
+    return `${hariMap[parts[0]]}-${hariMap[parts[1]]} ${jam.replace(/\s+/g,'')}`;
+  } else if(hariMap[hari.trim()]){
+    return `${hariMap[hari.trim()]} ${jam.replace(/\s+/g,'')}`;
+  }
+  return jam;
+  
   // SEO
   document.title = window.SITE.brand;
   document.querySelector('meta[name="description"]').setAttribute('content', window.SITE.description);
