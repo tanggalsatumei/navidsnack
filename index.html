@@ -872,9 +872,7 @@ function closeProductModal(){ $('#productModal').style.display = 'none'; }
 document.addEventListener('DOMContentLoaded', () => {
   if (!window.SITE) return;
 
-  // ========================
   // SEO META
-  // ========================
   document.title = window.SITE.brand;
   document.querySelector('meta[name="description"]')?.setAttribute('content', window.SITE.description);
   document.querySelector('meta[name="keywords"]')?.setAttribute('content', window.SITE.keywords);
@@ -884,45 +882,33 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('meta[property="og:description"]')?.setAttribute('content', window.SITE.description);
   document.querySelector('meta[property="og:image"]')?.setAttribute('content', window.SITE.img);
 
-  // ========================
   // PROMO MARQUEE
-  // ========================
   const marquee = document.getElementById('promoMarquee');
   if(marquee) marquee.textContent = window.PROMO_TEXT;
 
-  // ========================
   // FOOTER INFO
-  // ========================
   document.getElementById('footerBrand')?.textContent = window.SITE.brand;
   document.getElementById('footerAddr')?.textContent = window.SITE.alamat;
   document.getElementById('footerPhone')?.textContent = window.SITE.wa;
   document.getElementById('footerJam')?.textContent = window.SITE.jamOperasional;
   document.getElementById('footerHari')?.textContent = window.SITE.hariOperasional;
 
-  // ========================
   // MAP
-  // ========================
   const map = document.getElementById('mapFrame');
   if(map) map.src = window.SITE.mapFrame;
 
-  // ========================
   // IG RANDOM
-  // ========================
   const igFrame = document.getElementById('igFrame');
   if (igFrame && window.SITE.instagramEmbed?.length){
     const r = Math.floor(Math.random() * window.SITE.instagramEmbed.length);
     igFrame.src = window.SITE.instagramEmbed[r];
   }
 
-  // ========================
   // YOUTUBE
-  // ========================
   const ytFrame = document.getElementById('ytFrame');
   if (ytFrame) ytFrame.src = window.SITE.youtubeFrame;
 
-  // ========================
   // SCHEMA JSON-LD
-  // ========================
   const schema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -949,6 +935,7 @@ document.addEventListener('DOMContentLoaded', () => {
   schemaScript.textContent = JSON.stringify(schema, null, 2);
   document.head.appendChild(schemaScript);
 });
+
 
 // ========================
 // Helper hari → format schema
