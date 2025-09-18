@@ -10,6 +10,15 @@ window.SITE = {
   keywords: "navid snack, camilan lamongan, keripik pisang, kacang gurih, snack sehat, snack lamongan, oleh-oleh lamongan",
   description: "Navid Snack — Camilan sehat & lezat khas Lamongan, higienis dan bergizi. Pesan cepat via WhatsApp.",
   url: "https://navidsnack.vercel.app",
+  jamOperasional: "08.00 - 17.00 WIB",
+  hariOperasional: "Senin - Sabtu",
+  mapFrame: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3350.744872691265!2d112.442892!3d-7.1220645!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e77f9138f5d5981%3A0x508c66cab23884d6!2sNavid%20Snack!5e1!3m2!1sen!2sid!4v1758083702298!5m2!1sen!2sid",
+  instagramEmbed: [
+    "https://www.instagram.com/p/CQavdSMNUje/embed",
+    "https://www.instagram.com/p/CGxXMP_lDIh/?hl=en",
+    "https://www.instagram.com/p/CxsfPbPyvW0/?hl=en&img_index=1"
+  ],
+  youtubeFrame: "https://www.youtube.com/embed/WAt5cQiMlpE",
   sertifikat: [
     { src: "assets/logohalal.png", alt: "Sertifikat Halal" },
     { src: "assets/logobpom.png", alt: "Sertifikat BPOM" },
